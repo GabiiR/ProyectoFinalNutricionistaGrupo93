@@ -1,7 +1,7 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
 public class Comida {
-    protected int idComida;
+    protected int idComida; //ID.
     
     protected String nombre;
     protected String detalle;
