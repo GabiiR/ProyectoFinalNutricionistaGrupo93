@@ -1,7 +1,7 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
 public class DietaComida {
-    protected int id; //ID.
+    protected int idDietaComida; //ID.
     
     protected Comida comida;
     protected Dieta dieta;
@@ -14,18 +14,18 @@ public class DietaComida {
         this.dieta = dieta;
     }
 
-    public DietaComida(int id, Comida comida, Dieta dieta) {
-        this.id = id;
+    public DietaComida(int idDietaComida, Comida comida, Dieta dieta) {
+        this.idDietaComida = idDietaComida;
         this.comida = comida;
         this.dieta = dieta;
     }
 
-    public int getId() {
-        return id;
+    public int getIdDietaComida() {
+        return idDietaComida;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdDietaComida(int idDietaComida) {
+        this.idDietaComida = idDietaComida;
     }
 
     public Comida getComida() {
