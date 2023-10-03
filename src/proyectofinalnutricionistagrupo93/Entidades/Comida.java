@@ -1,14 +1,34 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
 public class Comida {
+    protected int idComida;
+    
     protected String nombre;
     protected String detalle;
-    protected int gramos;
+    protected int cantCalorias; //Por gramos.
 
-    public Comida(String nombre, String detalle, int gramos) {
+    public Comida() {
+    }
+
+    public Comida(int idComida, String nombre, String detalle, int cantCalorias) {
+        this.idComida = idComida;
         this.nombre = nombre;
         this.detalle = detalle;
-        this.gramos = gramos;
+        this.cantCalorias = cantCalorias;
+    }
+
+    public Comida(String nombre, String detalle, int cantCalorias) {
+        this.nombre = nombre;
+        this.detalle = detalle;
+        this.cantCalorias = cantCalorias;
+    }
+
+    public int getIdComida() {
+        return idComida;
+    }
+
+    public void setIdComida(int idComida) {
+        this.idComida = idComida;
     }
 
     public String getNombre() {
@@ -27,11 +47,11 @@ public class Comida {
         this.detalle = detalle;
     }
 
-    public int getGramos() {
-        return gramos;
+    public int getCantCalorias() {
+        return cantCalorias;
     }
 
-    public void setGramos(int gramos) {
-        this.gramos = gramos;
+    public void setCantCalorias(int cantCalorias) {
+        this.cantCalorias = cantCalorias;
     }
 }
