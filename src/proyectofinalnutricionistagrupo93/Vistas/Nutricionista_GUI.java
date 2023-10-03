@@ -5,6 +5,9 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Gabi
@@ -27,27 +30,86 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jlFondo = new javax.swing.JLabel();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jmbPacientes = new javax.swing.JMenu();
+        jmiPacientesOpc1 = new javax.swing.JMenuItem();
+        jmbComidas = new javax.swing.JMenu();
+        jmiComidasOpc1 = new javax.swing.JMenuItem();
+        jmbDietas = new javax.swing.JMenu();
+        jmiDietasOpc1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Menu de nutricionista");
         setResizable(false);
 
-        jlFondo.setIcon(new javax.swing.ImageIcon("C:\\Users\\Gabi\\Desktop\\ESCRITORIO\\Desarrollar Aplicacion - JAVA\\GRUPO 93\\Proyecto FINAL\\Multimedia\\bg.png")); // NOI18N
-        jlFondo.setText("jLabel1");
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 626, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 394, Short.MAX_VALUE)
+        );
+
+        jmbPacientes.setText("Pacientes");
+        jmbPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmbPacientesActionPerformed(evt);
+            }
+        });
+
+        jmiPacientesOpc1.setText("Registro de pacientes");
+        jmiPacientesOpc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPacientesOpc1ActionPerformed(evt);
+            }
+        });
+        jmbPacientes.add(jmiPacientesOpc1);
+
+        jMenuBar1.add(jmbPacientes);
+
+        jmbComidas.setText("Comidas");
+
+        jmiComidasOpc1.setText("Registro de comidas");
+        jmbComidas.add(jmiComidasOpc1);
+
+        jMenuBar1.add(jmbComidas);
+
+        jmbDietas.setText("Dietas");
+
+        jmiDietasOpc1.setText("Dietas de pacientes");
+        jmbDietas.add(jmiDietasOpc1);
+
+        jMenuBar1.add(jmbDietas);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jDesktopPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jDesktopPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jmiPacientesOpc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPacientesOpc1ActionPerformed
+        Registro_De_Pacientes RDP = new Registro_De_Pacientes();
+        jDesktopPane1.add(RDP);
+        RDP.show();
+    }//GEN-LAST:event_jmiPacientesOpc1ActionPerformed
+
+    private void jmbPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmbPacientesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmbPacientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -83,8 +145,14 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jlFondo;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu jmbComidas;
+    private javax.swing.JMenu jmbDietas;
+    private javax.swing.JMenu jmbPacientes;
+    private javax.swing.JMenuItem jmiComidasOpc1;
+    private javax.swing.JMenuItem jmiDietasOpc1;
+    private javax.swing.JMenuItem jmiPacientesOpc1;
     // End of variables declaration//GEN-END:variables
 }
