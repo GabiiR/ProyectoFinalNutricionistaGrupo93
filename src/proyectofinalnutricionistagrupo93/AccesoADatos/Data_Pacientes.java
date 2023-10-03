@@ -52,6 +52,7 @@ public class Data_Pacientes {
             ps.executeUpdate(); //Ejecuta consulta "UPDATE".
 
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
+            
             if (rs.next()){
                 paciente.setIdPaciente(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se ha actualizado la información del paciente.");
@@ -71,6 +72,7 @@ public class Data_Pacientes {
             ps.executeUpdate(); //Ejecuta consulta "DELETE".
             
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
+            
             if (rs.next()) { //Comprueba si ya hay un paciente con datos.
                 JOptionPane.showMessageDialog(null, "Paciente eliminado con exito.");
             }
