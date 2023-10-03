@@ -6,7 +6,7 @@ public class Dieta {
     protected int idDieta; //ID.
     protected String nombre;
     
-    protected Paciente Paciente; //Paciente.java
+    protected Paciente paciente; //Paciente.java
     
     protected LocalDate fechaInicial;
     protected LocalDate fechaFinal; //Finalizar dieta.
@@ -20,7 +20,7 @@ public class Dieta {
     public Dieta(int idDieta, String nombre, Paciente Paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
         this.idDieta = idDieta;
         this.nombre = nombre;
-        this.Paciente = Paciente;
+        this.paciente = Paciente;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
@@ -29,7 +29,7 @@ public class Dieta {
     
     public Dieta(String nombre, Paciente Paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
         this.nombre = nombre;
-        this.Paciente = Paciente;
+        this.paciente = Paciente;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
@@ -53,11 +53,11 @@ public class Dieta {
     }
 
     public Paciente getPaciente() {
-        return Paciente;
+        return paciente;
     }
 
     public void setPaciente(Paciente Paciente) {
-        this.Paciente = Paciente;
+        this.paciente = Paciente;
     }
 
     public LocalDate getFechaInicial() {
