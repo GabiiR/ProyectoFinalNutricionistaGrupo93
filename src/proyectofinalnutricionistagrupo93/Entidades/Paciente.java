@@ -1,7 +1,7 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
 public class Paciente {
-    protected int idPaciente;
+    protected int idPaciente; //ID.
     
     protected String nombre;
     protected int dni;
