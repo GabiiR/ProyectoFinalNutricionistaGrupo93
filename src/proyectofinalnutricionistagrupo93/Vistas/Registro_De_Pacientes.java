@@ -6,6 +6,7 @@
 package proyectofinalnutricionistagrupo93.Vistas;
 
 import javax.swing.JOptionPane;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
 /**
@@ -13,7 +14,7 @@ import proyectofinalnutricionistagrupo93.Entidades.Paciente;
  * @author Gabi
  */
 public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
-    protected Paciente paciente = new Paciente();
+    protected Data_Pacientes Dat_Pac = new Data_Pacientes();
     protected Paciente pacienteActual = null;
 
     /**
@@ -165,7 +166,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
     private void jbAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarPacienteActionPerformed
         try {
             String nombre = jtNombrePaciente.getText();
-            Integer dni = Integer.parseInt(jtDniPaciente.getText());
+            Integer dni = Integer.parseInt(jtDniPaciente.getText()); //Captura solo enteros.
             
             //Comprueba digitos del Dni:
             if (dni < 1000000 || dni > 99999999) { //7 u 8 digitos.
@@ -182,15 +183,14 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                 return;
             }
             
+            if (pacienteActual == null) {
+                pacienteActual = new Paciente(nombre, dni, domicilio, telefono);
+                Dat_Pac.agregarPaciente(pacienteActual);
+            }
+            
             //Si llega con exito hasta acá, agrega al paciente con exito a la DB.
             /*----------------------------------------------------------------*/
             
-            if (pacienteActual == null) {
-                pacienteActual = new Paciente(nombre, dni, domicilio, telefono);
-                /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-                paciente.agregarPaciente(pacienteActual); Descomentar y ARREGLAR ACÁ.
-                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
-            }
             JOptionPane.showMessageDialog(this, "Se agrego al paciente correctamente.");
             limpiarCampos();
             
