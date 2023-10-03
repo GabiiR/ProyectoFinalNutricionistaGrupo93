@@ -5,15 +5,16 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
-import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
-import jdk.nashorn.internal.ir.BreakNode;
+import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
 /**
  *
  * @author Gabi
  */
 public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
+    protected Paciente paciente = new Paciente();
+    protected Paciente pacienteActual = null;
 
     /**
      * Creates new form Registro_De_Pacientes
@@ -44,6 +45,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         jbModificarPaciente = new javax.swing.JButton();
         jbEliminarPaciente = new javax.swing.JButton();
         jbSalirRegistroPacientes = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -81,34 +83,44 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton1.setText("Buscar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jbAgregarPaciente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbModificarPaciente)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbEliminarPaciente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbSalirRegistroPacientes, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbSalirRegistroPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jlNombreCompleto)
                             .addComponent(jlDni)
                             .addComponent(jlDomicilio)
                             .addComponent(jlTelefono))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jtNombrePaciente, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtNombrePaciente, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtDniPaciente, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtDomicilioPaciente, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtTelefonoPaciente, javax.swing.GroupLayout.Alignment.LEADING))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -138,7 +150,8 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                         .addComponent(jbAgregarPaciente)
                         .addComponent(jbModificarPaciente)
                         .addComponent(jbEliminarPaciente)
-                        .addComponent(jbSalirRegistroPacientes)))
+                        .addComponent(jbSalirRegistroPacientes)
+                        .addComponent(jButton1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -151,24 +164,34 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
 
     private void jbAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarPacienteActionPerformed
         try {
-            String nombre = jtNombrePaciente.getText();
+            String nombreCompleto = jtNombrePaciente.getText();
             Integer dni = Integer.parseInt(jtDniPaciente.getText());
             
+            //Comprueba digitos del Dni:
             if (dni < 1000000 || dni > 99999999) { //7 u 8 digitos.
                 JOptionPane.showMessageDialog(this, "Por favor, ingrese un número de DNI correcto.");
                 return;
             }
             
-            String Domicilio = jtDomicilioPaciente.getText();
+            String domicilio = jtDomicilioPaciente.getText();
             Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText());
             
-            if (nombre.isEmpty() || Domicilio.isEmpty()){
+            //Comprueba campos vacios:
+            if (nombreCompleto.isEmpty() || domicilio.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
                 return;
             }
+            
+            //Si llega con exito hasta acá, agrega al paciente con exito a la DB.
+            if (pacienteActual == null) {
+                pacienteActual = new Paciente(nombreCompleto, dni, domicilio, telefono);
+                paciente.agregarPaciente(pacienteActual);
+            }
             JOptionPane.showMessageDialog(this, "Se agrego al paciente correctamente.");
+            limpiarCampos();
+            
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Su DNI o Telefono no fue ingresado correctamente \n o esta escrito en un formato incorrecto, \n por favor, vuelva a ingresar sus datos.");
+            JOptionPane.showMessageDialog(this, "Su DNI o Telefono no fue ingresado correctamente\n o esta escrito en un formato incorrecto,\n por favor, vuelva a ingresar sus datos.");
         }
     }//GEN-LAST:event_jbAgregarPacienteActionPerformed
 
@@ -176,8 +199,19 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtNombrePacienteActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    public void limpiarCampos(){
+        jtNombrePaciente.setText("");
+        jtDniPaciente.setText("");
+        jtDomicilioPaciente.setText("");
+        jtTelefonoPaciente.setText("");
+    };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbAgregarPaciente;
     private javax.swing.JButton jbEliminarPaciente;
