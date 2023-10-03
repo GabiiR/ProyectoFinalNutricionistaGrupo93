@@ -3,7 +3,7 @@ package proyectofinalnutricionistagrupo93.Entidades;
 public class Paciente {
     protected int idPaciente;
     
-    protected String nombreCompleto;
+    protected String nombre;
     protected int dni;
     protected String domicilio;
     protected int telefono;
@@ -11,16 +11,16 @@ public class Paciente {
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, String nombreCompleto, int dni, String domicilio, int telefono) {
+    public Paciente(int idPaciente, String nombre, int dni, String domicilio, int telefono) {
         this.idPaciente = idPaciente;
-        this.nombreCompleto = nombreCompleto;
+        this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
     }
 
-    public Paciente(String nombreCompleto, int dni, String domicilio, int telefono) {
-        this.nombreCompleto = nombreCompleto;
+    public Paciente(String nombre, int dni, String domicilio, int telefono) {
+        this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
@@ -34,12 +34,12 @@ public class Paciente {
         this.idPaciente = idPaciente;
     }
 
-    public String getNombreCompleto() {
-        return nombreCompleto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getDni() {
@@ -64,9 +64,5 @@ public class Paciente {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
-    }
-
-    public void agregarPaciente(Paciente pacienteActual) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
