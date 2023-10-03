@@ -183,9 +183,13 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
             }
             
             //Si llega con exito hasta acá, agrega al paciente con exito a la DB.
+            /*----------------------------------------------------------------*/
+            
             if (pacienteActual == null) {
                 pacienteActual = new Paciente(nombre, dni, domicilio, telefono);
-                paciente.agregarPaciente(pacienteActual);
+                /*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                paciente.agregarPaciente(pacienteActual); Descomentar y ARREGLAR ACÁ.
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
             }
             JOptionPane.showMessageDialog(this, "Se agrego al paciente correctamente.");
             limpiarCampos();
