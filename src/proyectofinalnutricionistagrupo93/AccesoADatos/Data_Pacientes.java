@@ -49,13 +49,14 @@ public class Data_Pacientes {
             ps.setInt(2, paciente.getDni());
             ps.setString(3, paciente.getDomicilio());
             ps.setInt(4, paciente.getTelefono());
-            ps.executeUpdate();
+            ps.executeUpdate(); //Ejecuta consulta "UPDATE".
 
-            ResultSet rs = ps.getGeneratedKeys();
-            paciente.setIdPaciente(rs.getInt(1));
+            ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
+            if (rs.next()){
+                paciente.setIdPaciente(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, "Se ha actualizado la información del paciente.");
+            }
             ps.close();
-            
-            JOptionPane.showMessageDialog(null, "Se ha actualizado la información del paciente.");
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente.");
         }
@@ -67,9 +68,9 @@ public class Data_Pacientes {
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            ps.executeUpdate();
+            ps.executeUpdate(); //Ejecuta consulta "DELETE".
             
-            ResultSet rs = ps.getGeneratedKeys();
+            ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
             if (rs.next()) { //Comprueba si ya hay un paciente con datos.
                 JOptionPane.showMessageDialog(null, "Paciente eliminado con exito.");
             }
