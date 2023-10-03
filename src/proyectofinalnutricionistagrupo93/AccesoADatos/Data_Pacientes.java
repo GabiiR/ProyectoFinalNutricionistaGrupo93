@@ -21,7 +21,7 @@ public class Data_Pacientes {
             String sql = "INSERT INTO paciente (nombre, dni, domicilio, telefono)" + "VALUES (?,?,?,?)"; //Plantilla DB.
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); //Agrega a los valores de la linea 20, lo de la linea 23 en adelante.
-            ps.setString(1, paciente.getNombreCompleto());
+            ps.setString(1, paciente.getNombre());
             ps.setInt(2, paciente.getDni());
             ps.setString(3, paciente.getDomicilio());
             ps.setInt(4, paciente.getTelefono());
@@ -45,7 +45,7 @@ public class Data_Pacientes {
             String sql = "UPDATE paciente SET nombre = ?, dni = ?, domicilio = ?, telefono = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, paciente.getNombreCompleto());
+            ps.setString(1, paciente.getNombre());
             ps.setInt(2, paciente.getDni());
             ps.setString(3, paciente.getDomicilio());
             ps.setInt(4, paciente.getTelefono());
@@ -91,7 +91,7 @@ public class Data_Pacientes {
             if (rs.next()){
                 paciente = new Paciente();
                 paciente.setIdPaciente(id);
-                paciente.setNombreCompleto(rs.getString("Nombre"));
+                paciente.setNombre(rs.getString("Nombre"));
                 paciente.setIdPaciente(rs.getInt("Dni"));
                 paciente.setDomicilio(rs.getString("Domicilio"));
                 paciente.setTelefono(rs.getInt("Telefono"));
