@@ -164,7 +164,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
 
     private void jbAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarPacienteActionPerformed
         try {
-            String nombreCompleto = jtNombrePaciente.getText();
+            String nombre = jtNombrePaciente.getText();
             Integer dni = Integer.parseInt(jtDniPaciente.getText());
             
             //Comprueba digitos del Dni:
@@ -177,14 +177,14 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
             Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText());
             
             //Comprueba campos vacios:
-            if (nombreCompleto.isEmpty() || domicilio.isEmpty()){
+            if (nombre.isEmpty() || domicilio.isEmpty()){
                 JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
                 return;
             }
             
             //Si llega con exito hasta acá, agrega al paciente con exito a la DB.
             if (pacienteActual == null) {
-                pacienteActual = new Paciente(nombreCompleto, dni, domicilio, telefono);
+                pacienteActual = new Paciente(nombre, dni, domicilio, telefono);
                 paciente.agregarPaciente(pacienteActual);
             }
             JOptionPane.showMessageDialog(this, "Se agrego al paciente correctamente.");
