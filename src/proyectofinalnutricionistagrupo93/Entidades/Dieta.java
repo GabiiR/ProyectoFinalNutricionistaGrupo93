@@ -3,7 +3,7 @@ package proyectofinalnutricionistagrupo93.Entidades;
 import java.time.LocalDate;
 
 public class Dieta {
-    protected int idDieta;
+    protected int idDieta; //ID.
     protected String nombre;
     
     protected Paciente Paciente; //Paciente.java
