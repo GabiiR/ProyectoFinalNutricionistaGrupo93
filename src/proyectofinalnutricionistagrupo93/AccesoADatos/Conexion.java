@@ -46,7 +46,7 @@ public class Conexion {
             } catch (SQLException ex) { //Posible error n°2: Base de datos.
                 
                 JOptionPane.showMessageDialog(null, "Error al conectarse a la base de datos.");
-                System.exit(0);
+                System.exit(0); //Si no logra acceder a la DB, se cierra el programa.
                 
             } //Null en este caso: No se esta ejecutando desde ninguna ventana.
 
