@@ -37,8 +37,6 @@ public class Conexion {
                 //3.Config base de datos. Verifica info.
                 connection = DriverManager.getConnection(URL + DB, USUARIO, PASSWORD);
                 
-                JOptionPane.showMessageDialog(null, "Conexion establecida con exito!!!");
-                
             } catch (ClassNotFoundException ex) { //Posible error n°1: Drivers.
                 
                 JOptionPane.showMessageDialog(null, "Error al carga el driver de conexión.");
@@ -49,10 +47,8 @@ public class Conexion {
                 System.exit(0); //Si no logra acceder a la DB, se cierra el programa.
                 
             } //Null en este caso: No se esta ejecutando desde ninguna ventana.
-
         }
         //4. Si la conexión esta establecida, retorna la linea 43.
-
         return connection;
     }
 }
