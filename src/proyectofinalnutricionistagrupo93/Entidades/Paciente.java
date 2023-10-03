@@ -7,30 +7,23 @@ public class Paciente {
     protected int dni;
     protected String domicilio;
     protected int telefono;
-    
-    protected int pesoActual; //Modificable.
-    protected int pesoDeseado;
 
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, String nombreCompleto, int dni, String domicilio, int telefono, int pesoActual, int pesoDeseado) {
+    public Paciente(int idPaciente, String nombreCompleto, int dni, String domicilio, int telefono) {
         this.idPaciente = idPaciente;
         this.nombreCompleto = nombreCompleto;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
-        this.pesoActual = pesoActual;
-        this.pesoDeseado = pesoDeseado;
     }
 
-    public Paciente(String nombreCompleto, int dni, String domicilio, int telefono, int pesoActual, int pesoDeseado) {
+    public Paciente(String nombreCompleto, int dni, String domicilio, int telefono) {
         this.nombreCompleto = nombreCompleto;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
-        this.pesoActual = pesoActual;
-        this.pesoDeseado = pesoDeseado;
     }    
 
     public int getIdPaciente() {
@@ -73,19 +66,7 @@ public class Paciente {
         this.telefono = telefono;
     }
 
-    public int getPesoActual() {
-        return pesoActual;
-    }
-
-    public void setPesoActual(int pesoActual) {
-        this.pesoActual = pesoActual;
-    }
-
-    public int getPesoDeseado() {
-        return pesoDeseado;
-    }
-
-    public void setPesoDeseado(int pesoDeseado) {
-        this.pesoDeseado = pesoDeseado;
+    public void agregarPaciente(Paciente pacienteActual) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
