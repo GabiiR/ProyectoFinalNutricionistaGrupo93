@@ -11,7 +11,7 @@ public class Conexion {
     private static final String URL = "jdbc:mariadb://localhost/"; //Static = Constante.
     
     //Nombre base de datos:
-    private static final String DB = "universidadgrupo93";
+    private static final String DB = "ProyectoFinalNutricionistaGrupo93";
 
     //Usuario "root" es el default.
     private static final String USUARIO = "root";
