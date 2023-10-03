@@ -9,32 +9,96 @@ import javax.swing.JOptionPane;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
 public class Data_Pacientes {
+
     private Connection con = null;
 
     public Data_Pacientes() { //Constructor.
         con = Conexion.getConexion(); //Se conecta a la DB en caso de necesitarlo.
     }
-    
-    public void agregarPaciente(Paciente paciente){
+
+    public void agregarPaciente(Paciente paciente) {
         try {
-            String sql="INSERT INTO paciente (nombre, dni, domicilio, telefono)" + "VALUES (?,?,?,?)"; //Plantilla DB.
-            
+            String sql = "INSERT INTO paciente (nombre, dni, domicilio, telefono)" + "VALUES (?,?,?,?)"; //Plantilla DB.
+
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); //Agrega a los valores de la linea 20, lo de la linea 23 en adelante.
             ps.setString(1, paciente.getNombreCompleto());
             ps.setInt(2, paciente.getDni());
             ps.setString(3, paciente.getDomicilio());
             ps.setInt(4, paciente.getTelefono());
             ps.executeUpdate(); //Ejecuta consulta "INSERT INTO".
-            
+
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
-            
-            if (rs.next()){ //Verifica si todos los datos estan disponibles para crear la columna.
+
+            if (rs.next()) { //Verifica si todos los datos estan disponibles para crear la columna.
                 paciente.setIdPaciente(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Paciente agregado con exito.");
             }
             ps.close();
+            
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al agregar paciente.");
+        }
+    };
+    
+    public void modificarPaciente(Paciente paciente) {
+        try {
+            String sql = "UPDATE paciente SET nombre = ?, dni = ?, domicilio = ?, telefono = ?";
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, paciente.getNombreCompleto());
+            ps.setInt(2, paciente.getDni());
+            ps.setString(3, paciente.getDomicilio());
+            ps.setInt(4, paciente.getTelefono());
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            paciente.setIdPaciente(rs.getInt(1));
+            ps.close();
+            
+            JOptionPane.showMessageDialog(null, "Se ha actualizado la información del paciente.");
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente.");
+        }
+    };
+    
+    public void eliminarPaciente(int id) {
+        try {
+            String sql = "DELETE FROM paciente WHERE idPaciente = ?";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) { //Comprueba si ya hay un paciente con datos.
+                JOptionPane.showMessageDialog(null, "Paciente eliminado con exito.");
+            }
+            ps.close();
+            
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error al eliminar paciente.");
+        }
+    };
+    
+    public void buscarPaciente(int id){
+        Paciente paciente = null;
+        try {
+            String sql = "SELECT nombre, dni, domicilio, telefono\n FROM paciente\n WHERE idPaciente = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()){
+                paciente = new Paciente();
+                paciente.setIdPaciente(id);
+                paciente.setNombreCompleto(rs.getString("Nombre"));
+                paciente.setIdPaciente(rs.getInt("Dni"));
+                paciente.setDomicilio(rs.getString("Domicilio"));
+                paciente.setTelefono(rs.getInt("Telefono"));
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente.");
         }
     };
 }
