@@ -5,9 +5,6 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
-import java.awt.Graphics;
-import javax.swing.ImageIcon;
-
 /**
  *
  * @author Gabi
