@@ -42,13 +42,13 @@ public class Data_Pacientes {
     
     public void modificarPaciente(Paciente paciente) {
         try {
-            String sql = "UPDATE paciente SET nombre = ?, dni = ?, domicilio = ?, telefono = ?";
+            String sql = "UPDATE paciente SET nombre = ?, domicilio = ?, telefono = ? WHERE dni = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, paciente.getNombre());
-            ps.setInt(2, paciente.getDni());
-            ps.setString(3, paciente.getDomicilio());
-            ps.setInt(4, paciente.getTelefono());
+            ps.setInt(4, paciente.getDni());
+            ps.setString(2, paciente.getDomicilio());
+            ps.setInt(3, paciente.getTelefono());
             ps.executeUpdate(); //Ejecuta consulta "UPDATE".
 
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
@@ -83,25 +83,24 @@ public class Data_Pacientes {
         }
     };
     
-    public void buscarPaciente(int id){
+    public void buscarPaciente(int dni){
         Paciente paciente = null;
         try {
-            String sql = "SELECT nombre, dni, domicilio, telefono\n FROM paciente\n WHERE idPaciente = ?";
+            String sql = "SELECT nombre, domicilio, telefono FROM paciente WHERE dni = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, dni);
             
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 paciente = new Paciente();
-                paciente.setIdPaciente(id);
                 paciente.setNombre(rs.getString("Nombre"));
-                paciente.setIdPaciente(rs.getInt("Dni"));
                 paciente.setDomicilio(rs.getString("Domicilio"));
                 paciente.setTelefono(rs.getInt("Telefono"));
             }
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente.");
+            e.printStackTrace();
         }
     };
 }
