@@ -5,6 +5,8 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
@@ -46,7 +48,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         jbModificarPaciente = new javax.swing.JButton();
         jbEliminarPaciente = new javax.swing.JButton();
         jbSalirRegistroPacientes = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbBuscarPaciente = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -74,6 +76,11 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         });
 
         jbModificarPaciente.setText("Modificar");
+        jbModificarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarPacienteActionPerformed(evt);
+            }
+        });
 
         jbEliminarPaciente.setText("Eliminar");
 
@@ -84,10 +91,10 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Buscar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbBuscarPaciente.setText("Buscar");
+        jbBuscarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbBuscarPacienteActionPerformed(evt);
             }
         });
 
@@ -105,7 +112,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbEliminarPaciente)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbBuscarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbSalirRegistroPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -152,7 +159,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                         .addComponent(jbModificarPaciente)
                         .addComponent(jbEliminarPaciente)
                         .addComponent(jbSalirRegistroPacientes)
-                        .addComponent(jButton1)))
+                        .addComponent(jbBuscarPaciente)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -203,10 +210,50 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_jtNombrePacienteActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jbBuscarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarPacienteActionPerformed
+        //nota: COMPLETAR.
+        Integer dni = Integer.parseInt(jtDniPaciente.getText()); //Captura solo enteros.
+    }//GEN-LAST:event_jbBuscarPacienteActionPerformed
 
+    private void jbModificarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarPacienteActionPerformed
+        try {
+            String nombre = jtNombrePaciente.getText();
+            Integer dni = Integer.parseInt(jtDniPaciente.getText()); //Captura solo enteros.
+            
+            //Comprueba digitos del Dni:
+            if (dni < 1000000 || dni > 99999999) { //7 u 8 digitos.
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un número de DNI correcto.");
+                return;
+            }
+            
+            String domicilio = jtDomicilioPaciente.getText();
+            Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText());
+            
+            //Comprueba campos vacios:
+            if (nombre.isEmpty() || domicilio.isEmpty()){
+                JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
+                return;
+            }
+            
+            /*----------------------------------------------------------------*/
+            //nota: INTENTAR CORREGIR.
+            pacienteActual = new Paciente(nombre, dni, domicilio, telefono);
+            if (pacienteActual != null) {
+                pacienteActual.setNombre(nombre);
+                pacienteActual.setDomicilio(domicilio);
+                pacienteActual.setTelefono(telefono);
+                
+                Dat_Pac.modificarPaciente(pacienteActual);
+                JOptionPane.showMessageDialog(this, "Se modifico al paciente correctamente.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error al modificar datos del paciente.");
+            }
+            
+            } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Su DNI o Telefono no fue ingresado correctamente\n o esta escrito en un formato incorrecto,\n por favor, vuelva a ingresar sus datos.");
+        }
+    }//GEN-LAST:event_jbModificarPacienteActionPerformed
+    //nota: AGREGAR EL FONDO DE "multimedia/bg.png".
     public void limpiarCampos(){
         jtNombrePaciente.setText("");
         jtDniPaciente.setText("");
@@ -215,9 +262,9 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
     };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbAgregarPaciente;
+    private javax.swing.JButton jbBuscarPaciente;
     private javax.swing.JButton jbEliminarPaciente;
     private javax.swing.JButton jbModificarPaciente;
     private javax.swing.JButton jbSalirRegistroPacientes;
