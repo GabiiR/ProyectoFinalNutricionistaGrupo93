@@ -46,15 +46,15 @@ public class Data_Pacientes {
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, paciente.getNombre());
-            ps.setInt(4, paciente.getDni());
             ps.setString(2, paciente.getDomicilio());
             ps.setInt(3, paciente.getTelefono());
-            ps.executeUpdate(); //Ejecuta consulta "UPDATE".
-
-            ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
+            ps.setInt(4, paciente.getDni());
             
-            if (rs.next()){
-                paciente.setIdPaciente(rs.getInt(1));
+            int rowsAffected= ps.executeUpdate(); //Ejecuta consulta "UPDATE".
+            //ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
+            
+            if (rowsAffected > 0){
+                //paciente.setIdPaciente(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se ha actualizado la información del paciente.");
             }
             ps.close();
