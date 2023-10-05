@@ -83,7 +83,7 @@ public class Data_Pacientes {
         }
     };
     
-    public void buscarPaciente(int dni){
+    public Paciente buscarPaciente(int dni){
         Paciente paciente = null;
         try {
             String sql = "SELECT nombre, domicilio, telefono FROM paciente WHERE dni = ?";
@@ -96,11 +96,14 @@ public class Data_Pacientes {
                 paciente.setNombre(rs.getString("Nombre"));
                 paciente.setDomicilio(rs.getString("Domicilio"));
                 paciente.setTelefono(rs.getInt("Telefono"));
+                JOptionPane.showMessageDialog(null, "Paciente encontrado.");
+            } else if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "Paciente NO encontrado.");
             }
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente.");
-            e.printStackTrace();
         }
+        return paciente;
     };
 }
