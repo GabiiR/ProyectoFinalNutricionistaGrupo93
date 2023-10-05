@@ -240,30 +240,28 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         if (pacienteActual != null) {
 
             try {
-                String nombre = jtNombrePaciente.getText();
-                //jtNombrePaciente.setText(pacienteActual.getNombre());
+                String nombre = jtNombrePaciente.getText(); //Obtiene un nombre (String).
                 
-                String domicilio = jtDomicilioPaciente.getText();
-                //jtDomicilioPaciente.setText(pacienteActual.getDomicilio());
+                String domicilio = jtDomicilioPaciente.getText(); //Obtiene un domicilio (String).
                 
-                Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText());
-                //jtTelefonoPaciente.setText(String.valueOf(pacienteActual.getTelefono()));
+                Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText()); //Obtiene un telefono (int).
 
                 //Comprueba campos vacios:
-                if (nombre.isEmpty() || domicilio.isEmpty()) {
+                if (nombre.isEmpty() || domicilio.isEmpty()) { //Verifica si hay espacios vacios en [Nombre] y [Domicilio].
                     JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
                     return;
+                    
                 } else {
-                    pacienteActual.setNombre(nombre);
-                    pacienteActual.setDomicilio(domicilio);
-                    pacienteActual.setTelefono(telefono);
+                    pacienteActual.setNombre(nombre); //Actualiza el nombre del paciente seleccionado.
+                    pacienteActual.setDomicilio(domicilio); //Actualiza el domicilio del paciente seleccionado.
+                    pacienteActual.setTelefono(telefono); //Actualiza el telefono del paciente seleccionado.
                 }
-                Dat_Pac.modificarPaciente(pacienteActual);
+                Dat_Pac.modificarPaciente(pacienteActual); //Modifica los datos del paciente por los editados anteriormente.
+                
                 //JOptionPane.showMessageDialog(this, "Se modifico al paciente correctamente.");
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Su DNI o Telefono no fue ingresado correctamente\n o esta escrito en un formato incorrecto,\n por favor, vuelva a ingresar sus datos.");
             }
-            
         } else {
             JOptionPane.showMessageDialog(this, "Error , no existe el paciente con el dni " + dni); //NULL.
         }
