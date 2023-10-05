@@ -240,56 +240,32 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         if (pacienteActual != null) {
 
             try {
-                /*
-                //Comprueba digitos del Dni:
-                if (dni < 1000000 || dni > 99999999) { //7 u 8 digitos.
-                    JOptionPane.showMessageDialog(this, "Por favor, ingrese un número de DNI correcto.");
-                    return;
-                }
-                */
                 String nombre = jtNombrePaciente.getText();
-                jtNombrePaciente.setText(pacienteActual.getNombre());
+                //jtNombrePaciente.setText(pacienteActual.getNombre());
                 
                 String domicilio = jtDomicilioPaciente.getText();
-                jtDomicilioPaciente.setText(pacienteActual.getDomicilio());
+                //jtDomicilioPaciente.setText(pacienteActual.getDomicilio());
                 
                 Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText());
-                jtTelefonoPaciente.setText(String.valueOf(pacienteActual.getTelefono()));
+                //jtTelefonoPaciente.setText(String.valueOf(pacienteActual.getTelefono()));
 
                 //Comprueba campos vacios:
                 if (nombre.isEmpty() || domicilio.isEmpty()) {
                     JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
                     return;
+                } else {
+                    pacienteActual.setNombre(nombre);
+                    pacienteActual.setDomicilio(domicilio);
+                    pacienteActual.setTelefono(telefono);
                 }
-                
                 Dat_Pac.modificarPaciente(pacienteActual);
                 //JOptionPane.showMessageDialog(this, "Se modifico al paciente correctamente.");
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Su DNI o Telefono no fue ingresado correctamente\n o esta escrito en un formato incorrecto,\n por favor, vuelva a ingresar sus datos.");
             }
             
-            /*----------------------------------------------------------------*/
-            /*==================================================================
-            ==================================================================*/
-            /*----------------------------------------------------------------*/
-            //nota: INTENTAR CORREGIR.
-            
-            /*
-            pacienteActual = new Paciente(nombre, dni, domicilio, telefono);
-            if (pacienteActual != null) {
-                pacienteActual.setNombre(nombre);
-                pacienteActual.setDomicilio(domicilio);
-                pacienteActual.setTelefono(telefono);
-                
-                Dat_Pac.modificarPaciente(pacienteActual);
-                JOptionPane.showMessageDialog(this, "Se modifico al paciente correctamente.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Error al modificar datos del paciente.");
-            }
-            */
-            
         } else {
-            JOptionPane.showMessageDialog(this, "Error al modificar datos del paciente.");
+            JOptionPane.showMessageDialog(this, "Error , no existe el paciente con el dni " + dni); //NULL.
         }
     }//GEN-LAST:event_jbModificarPacienteActionPerformed
     //nota: AGREGAR EL FONDO DE "multimedia/bg.png".
