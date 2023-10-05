@@ -97,8 +97,6 @@ public class Data_Pacientes {
                 paciente.setDomicilio(rs.getString("Domicilio"));
                 paciente.setTelefono(rs.getInt("Telefono"));
                 JOptionPane.showMessageDialog(null, "Paciente encontrado.");
-            } else if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "Paciente NO encontrado.");
             }
             ps.close();
         } catch (SQLException e) {
