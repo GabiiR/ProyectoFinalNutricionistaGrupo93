@@ -5,6 +5,8 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import proyectofinalnutricionistagrupo93.AccesoADatos.Conexion;
+
 /**
  *
  * @author Gabi
@@ -15,6 +17,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
      * Creates new form Nutricionista_GUI
      */
     public Nutricionista_GUI() {
+        Conexion.getConexion(); //
         initComponents();
     }
 
