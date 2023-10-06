@@ -31,6 +31,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmbPacientes = new javax.swing.JMenu();
         jmiPacientesOpc1 = new javax.swing.JMenuItem();
+        jmiPacientesOpc2 = new javax.swing.JMenuItem();
         jmbComidas = new javax.swing.JMenu();
         jmiComidasOpc1 = new javax.swing.JMenuItem();
         jmbDietas = new javax.swing.JMenu();
@@ -65,6 +66,9 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
             }
         });
         jmbPacientes.add(jmiPacientesOpc1);
+
+        jmiPacientesOpc2.setText("Consulta de pacientes");
+        jmbPacientes.add(jmiPacientesOpc2);
 
         jMenuBar1.add(jmbPacientes);
 
@@ -151,5 +155,6 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiComidasOpc1;
     private javax.swing.JMenuItem jmiDietasOpc1;
     private javax.swing.JMenuItem jmiPacientesOpc1;
+    private javax.swing.JMenuItem jmiPacientesOpc2;
     // End of variables declaration//GEN-END:variables
 }
