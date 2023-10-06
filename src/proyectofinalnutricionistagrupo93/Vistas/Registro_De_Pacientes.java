@@ -264,8 +264,6 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                         Dat_Pac.modificarPaciente(pacienteActual); //Devuelve el paciente modificado.
                     }
 
-                    Dat_Pac.modificarPaciente(pacienteActual); //Modifica los datos del paciente por los editados anteriormente.
-
                     //JOptionPane.showMessageDialog(this, "Se modifico al paciente correctamente.");
                 } catch (NumberFormatException e) {
                     JOptionPane.showMessageDialog(this, "Su DNI o Telefono no fue ingresado correctamente\n o esta escrito en un formato incorrecto,\n por favor, vuelva a ingresar sus datos.");
@@ -277,7 +275,33 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbModificarPacienteActionPerformed
 
     private void jbEliminarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarPacienteActionPerformed
-        
+        try {
+            Integer dni = Integer.parseInt(jtDniPaciente.getText()); //Captura solo enteros.
+            pacienteActual = Dat_Pac.buscarPaciente(dni);
+            
+            if (pacienteActual != null) {
+                
+                String nombre = jtNombrePaciente.getText(); //Obtiene un nombre (String).
+
+                String domicilio = jtDomicilioPaciente.getText(); //Obtiene un domicilio (String).
+
+                Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText()); //Obtiene un telefono (int).
+
+                //Comprueba campos vacios:
+                if (nombre.isEmpty() || domicilio.isEmpty()) { //Verifica si hay espacios vacios en [Nombre] y [Domicilio].
+                    JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
+                    return;
+                } else {
+                    pacienteActual = new Paciente(nombre, dni, domicilio, telefono); //Instancia el paciente a modificar.
+                    pacienteActual.setNombre(nombre); //Actualiza el nombre del paciente seleccionado.
+                    pacienteActual.setDomicilio(domicilio); //Actualiza el domicilio del paciente seleccionado.
+                    pacienteActual.setTelefono(telefono); //Actualiza el telefono del paciente seleccionado.
+                    Dat_Pac.eliminarPaciente(pacienteActual.getDni()); //Elimina al paciente.
+                }
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error , vuelva a ingresar de vuelta el DNI que desee modificar.");
+        }
     }//GEN-LAST:event_jbEliminarPacienteActionPerformed
     //nota: AGREGAR EL FONDO DE "multimedia/bg.png".
     public void limpiarCampos(){
