@@ -63,12 +63,12 @@ public class Data_Pacientes {
         }
     };
     
-    public void eliminarPaciente(int id) {
+    public void eliminarPaciente(int dni) {
         try {
-            String sql = "DELETE FROM paciente WHERE idPaciente = ?";
+            String sql = "DELETE FROM paciente WHERE dni = ?";
 
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, dni);
             ps.executeUpdate(); //Ejecuta consulta "DELETE".
             
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
