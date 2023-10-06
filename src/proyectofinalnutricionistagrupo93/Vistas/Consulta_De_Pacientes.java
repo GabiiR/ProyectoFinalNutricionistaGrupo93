@@ -5,17 +5,23 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import javax.swing.table.DefaultTableModel;
+import proyectofinalnutricionistagrupo93.Entidades.Dieta;
+import proyectofinalnutricionistagrupo93.Entidades.Paciente;
+
 /**
  *
  * @author Gabi
  */
 public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
     /**
      * Creates new form Consulta_De_Pacientes
      */
     public Consulta_De_Pacientes() {
         initComponents();
+        crearTabla();
     }
 
     /**
@@ -27,18 +33,24 @@ public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jlSeleccionarPaciente = new javax.swing.JLabel();
         jcbSeleccionarPaciente = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtModelo = new javax.swing.JTable();
 
         setClosable(true);
         setIconifiable(true);
         setTitle("Pacientes");
 
-        jLabel1.setText("Seleccione un paciente :");
+        jlSeleccionarPaciente.setText("Seleccione un paciente :");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jcbSeleccionarPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSeleccionarPacienteActionPerformed(evt);
+            }
+        });
+
+        jtModelo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -49,7 +61,7 @@ public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtModelo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,7 +71,7 @@ public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(jlSeleccionarPaciente)
                         .addGap(18, 18, 18)
                         .addComponent(jcbSeleccionarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -70,7 +82,7 @@ public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jlSeleccionarPaciente)
                     .addComponent(jcbSeleccionarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -80,11 +92,34 @@ public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbSeleccionarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionarPacienteActionPerformed
+        jcbSeleccionarPaciente.addItem("Seleccione un paciente.");
+        jcbSeleccionarPaciente.addItem("");
+        toString();
+    }//GEN-LAST:event_jcbSeleccionarPacienteActionPerformed
+
+    private void obtenerListaDePacientes(){
+        
+    }
+    
+    private void crearTabla() {
+        modeloTabla.addColumn("Nombre completo");
+        modeloTabla.addColumn("Dni");
+        modeloTabla.addColumn("Domicilio");
+        modeloTabla.addColumn("Telefono");
+        modeloTabla.addColumn("Peso actual");
+        modeloTabla.addColumn("Peso deseado");
+        jtModelo.setModel(modeloTabla);
+    }
+    
+    private void cargarDatos(Paciente paciente) {
+        //modeloTabla.addRow(new Object[]{paciente.getNombre(), paciente.getDni(), paciente.getDomicilio(), paciente.getTelefono(), dieta.getPesoInicial, dieta.getPesoFinal});
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> jcbSeleccionarPaciente;
+    private javax.swing.JLabel jlSeleccionarPaciente;
+    private javax.swing.JTable jtModelo;
     // End of variables declaration//GEN-END:variables
 }
