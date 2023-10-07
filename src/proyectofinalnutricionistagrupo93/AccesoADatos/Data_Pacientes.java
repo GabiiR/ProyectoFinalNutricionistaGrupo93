@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
@@ -106,4 +108,36 @@ public class Data_Pacientes {
         }
         return paciente;
     };
+    
+    public List <Paciente> listarPacientes(){
+        List<Paciente> listarPacientes = new ArrayList<Paciente>();
+
+        String sql = "SELECT * from paciente";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Paciente paciente = new Paciente();
+                //paciente.setIdPaciente(rs.getInt("idPaciente"));
+                paciente.setNombre(rs.getString("Nombre"));
+                paciente.setDni(rs.getInt("Dni"));
+                paciente.setDomicilio(rs.getString("Domicilio"));
+                paciente.setTelefono(rs.getInt("Telefono"));
+
+                paciente.setPesoActual(rs.getDouble("Peso actual"));
+                paciente.setPesoDeseado(rs.getDouble("Peso deseado"));
+                listarPacientes.add(paciente);
+            }
+            ps.close();
+            JOptionPane.showMessageDialog(null, "Exito al encontrar pacientes");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes");
+        }
+        return listarPacientes;
+    }
+    
 }
