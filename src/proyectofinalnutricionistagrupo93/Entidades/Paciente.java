@@ -65,4 +65,9 @@ public class Paciente {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }
