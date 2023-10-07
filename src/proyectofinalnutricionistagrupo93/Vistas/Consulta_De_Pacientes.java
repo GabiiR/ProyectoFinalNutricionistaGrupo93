@@ -5,7 +5,9 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Dieta;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
@@ -21,7 +23,12 @@ public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
      */
     public Consulta_De_Pacientes() {
         initComponents();
+        Paciente paciente = new Paciente(); //Datos del paciente.
+        Data_Pacientes Data_Pac = new Data_Pacientes(); //Metodos del paciente.
+        lista_Pac = (ArrayList<Paciente>) Data_Pac.listarPacientes();
+        /*--------------------------------------*/
         crearTabla();
+        cargarDatos();
     }
 
     /**
@@ -70,12 +77,12 @@ public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jlSeleccionarPaciente)
                         .addGap(18, 18, 18)
-                        .addComponent(jcbSeleccionarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addComponent(jcbSeleccionarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -94,13 +101,19 @@ public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
 
     private void jcbSeleccionarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionarPacienteActionPerformed
         jcbSeleccionarPaciente.addItem("Seleccione un paciente.");
-        jcbSeleccionarPaciente.addItem("");
+        jcbSeleccionarPaciente.addItem("Paciente 1");
+        jcbSeleccionarPaciente.addItem("Paciente 2");
+        jcbSeleccionarPaciente.addItem("Paciente 3");
         toString();
     }//GEN-LAST:event_jcbSeleccionarPacienteActionPerformed
 
-    private void obtenerListaDePacientes(){
-        
-    }
+    private ArrayList<Paciente> listarPacientes(){
+        ArrayList<String> pacientes = new ArrayList<>();
+        pacientes.add("Seleccione un paciente");
+        pacientes.add("Paciente 1");
+        pacientes.add("Paciente 2");
+        pacientes.add("Paciente 3");
+    };
     
     private void crearTabla() {
         modeloTabla.addColumn("Nombre completo");
@@ -112,7 +125,7 @@ public class Consulta_De_Pacientes extends javax.swing.JInternalFrame {
         jtModelo.setModel(modeloTabla);
     }
     
-    private void cargarDatos(Paciente paciente) {
+    private void cargarDatos() {
         //modeloTabla.addRow(new Object[]{paciente.getNombre(), paciente.getDni(), paciente.getDomicilio(), paciente.getTelefono(), dieta.getPesoInicial, dieta.getPesoFinal});
     }
 
