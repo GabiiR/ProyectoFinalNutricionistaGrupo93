@@ -5,6 +5,7 @@ public class DietaComida {
     
     protected Comida comida;
     protected Dieta dieta;
+    protected Horario horario;
 
     public DietaComida() {
     }
