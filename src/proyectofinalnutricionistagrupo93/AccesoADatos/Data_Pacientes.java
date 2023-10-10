@@ -110,7 +110,7 @@ public class Data_Pacientes {
     };
     
     public List <Paciente> listarPacientes(){
-        List<Paciente> listarPacientes = new ArrayList<Paciente>();
+        List<Paciente> listaPacientes = new ArrayList<Paciente>();
 
         String sql = "SELECT * from paciente";
         PreparedStatement ps = null;
@@ -129,7 +129,7 @@ public class Data_Pacientes {
 
                 paciente.setPesoActual(rs.getDouble("Peso actual"));
                 paciente.setPesoDeseado(rs.getDouble("Peso deseado"));
-                listarPacientes.add(paciente);
+                listaPacientes.add(paciente);
             }
             ps.close();
             JOptionPane.showMessageDialog(null, "Exito al encontrar pacientes");
@@ -137,7 +137,7 @@ public class Data_Pacientes {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes");
         }
-        return listarPacientes;
+        return listaPacientes;
     }
     
 }
