@@ -2,29 +2,35 @@ package proyectofinalnutricionistagrupo93.Entidades;
 
 public class Paciente {
     protected int idPaciente; //ID.
-    
     protected String nombre;
     protected int dni;
     protected String domicilio;
     protected int telefono;
+    protected double pesoActual;
+    protected double pesoDeseado;
+    
 
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, String nombre, int dni, String domicilio, int telefono) {
+    public Paciente(int idPaciente, String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado) {
         this.idPaciente = idPaciente;
         this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
+        this.pesoActual = pesoActual;
+        this.pesoDeseado = pesoDeseado;
     }
 
-    public Paciente(String nombre, int dni, String domicilio, int telefono) {
+    public Paciente(String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado) {
         this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
-    }    
+        this.pesoActual = pesoActual;
+        this.pesoDeseado = pesoDeseado;
+    }
 
     public int getIdPaciente() {
         return idPaciente;
@@ -66,8 +72,26 @@ public class Paciente {
         this.telefono = telefono;
     }
 
+    public double getPesoActual() {
+        return pesoActual;
+    }
+
+    public void setPesoActual(double pesoActual) {
+        this.pesoActual = pesoActual;
+    }
+
+    public double getPesoDeseado() {
+        return pesoDeseado;
+    }
+
+    public void setPesoDeseado(double pesoDeseado) {
+        this.pesoDeseado = pesoDeseado;
+    }
+
     @Override
     public String toString() {
-        return nombre;
+        return "Paciente{" + "nombre=" + nombre + ", dni=" + dni + ", pesoActual=" + pesoActual + ", pesoDeseado=" + pesoDeseado + '}';
     }
+
+   
 }
