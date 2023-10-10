@@ -7,24 +7,30 @@ public class Paciente {
     protected int dni;
     protected String domicilio;
     protected int telefono;
+    protected double pesoActual;
+    protected double pesoDeseado;
 
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, String nombre, int dni, String domicilio, int telefono) {
+    public Paciente(int idPaciente, String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado) {
         this.idPaciente = idPaciente;
         this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
+        this.pesoActual = pesoActual;
+        this.pesoDeseado = pesoDeseado;
     }
 
-    public Paciente(String nombre, int dni, String domicilio, int telefono) {
+    public Paciente(String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado) {
         this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
-    }    
+        this.pesoActual = pesoActual;
+        this.pesoDeseado = pesoDeseado;
+    }
 
     public int getIdPaciente() {
         return idPaciente;
@@ -66,8 +72,23 @@ public class Paciente {
         this.telefono = telefono;
     }
 
-    @Override
+    public double getPesoActual() {
+        return pesoActual;
+    }
+
+    public void setPesoActual(double pesoActual) {
+        this.pesoActual = pesoActual;
+    }
+
+    public double getPesoDeseado() {
+        return pesoDeseado;
+    }
+
+    public void setPesoDeseado(double pesoDeseado) {
+        this.pesoDeseado = pesoDeseado;
+    }
+    
     public String toString() {
-        return nombre;
+        return nombre + dni + domicilio + telefono + pesoActual + pesoDeseado;
     }
 }
