@@ -24,21 +24,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jbAgregarPaciente" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbModificarPaciente" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbEliminarPaciente" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbBuscarPaciente" min="-2" pref="71" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbSalirRegistroPacientes" min="-2" pref="56" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jlNombreCompleto" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -47,15 +35,44 @@
                           <Component id="jlTelefono" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jtNombrePaciente" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jtDniPaciente" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jtDniPaciente" alignment="0" pref="219" max="32767" attributes="0"/>
                           <Component id="jtDomicilioPaciente" alignment="0" max="32767" attributes="0"/>
                           <Component id="jtTelefonoPaciente" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jtNombrePaciente" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jbAgregarPaciente" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jbModificarPaciente" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jbEliminarPaciente" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jbBuscarPaciente" min="-2" pref="71" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jbSalirRegistroPacientes" pref="58" max="32767" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jlPesoDeseado" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlPesoActual" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jtPesoDeseado" pref="76" max="32767" attributes="0"/>
+                              <Component id="jtPesoActual" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jlPesoActual_kg" min="-2" max="-2" attributes="0"/>
+                              <Component id="jlPesoDeseado_kg" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jSeparator1" pref="1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -88,12 +105,24 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jbAgregarPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbModificarPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbEliminarPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbSalirRegistroPacientes" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jbBuscarPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlPesoActual" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtPesoActual" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlPesoActual_kg" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jlPesoDeseado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtPesoDeseado" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jlPesoDeseado_kg" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jbAgregarPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbModificarPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbEliminarPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbSalirRegistroPacientes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbBuscarPaciente" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -173,6 +202,30 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBuscarPacienteActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlPesoActual">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingresar peso actual :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtPesoActual">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlPesoDeseado">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ingresar peso deseado :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtPesoDeseado">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlPesoActual_kg">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="kg"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jlPesoDeseado_kg">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="kg"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
