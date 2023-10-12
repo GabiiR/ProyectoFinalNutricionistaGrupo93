@@ -20,7 +20,7 @@ public class Data_Pacientes {
 
     public void agregarPaciente(Paciente paciente) {
         try {
-            String sql = "INSERT INTO paciente (nombre, dni, domicilio, telefono, pesoActual, pesoDeseado)" + "VALUES (?,?,?,?,?,?)"; //Plantilla DB.
+            String sql = "INSERT INTO paciente (nombre, dni, domicilio, telefono, pesoActual, pesoDeseado, estado)" + "VALUES (?,?,?,?,?,?,?)"; //Plantilla DB.
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); //Agrega a los valores de la linea 20, lo de la linea 23 en adelante.
             ps.setString(1, paciente.getNombre());
@@ -29,6 +29,7 @@ public class Data_Pacientes {
             ps.setInt(4, paciente.getTelefono());
             ps.setDouble(5, paciente.getPesoActual());
             ps.setDouble(6, paciente.getPesoDeseado());
+            ps.setBoolean(7, true);
             ps.executeUpdate(); //Ejecuta consulta "INSERT INTO".
 
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
@@ -46,7 +47,7 @@ public class Data_Pacientes {
     
     public void modificarPaciente(Paciente paciente) {
         try {
-            String sql = "UPDATE paciente SET nombre = ?, domicilio = ?, telefono = ?, pesoActual = ?, pesoDeseado = ?, WHERE dni = ?";
+            String sql = "UPDATE paciente SET nombre = ?, domicilio = ?, telefono = ?, pesoActual = ?, pesoDeseado = ?, WHERE dni = ? AND estado = 1";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, paciente.getNombre());
@@ -71,11 +72,11 @@ public class Data_Pacientes {
     
     public void eliminarPaciente(int dni) {
         try {
-            String sql = "DELETE FROM paciente WHERE dni = ?";
-
+            String sql = "UPDATE paciente SET estado = ? WHERE dni = ? AND estado = 1";
+            
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, dni);
-            ps.executeUpdate(); //Ejecuta consulta "DELETE".
+            ps.setBoolean(1, false);
+            ps.executeUpdate(); //Ejecuta consulta "UPDATE".
             
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
             
@@ -92,7 +93,7 @@ public class Data_Pacientes {
     public Paciente buscarPaciente(int dni){
         Paciente paciente = null;
         try {
-            String sql = "SELECT nombre, domicilio, telefono, pesoActual, pesoDeseado FROM paciente WHERE dni = ?";
+            String sql = "SELECT nombre, domicilio, telefono, pesoActual, pesoDeseado FROM paciente WHERE dni = ? AND estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
             
@@ -136,6 +137,7 @@ public class Data_Pacientes {
 
                 paciente.setPesoActual(rs.getDouble("Peso actual"));
                 paciente.setPesoDeseado(rs.getDouble("Peso deseado"));
+                paciente.setEstado(rs.getBoolean("Estado"));
                 listaPacientes.add(paciente);
             }
             ps.close();
