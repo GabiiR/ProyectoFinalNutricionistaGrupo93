@@ -70,7 +70,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         });
         jmbPacientes.add(jmiPacientesOpc1);
 
-        jmiPacientesOpc2.setText("Consulta de pacientes");
+        jmiPacientesOpc2.setText("Historial de pacientes");
         jmiPacientesOpc2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiPacientesOpc2ActionPerformed(evt);
@@ -121,9 +121,9 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jmbPacientesActionPerformed
 
     private void jmiPacientesOpc2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPacientesOpc2ActionPerformed
-        Consulta_De_Pacientes CDP = new Consulta_De_Pacientes();
-        jDesktopPane1.add(CDP);
-        CDP.show();
+        Historial_De_Pacientes HDP = new Historial_De_Pacientes();
+        jDesktopPane1.add(HDP);
+        HDP.show();
     }//GEN-LAST:event_jmiPacientesOpc2ActionPerformed
 
     /**
