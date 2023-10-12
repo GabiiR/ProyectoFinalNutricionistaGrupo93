@@ -9,11 +9,12 @@ public class Paciente {
     protected int telefono;
     protected double pesoActual;
     protected double pesoDeseado;
+    protected boolean estado = false;
 
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado) {
+    public Paciente(int idPaciente, String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado, boolean estado) {
         this.idPaciente = idPaciente;
         this.nombre = nombre;
         this.dni = dni;
@@ -21,15 +22,17 @@ public class Paciente {
         this.telefono = telefono;
         this.pesoActual = pesoActual;
         this.pesoDeseado = pesoDeseado;
+        this.estado = estado;
     }
 
-    public Paciente(String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado) {
+    public Paciente(String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado, boolean estado) {
         this.nombre = nombre;
         this.dni = dni;
         this.domicilio = domicilio;
         this.telefono = telefono;
         this.pesoActual = pesoActual;
         this.pesoDeseado = pesoDeseado;
+        this.estado = estado;
     }
 
     public int getIdPaciente() {
@@ -87,8 +90,16 @@ public class Paciente {
     public void setPesoDeseado(double pesoDeseado) {
         this.pesoDeseado = pesoDeseado;
     }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
     
     public String toString() {
-        return nombre + dni + domicilio + telefono + pesoActual + pesoDeseado;
+        return nombre + dni + domicilio + telefono + pesoActual + pesoDeseado + estado;
     }
 }
