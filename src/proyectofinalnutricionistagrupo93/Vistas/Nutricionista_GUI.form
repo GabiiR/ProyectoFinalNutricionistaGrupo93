@@ -22,7 +22,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiPacientesOpc2">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Consulta de pacientes"/>
+                <Property name="text" type="java.lang.String" value="Historial de pacientes"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPacientesOpc2ActionPerformed"/>
