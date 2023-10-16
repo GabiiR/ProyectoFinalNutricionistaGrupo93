@@ -397,6 +397,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
 
     private void jrbEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbEstadoActionPerformed
         // TODO add your handling code here:
+        //jrbEstado.setEnabled(false);
     }//GEN-LAST:event_jrbEstadoActionPerformed
     //nota: AGREGAR EL FONDO DE "multimedia/bg.png".
     public void limpiarCampos(){
@@ -404,6 +405,8 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         jtDniPaciente.setText("");
         jtDomicilioPaciente.setText("");
         jtTelefonoPaciente.setText("");
+        jtPesoActual.setText("");
+        jtPesoDeseado.setText("");
     };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

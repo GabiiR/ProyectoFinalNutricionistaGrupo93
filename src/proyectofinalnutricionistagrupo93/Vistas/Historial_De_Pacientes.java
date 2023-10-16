@@ -130,7 +130,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
         
         //borrarFila();
         
-        int filaseleccionada = jcbSeleccionarPaciente.getSelectedIndex();
+        int filaseleccionada = jcbSeleccionarPaciente.getSelectedIndex();// Selecciona la 
         //borrarFila();
             if(filaseleccionada !=-1){
             Paciente p = (Paciente) jcbSeleccionarPaciente.getSelectedItem();

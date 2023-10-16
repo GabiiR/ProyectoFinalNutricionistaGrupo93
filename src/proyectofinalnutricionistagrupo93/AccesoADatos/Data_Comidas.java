@@ -17,13 +17,13 @@ public class Data_Comidas {
     }
 
     public void agregarComida(Comida comida) {
+        String sql = "INSERT INTO comida (nombre, detalle, cantCalorias, estado) VALUES (?,?,?,?)";
         try {
-            String sql = "INSERT INTO comida (nombre, detalle, cantCalorias) \n" + "VALUES (?,?,?)";
-
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, comida.getNombre());
             ps.setString(2, comida.getDetalle());
             ps.setInt(3, comida.getCantCalorias());
+            ps.setBoolean(4, comida.isEstado());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -40,12 +40,13 @@ public class Data_Comidas {
     
     public void modificarComida(Comida comida) {
         try {
-            String sql = "UPDATE comida \n SET nombre = ?, detalle = ?, cantCalorias = ?";
+            String sql = "UPDATE comida SET nombre = ?, detalle = ?, cantCalorias = ?, estado = ?";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, comida.getNombre());
             ps.setString(2, comida.getDetalle());
             ps.setInt(3, comida.getCantCalorias());
+            ps.setBoolean(4, comida.isEstado());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -60,15 +61,16 @@ public class Data_Comidas {
         }
     };
     
-    public void eliminarComida(Comida comida) {
+    public void eliminarComida(int idComida) {
+        String sql = "UPDATE comida SET estado = ? WHERE idComida = ? AND estado = 1";
         try {
-            String sql = "DELETE FROM comida \n WHERE idComida = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
             
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setBoolean(1, false);
+            ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                comida.setIdComida(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, "Se elimino correctamente su comida.");
+              JOptionPane.showMessageDialog(null, "Se elimino correctamente su comida.");
             }
             ps.close();
         } catch (SQLException e) {

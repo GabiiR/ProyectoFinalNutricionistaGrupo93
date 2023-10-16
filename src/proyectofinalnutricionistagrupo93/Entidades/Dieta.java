@@ -13,27 +13,30 @@ public class Dieta {
     
     protected double pesoInicial;
     protected double pesoFinal;
+    protected boolean estado;
 
     public Dieta() {
     }
 
-    public Dieta(int idDieta, String nombre, Paciente Paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
+    public Dieta(String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
+        this.nombre = nombre;
+        this.paciente = paciente;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+        this.pesoInicial = pesoInicial;
+        this.pesoFinal = pesoFinal;
+        this.estado = estado;
+    }
+
+    public Dieta(int idDieta, String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
         this.idDieta = idDieta;
         this.nombre = nombre;
-        this.paciente = Paciente;
+        this.paciente = paciente;
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
         this.pesoFinal = pesoFinal;
-    }
-    
-    public Dieta(String nombre, Paciente Paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal) {
-        this.nombre = nombre;
-        this.paciente = Paciente;
-        this.fechaInicial = fechaInicial;
-        this.fechaFinal = fechaFinal;
-        this.pesoInicial = pesoInicial;
-        this.pesoFinal = pesoFinal;
+        this.estado = estado;
     }
 
     public int getIdDieta() {
@@ -56,8 +59,8 @@ public class Dieta {
         return paciente;
     }
 
-    public void setPaciente(Paciente Paciente) {
-        this.paciente = Paciente;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
     public LocalDate getFechaInicial() {
@@ -91,4 +94,20 @@ public class Dieta {
     public void setPesoFinal(double pesoFinal) {
         this.pesoFinal = pesoFinal;
     }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Dieta{" + "nombre=" + nombre + ", paciente=" + paciente.getNombre() + ", fechaInicial=" +
+                fechaInicial + ", fechaFinal=" + fechaFinal + ", pesoInicial=" + pesoInicial 
+                + ", pesoFinal=" + pesoFinal + '}';
+    }
+
 }

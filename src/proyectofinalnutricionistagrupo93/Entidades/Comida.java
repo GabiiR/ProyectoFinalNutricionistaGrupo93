@@ -1,26 +1,32 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
+import java.util.logging.Logger;
+
 public class Comida {
     protected int idComida; //ID.
     
     protected String nombre;
     protected String detalle;
     protected int cantCalorias; //Por gramos.
+    protected boolean estado;
+    
 
     public Comida() {
     }
 
-    public Comida(int idComida, String nombre, String detalle, int cantCalorias) {
+    public Comida(String nombre, String detalle, int cantCalorias, boolean estado) {
+        this.nombre = nombre;
+        this.detalle = detalle;
+        this.cantCalorias = cantCalorias;
+        this.estado = estado;
+    }
+
+    public Comida(int idComida, String nombre, String detalle, int cantCalorias, boolean estado) {
         this.idComida = idComida;
         this.nombre = nombre;
         this.detalle = detalle;
         this.cantCalorias = cantCalorias;
-    }
-
-    public Comida(String nombre, String detalle, int cantCalorias) {
-        this.nombre = nombre;
-        this.detalle = detalle;
-        this.cantCalorias = cantCalorias;
+        this.estado = estado;
     }
 
     public int getIdComida() {
@@ -54,4 +60,19 @@ public class Comida {
     public void setCantCalorias(int cantCalorias) {
         this.cantCalorias = cantCalorias;
     }
+
+    public boolean isEstado() {
+        return estado;
+    }
+
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return "Comida{" + "nombre=" + nombre + ", detalle=" + detalle + ", cantCalorias=" + cantCalorias + ", estado=" + estado + '}';
+    }
+    
+   
 }
