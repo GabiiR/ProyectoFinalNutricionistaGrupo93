@@ -117,8 +117,8 @@ public class Data_Pacientes {
         return paciente;
     };
     
-    public List <Paciente> listarPacientes(){
-        List<Paciente> listaPacientes = new ArrayList<Paciente>();
+    public ArrayList <Paciente> listarPacientes(){
+        List<Paciente> listaPaci = new ArrayList<>();
 
         String sql = "SELECT * from paciente";
         PreparedStatement ps = null;
@@ -129,24 +129,23 @@ public class Data_Pacientes {
 
             while (rs.next()) {
                 Paciente paciente = new Paciente();
-                //paciente.setIdPaciente(rs.getInt("idPaciente"));
-                paciente.setNombre(rs.getString("Nombre"));
-                paciente.setDni(rs.getInt("Dni"));
-                paciente.setDomicilio(rs.getString("Domicilio"));
-                paciente.setTelefono(rs.getInt("Telefono"));
-
-                paciente.setPesoActual(rs.getDouble("Peso actual"));
-                paciente.setPesoDeseado(rs.getDouble("Peso deseado"));
-                paciente.setEstado(rs.getBoolean("Estado"));
-                listaPacientes.add(paciente);
+                paciente.setIdPaciente(rs.getInt("idPaciente"));
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setDni(rs.getInt("dni"));
+                paciente.setDomicilio(rs.getString("domicilio"));
+                paciente.setTelefono(rs.getInt("telefono"));
+                paciente.setPesoActual(rs.getDouble("pesoActual"));
+                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
+                paciente.setEstado(rs.getBoolean("estado"));
+                listaPaci.add(paciente);
             }
             ps.close();
             JOptionPane.showMessageDialog(null, "Exito al encontrar pacientes");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes");
+            JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes");               
         }
-        return listaPacientes;
+        return (ArrayList<Paciente>) listaPaci;
     }
     
 }

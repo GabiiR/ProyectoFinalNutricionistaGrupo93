@@ -7,6 +7,7 @@ package proyectofinalnutricionistagrupo93.Vistas;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.accessibility.AccessibleContext;
 import javax.swing.JOptionPane;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
@@ -289,7 +290,8 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Por favor, ingrese un DNI.");
                 return;
             }
-            
+            boolean activo = jrbEstado.isEnabled();
+            Boolean estado = activo;
             Integer dni = Integer.parseInt(jtDniPaciente.getText()); //Captura solo enteros.
             if (dni < 1000000 && estado == true|| dni > 99999999 && estado == true) {
                 JOptionPane.showMessageDialog(this, "Ingrese un DNI correcto.");

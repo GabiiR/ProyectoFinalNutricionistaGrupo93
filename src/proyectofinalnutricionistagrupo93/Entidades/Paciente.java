@@ -99,7 +99,8 @@ public class Paciente {
         this.estado = estado;
     }
     
+    @Override
     public String toString() {
-        return nombre + dni + domicilio + telefono + pesoActual + pesoDeseado + estado;
+        return nombre +", "+ dni +"-"+ estado;
     }
 }
