@@ -12,7 +12,7 @@ public class PlanNutricional {
     protected LocalDate fechaFinal; //Finalizar dieta.
     
     protected double pesoInicial;
-    protected double pesoFinal;
+    protected double pesoObjetivo;
     protected boolean estado;
 
     public PlanNutricional() {
@@ -24,7 +24,7 @@ public class PlanNutricional {
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
-        this.pesoFinal = pesoFinal;
+        this.pesoObjetivo = pesoObjetivo;
         this.estado = estado;
     }
 
@@ -35,7 +35,7 @@ public class PlanNutricional {
         this.fechaInicial = fechaInicial;
         this.fechaFinal = fechaFinal;
         this.pesoInicial = pesoInicial;
-        this.pesoFinal = pesoFinal;
+        this.pesoObjetivo = pesoObjetivo;
         this.estado = estado;
     }
 
@@ -88,11 +88,11 @@ public class PlanNutricional {
     }
 
     public double getPesoFinal() {
-        return pesoFinal;
+        return pesoObjetivo;
     }
 
     public void setPesoFinal(double pesoFinal) {
-        this.pesoFinal = pesoFinal;
+        this.pesoObjetivo = pesoObjetivo;
     }
 
     public boolean isEstado() {
@@ -107,7 +107,7 @@ public class PlanNutricional {
     public String toString() {
         return "Dieta{" + "nombre=" + nombre + ", paciente=" + paciente.getNombre() + ", fechaInicial=" +
                 fechaInicial + ", fechaFinal=" + fechaFinal + ", pesoInicial=" + pesoInicial 
-                + ", pesoFinal=" + pesoFinal + '}';
+                + ", pesoFinal=" + pesoObjetivo + '}';
     }
 
 }

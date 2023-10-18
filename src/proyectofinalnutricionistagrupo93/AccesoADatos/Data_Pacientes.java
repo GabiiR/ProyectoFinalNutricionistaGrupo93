@@ -39,16 +39,18 @@ public class Data_Pacientes {
                 JOptionPane.showMessageDialog(null, "Paciente agregado con exito.");
             }
             ps.close();
-            
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al agregar paciente.");
         }
-    };
+    }
+
+    ;
     
     public void modificarPaciente(Paciente paciente) {
         try {
             String sql = "UPDATE paciente SET nombre = ?, domicilio = ?, telefono = ?, pesoActual = ?, pesoDeseado = ? WHERE dni = ? AND estado = 1";
-            
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, paciente.getNombre());
             ps.setString(2, paciente.getDomicilio());
@@ -56,68 +58,107 @@ public class Data_Pacientes {
             ps.setDouble(4, paciente.getPesoActual());
             ps.setDouble(5, paciente.getPesoDeseado());
             ps.setInt(6, paciente.getDni());
-            
-            int resultado= ps.executeUpdate(); //Ejecuta consulta "UPDATE".
+
+            int resultado = ps.executeUpdate(); //Ejecuta consulta "UPDATE".
             //ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
-            
-            if (resultado > 0){
+
+            if (resultado > 0) {
                 //paciente.setIdPaciente(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se ha actualizado la información del paciente.");
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente."+e);
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente." + e);
         }
-    };
+    }
+
+    ;
     
     public void eliminarPaciente(int dni) {
         try {
             String sql = "UPDATE paciente SET estado = ? WHERE dni = ? AND estado = 1";
-            
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setBoolean(1, false);
             ps.executeUpdate(); //Ejecuta consulta "UPDATE".
-            
+
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
-            
+
             if (rs.next()) { //Comprueba si ya hay un paciente con datos.
                 JOptionPane.showMessageDialog(null, "Paciente eliminado con exito.");
             }
             ps.close();
-            
+
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al eliminar paciente.");
         }
-    };
+    }
+
+    ;
     
-    public Paciente buscarPaciente(int dni){
+    public Paciente buscarPaciente(int dni) {
         Paciente paciente = null;
         try {
             String sql = "SELECT nombre, domicilio, telefono, pesoActual, pesoDeseado FROM paciente WHERE dni = ? AND estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, dni);
-            
+
             ResultSet rs = ps.executeQuery();
-            if (rs.next()){
+            if (rs.next()) {
                 paciente = new Paciente();
                 paciente.setNombre(rs.getString("Nombre"));
                 paciente.setDomicilio(rs.getString("Domicilio"));
                 paciente.setTelefono(rs.getInt("Telefono"));
                 paciente.setPesoActual(rs.getDouble("pesoActual"));
-                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));                    
-                
+                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
+
                 JOptionPane.showMessageDialog(null, "Paciente encontrado.");
             } else if (!rs.next()) {
                 JOptionPane.showMessageDialog(null, "Paciente NO encontrado.");
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente."+ e);
+            JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente." + e);
         }
         return paciente;
-    };
+    }
+
+    ;
     
-    public ArrayList <Paciente> listarPacientes(){
+     public Paciente buscarPacienteID(int id) {
+        Paciente paciente = null;
+        try {
+            String sql = "SELECT Dni, Nombre, Apellido, Genero, Edad, Altura, pesoActual, pesoDeseado, Domicilio, Telefono, Mail FROM paciente WHERE idPaciente = ? AND estado = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                paciente = new Paciente();
+                paciente.setDni(rs.getInt("Dni"));
+                paciente.setNombre(rs.getString("Nombre"));
+                paciente.setApellido(rs.getString("Apellido"));
+                paciente.setGenero(rs.getString("Genero"));
+                paciente.setEdad(rs.getInt("Edad"));
+                paciente.setAltura(rs.getFloat("Altura"));
+                paciente.setPesoActual(rs.getDouble("pesoActual"));
+                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
+                paciente.setDomicilio(rs.getString("Domicilio"));
+                paciente.setTelefono(rs.getInt("Telefono"));
+                paciente.setMail(rs.getString("Mail"));
+
+                JOptionPane.showMessageDialog(null, "Paciente encontrado.");
+            } else if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "Paciente NO encontrado.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente." + e);
+        }
+        return paciente;
+    }
+   
+    public ArrayList<Paciente> listarPacientes() {
         List<Paciente> listaPaci = new ArrayList<>();
 
         String sql = "SELECT * from paciente";
@@ -143,9 +184,9 @@ public class Data_Pacientes {
             JOptionPane.showMessageDialog(null, "Exito al encontrar pacientes");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes");               
+            JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes");
         }
         return (ArrayList<Paciente>) listaPaci;
     }
-    
+
 }

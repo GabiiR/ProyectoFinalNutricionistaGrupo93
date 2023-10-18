@@ -1,15 +1,20 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
 public class Paciente {
-    protected int idPaciente; //ID.
+    private int idPaciente; //ID.
     
-    protected String nombre;
-    protected int dni;
-    protected String domicilio;
-    protected int telefono;
-    protected double pesoActual;
-    protected double pesoDeseado;
-    protected boolean estado = false;
+    private String nombre;
+    private String apellido;
+    private int dni;
+    private String genero;
+    private int edad;
+    private float altura;
+    private String mail;
+    private String domicilio;
+    private int telefono;
+    private double pesoActual;
+    private double pesoDeseado;
+    private boolean estado = false;
 
     public Paciente() {
     }
@@ -99,8 +104,54 @@ public class Paciente {
         this.estado = estado;
     }
     
+        public String getApellido() {
+        return apellido;
+    }
+
+ 
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+  
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public int getEdad() {
+        return edad;
+    }
+
+
+    public void setEdad(int edad) {
+        this.edad = edad;
+    }
+
+    public float getAltura() {
+        return altura;
+    }
+
+
+    public void setAltura(float altura) {
+        this.altura = altura;
+    }
+
+
+    public String getMail() {
+        return mail;
+    }
+
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+    
     @Override
     public String toString() {
-        return nombre +", "+ dni +"-"+ estado;
+        return getNombre() +", "+ getDni() +"-"+ isEstado();
     }
 }
