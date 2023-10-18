@@ -1,22 +1,22 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
-public class DietaComida {
+public class Dieta {
     protected int idDietaComida; //ID.
     
     protected Comida comida;
     protected PlanNutricional dieta;
     protected Horario horario; //Horario.
 
-    public DietaComida() {
+    public Dieta() {
     }
 
-    public DietaComida(Comida comida, PlanNutricional dieta, Horario horario) {
+    public Dieta(Comida comida, PlanNutricional dieta, Horario horario) {
         this.comida = comida;
         this.dieta = dieta;
         this.horario = horario;
     }
 
-    public DietaComida(int idDietaComida, Comida comida, PlanNutricional dieta, Horario horario) {
+    public Dieta(int idDietaComida, Comida comida, PlanNutricional dieta, Horario horario) {
         this.idDietaComida = idDietaComida;
         this.comida = comida;
         this.dieta = dieta;
