@@ -44,8 +44,9 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         jbAgregar = new javax.swing.JButton();
         jbBorrar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
-        jbSalir = new javax.swing.JButton();
+        jbLimpiarCampos = new javax.swing.JButton();
         jbBuscarComida = new javax.swing.JButton();
+        jbSalir1 = new javax.swing.JButton();
 
         jLabel1.setText("Registro de Comidas:");
 
@@ -62,8 +63,14 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         jtIDcomida.setEditable(false);
 
         jbAgregar.setText("Agregar");
+        jbAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarActionPerformed(evt);
+            }
+        });
 
-        jbBorrar.setText("Borrar");
+        jbBorrar.setText("Eliminar");
+        jbBorrar.setEnabled(false);
         jbBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBorrarActionPerformed(evt);
@@ -71,16 +78,17 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         });
 
         jbModificar.setText("Modificar");
+        jbModificar.setEnabled(false);
         jbModificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbModificarActionPerformed(evt);
             }
         });
 
-        jbSalir.setText("Salir");
-        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiarCampos.setText("Limpiar");
+        jbLimpiarCampos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalirActionPerformed(evt);
+                jbLimpiarCamposActionPerformed(evt);
             }
         });
 
@@ -88,6 +96,13 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         jbBuscarComida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarComidaActionPerformed(evt);
+            }
+        });
+
+        jbSalir1.setText("Salir");
+        jbSalir1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalir1ActionPerformed(evt);
             }
         });
 
@@ -128,11 +143,17 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
-                                        .addComponent(jbBuscarComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(jbBuscarComida, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGap(107, 107, 107)
-                                        .addComponent(jbSalir)))))))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jbLimpiarCampos)
+                                        .addGap(69, 69, 69)))))))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(544, Short.MAX_VALUE)
+                    .addComponent(jbSalir1)
+                    .addGap(16, 16, 16)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,24 +182,51 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                             .addComponent(jtIDcomida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jbSalir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jbAgregar)
-                            .addComponent(jbModificar)
-                            .addComponent(jbBorrar))))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbAgregar)
+                    .addComponent(jbModificar)
+                    .addComponent(jbBorrar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbLimpiarCampos)
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(276, Short.MAX_VALUE)
+                    .addComponent(jbSalir1)
+                    .addContainerGap()))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+        try {
+            Integer id = Integer.parseInt(jtIDcomida.getText());
+            comidaActual = Data_Comi.buscarComidaID(id);
 
+            if (comidaActual != null) {
+                String nombre = jtNombre.getText();
+                String detalle = jtDetalle.getText();
+                Integer cantCalorias = Integer.parseInt(jtCantCalorias.getText());
+                Boolean estado = jrbEstado.isSelected();
+
+                if (detalle.isEmpty() || cantCalorias == null || nombre.isEmpty()) {
+                    JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
+                    return;
+                } else {
+                    comidaActual = new Comida(nombre, detalle, cantCalorias, estado);
+                    comidaActual.setNombre(nombre);
+                    comidaActual.setIdComida(id);
+                    comidaActual.setCantCalorias(cantCalorias);
+                    comidaActual.setDetalle(detalle);
+                    comidaActual.setEstado(estado);
+                    Data_Comi.eliminarComida(comidaActual.getIdComida());
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error , vuelva a ingresar de vuelta el ID de comida que desee modificar.");
+        }
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbBuscarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarComidaActionPerformed
@@ -196,6 +244,8 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                 jtCantCalorias.setText(String.valueOf(comidaActual.getCantCalorias()));
                 jrbEstado.setSelected(true);
                 jrbEstado.setEnabled(true);
+                jbModificar.setEnabled(true);
+                jbBorrar.setEnabled(true);
             }
 
         } catch (Exception e) {
@@ -204,9 +254,9 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jbBuscarComidaActionPerformed
 
-    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        dispose(); //Cierra la ventana.
-    }//GEN-LAST:event_jbSalirActionPerformed
+    private void jbLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCamposActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jbLimpiarCamposActionPerformed
 
     private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
         try {
@@ -219,7 +269,7 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                     Integer cantCalorias = Integer.parseInt(jtCantCalorias.getText());
                     Boolean estado = jrbEstado.isSelected();
 
-                    if (detalle.isEmpty() || cantCalorias == null) {
+                    if (detalle.isEmpty() || cantCalorias == null || idcomida == null) {
                         JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
                         return;
                     } else {
@@ -229,6 +279,9 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                         comidaActual.setDetalle(detalle);
                         comidaActual.setEstado(true);
                         Data_Comi.modificarComida(comidaActual);
+                        JOptionPane.showMessageDialog(this, "Se modifico la comida correctamente.");
+                        limpiarCampos();
+
                     }
                 }
             } catch (Exception e) {
@@ -238,6 +291,35 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Error , vuelva a ingresar de vuelta el Nombre de la comida que desee modificar.");
         }
     }//GEN-LAST:event_jbModificarActionPerformed
+
+    private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
+        try {
+            String nombre = jtNombre.getText();
+            Integer id = Integer.parseInt(jtIDcomida.getText());
+            String detalle = jtDetalle.getText();
+            Integer cantCalorias = Integer.parseInt(jtCantCalorias.getText());
+            Boolean estado = jrbEstado.isSelected();
+            if (detalle.isEmpty() || cantCalorias == null || nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
+                return;
+            }
+
+            if (comidaActual == null) {
+                estado = true;
+                comidaActual = new Comida(nombre, detalle, id, estado);
+                Data_Comi.agregarComida(comidaActual);
+                JOptionPane.showMessageDialog(this, "Se agrego la comida correctamente.");
+                limpiarCampos();
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Algunos datos no fueron ingresados correctamente\n o esta escrito en un formato incorrecto.n Por favor, vuelva a ingresar sus datos.");
+        }
+    }//GEN-LAST:event_jbAgregarActionPerformed
+
+    private void jbSalir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalir1ActionPerformed
+        dispose(); //Cierra la ventana.
+    }//GEN-LAST:event_jbSalir1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -250,12 +332,21 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBorrar;
     private javax.swing.JButton jbBuscarComida;
+    private javax.swing.JButton jbLimpiarCampos;
     private javax.swing.JButton jbModificar;
-    private javax.swing.JButton jbSalir;
+    private javax.swing.JButton jbSalir1;
     private javax.swing.JRadioButton jrbEstado;
     private javax.swing.JTextField jtCantCalorias;
     private javax.swing.JTextField jtDetalle;
     private javax.swing.JTextField jtIDcomida;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarCampos() {
+        jtNombre.setText("");
+        jtCantCalorias.setText("");
+        jtDetalle.setText("");
+        jtIDcomida.setText("");
+        jrbEstado.setSelected(false);
+    }
 }

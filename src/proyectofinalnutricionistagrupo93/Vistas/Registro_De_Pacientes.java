@@ -273,8 +273,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
             limpiarCampos();
             
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Su DNI, telefono o peso no fue ingresado correctamente\n o esta escrito en un formato incorrecto,\n por favor, vuelva a ingresar sus datos.");
-        }
+            JOptionPane.showMessageDialog(this, "Su DNI, telefono o peso no fue ingresado correctamente\n o esta escrito en un formato incorrecto.n Por favor, vuelva a ingresar sus datos.");}
     }//GEN-LAST:event_jbAgregarPacienteActionPerformed
 
     private void jtNombrePacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombrePacienteActionPerformed

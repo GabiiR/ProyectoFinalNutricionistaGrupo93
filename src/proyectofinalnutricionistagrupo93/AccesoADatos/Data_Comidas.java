@@ -78,6 +78,34 @@ public class Data_Comidas {
         }
     };
     
+    public Comida buscarComidaID(int id){
+        Comida comidaID = null;
+        String sql = "SELECT * FROM comida WHERE idComida=? AND estado = 1";
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()){
+                comidaID = new Comida();
+                comidaID.setNombre(rs.getString("nombre"));   
+                comidaID.setDetalle(rs.getString("detalle"));
+                comidaID.setCantCalorias(rs.getInt("cantCalorias"));
+                comidaID.setIdComida(id);
+                comidaID.setEstado(rs.getBoolean("estado"));
+                
+                JOptionPane.showMessageDialog(null, "Comida encontrada.");
+          } else if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "Comida NO encontrado.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "");
+        }
+        return comidaID;
+    };
+    
     public Comida buscarComida(String nombre){
         Comida comida = null;
         String sql = "SELECT * FROM `comida` WHERE `nombre`=? AND estado = 1";
