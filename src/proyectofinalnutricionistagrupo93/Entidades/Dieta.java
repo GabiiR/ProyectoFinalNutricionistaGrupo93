@@ -1,10 +1,15 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
 public class Dieta {
-    protected int idDieta; //ID.    
-    protected Comida comida;
-    protected PlanNutricional dieta;
-    protected Horario horario; //Horario.
+    private int idDieta; //ID.    
+    private Comida comida;
+    private PlanNutricional dieta;
+    private Horario horario; //Horario.
+    private int idPlanNutricional;
+    private int idComida;
+    private int porcion;
+    private boolean estado;
+    
 
     public Dieta() {
     }
@@ -53,12 +58,48 @@ public class Dieta {
     public void setHorario(Horario horario) {
         this.horario = horario;
     }
-
-    @Override
-    public String toString() {
-        return "DietaComida{" + "comida=" + comida + ", dieta=" + dieta + ", horario=" + horario + '}';
-    }
     
+    public int getIdPlanNutricional() {
+        return idPlanNutricional;
+    }
 
    
+    public void setIdPlanNutricional(int idPlanNutricional) {
+        this.idPlanNutricional = idPlanNutricional;
+    }
+
+    
+    public int getIdComida() {
+        return idComida;
+    }
+
+   
+    public void setIdComida(int idComida) {
+        this.idComida = idComida;
+    }
+
+  
+    public int getPorcion() {
+        return porcion;
+    }
+
+   
+    public void setPorcion(int porcion) {
+        this.porcion = porcion;
+    }
+
+   
+    public boolean isEstado() {
+        return estado;
+    }
+
+  
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
+    @Override
+    public String toString() {
+        return "DietaComida{" + "comida=" + getComida() + ", dieta=" + getDieta() + ", horario=" + getHorario() + '}';
+    }   
 }

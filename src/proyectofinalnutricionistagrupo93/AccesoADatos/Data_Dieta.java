@@ -6,7 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import proyectofinalnutricionistagrupo93.Entidades.Comida;
 import proyectofinalnutricionistagrupo93.Entidades.Dieta;
+import proyectofinalnutricionistagrupo93.Entidades.Horario;
 
 public class Data_Dieta{
 
@@ -18,12 +20,16 @@ public class Data_Dieta{
     
     public void agregarDieta(Dieta dieta){
         try {
-            String sql = "INSERT INTO dieta (nombres de columnas)" + "VALUES (?,?,?,?,?,?,?)"; //Plantilla DB.
+            String sql = "INSERT INTO `dieta`(`idPlanNutricional`, `IdComida`, `IdDieta`, `Horario`, `Porcion`, `Estado`)" + "VALUES (?,?,?,?,?,?)"; //Plantilla DB.
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); //Agrega a los valores de la linea 20, lo de la linea 23 en adelante.
-            //ps.setString(1, dieta.());
-            //ps.setInt(2, dieta.());
-            //ps.setBoolean(3, true);
+            ps.setInt(1, dieta.getIdPlanNutricional());
+            ps.setInt(2, dieta.getComida().getIdComida());
+            ps.setInt(3, dieta.getDieta().getIdDieta());
+            ps.setString(4, String.valueOf(dieta.getHorario()));
+            ps.setString(5, String.valueOf(dieta.getPorcion()));
+            ps.setBoolean(6, dieta.isEstado());
+            
             ps.executeUpdate(); //Ejecuta consulta "INSERT INTO".
 
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
@@ -32,10 +38,7 @@ public class Data_Dieta{
                 dieta.setIdDieta(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Dieta agregado con exito.");
             }
-            ps.close();
-            
-            
-            
+            ps.close();           
             
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al agregar Dieta.");
@@ -44,14 +47,15 @@ public class Data_Dieta{
     }
     public void modificarDieta(Dieta dieta) {
         try {
-            String sql = "UPDATE dieta SET  = ?,  = ?,  = ? WHERE dni = ? AND estado = 1";
+            String sql = "UPDATE dieta SET  idPlanNutricional = ?, IdComida= ?,   Horario= ?, Porcion=? WHERE IdDieta = ? AND Estado = 1";
             
             PreparedStatement ps = con.prepareStatement(sql);
-            //ps.setString(1, dieta.());
-            //ps.setString(2, dieta.());
-            //ps.setInt(3, dieta.());
-           
-            
+            ps.setInt(1, dieta.getIdPlanNutricional());
+            ps.setInt(2, dieta.getIdComida());
+            ps.setString(3, String.valueOf(dieta.getHorario()));
+            ps.setInt(4, dieta.getPorcion());
+            ps.setInt(5, dieta.getIdDieta());
+                       
             int resultado= ps.executeUpdate(); //Ejecuta consulta "UPDATE".
             if (resultado > 0){
                 JOptionPane.showMessageDialog(null, "Se ha actualizado la Dieta.");
@@ -84,17 +88,22 @@ public class Data_Dieta{
     
     public Dieta buscarDieta(int id){
         Dieta dieta = null;
-        try {
+        Comida comida =  null;
+              try {
             String sql = "SELECT * WHERE id = ? AND estado = 1";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            
+            //idPlanNutricional`, `IdComida`, `IdDieta`, `Horario`, `Porcion`, `Estado` 
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
                 dieta = new Dieta();
-                //dieta.setNombre(rs.getString(""));
-                //dieta.set(rs.getString(""));
-                //dieta.set(rs.getInt(""));               
+                comida = new Comida();               
+                comida.setIdComida(id);
+                dieta.setComida(comida);
+                dieta.setEstado(rs.getBoolean("Estado"));
+                dieta.setIdDieta(rs.getInt("IdDieta"));
+                dieta.setPorcion(rs.getInt("porcion"));
+                dieta.setHorario(Horario.valueOf("horario");
                 
                 JOptionPane.showMessageDialog(null, "Dieta encontrado.");
             } else if (!rs.next()) {
