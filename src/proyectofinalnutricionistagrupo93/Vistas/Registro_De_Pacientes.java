@@ -12,10 +12,6 @@ import javax.swing.JOptionPane;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
-/**
- *
- * @author Gabi
- */
 public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
     protected Data_Pacientes Dat_Pac = new Data_Pacientes();
     protected Paciente pacienteActual = null;
@@ -40,7 +36,6 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         jlDni = new javax.swing.JLabel();
         jlDomicilio = new javax.swing.JLabel();
         jlTelefono = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
         jtNombrePaciente = new javax.swing.JTextField();
         jtDniPaciente = new javax.swing.JTextField();
         jtDomicilioPaciente = new javax.swing.JTextField();
@@ -58,18 +53,19 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         jlPesoDeseado_kg = new javax.swing.JLabel();
         jrbEstado = new javax.swing.JRadioButton();
         jlEstado = new javax.swing.JLabel();
+        jbLimpiarRegistro = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
         setTitle("Registro de pacientes");
 
-        jlNombreCompleto.setText("Ingresar nombre completo :");
+        jlNombreCompleto.setText("Nombre Completo :");
 
         jlDni.setText("Ingresar DNI :");
 
-        jlDomicilio.setText("Ingresar Domicilio :");
+        jlDomicilio.setText("Domicilio :");
 
-        jlTelefono.setText("Ingresar Telefono :");
+        jlTelefono.setText(" Telefono :");
 
         jtNombrePaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,21 +101,22 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
             }
         });
 
-        jbBuscarPaciente.setText("Buscar");
+        jbBuscarPaciente.setText("Buscar Paciente por DNI");
         jbBuscarPaciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarPacienteActionPerformed(evt);
             }
         });
 
-        jlPesoActual.setText("Ingresar peso actual :");
+        jlPesoActual.setText("Peso Actual :");
 
-        jlPesoDeseado.setText("Ingresar peso deseado :");
+        jlPesoDeseado.setText("Peso Deseado :");
 
-        jlPesoActual_kg.setText("kg");
+        jlPesoActual_kg.setText("KG");
 
-        jlPesoDeseado_kg.setText("kg");
+        jlPesoDeseado_kg.setText("KG");
 
+        jrbEstado.setSelected(true);
         jrbEstado.setEnabled(false);
         jrbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -128,6 +125,13 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         });
 
         jlEstado.setText("Estado :");
+
+        jbLimpiarRegistro.setText("Limpiar");
+        jbLimpiarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarRegistroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -162,26 +166,24 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jlPesoActual_kg)
                                     .addComponent(jlPesoDeseado_kg))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbBuscarPaciente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jbAgregarPaciente)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbModificarPaciente))
-                            .addComponent(jlEstado))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jlEstado)
+                                .addGap(69, 69, 69)
+                                .addComponent(jrbEstado)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jrbEstado)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbEliminarPaciente)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbBuscarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbSalirRegistroPacientes, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE)))))
+                        .addComponent(jbEliminarPaciente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jbLimpiarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                        .addComponent(jbSalirRegistroPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -194,7 +196,8 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlDni)
-                    .addComponent(jtDniPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtDniPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarPaciente))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlDomicilio)
@@ -204,32 +207,26 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                     .addComponent(jlTelefono)
                     .addComponent(jtTelefonoPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlPesoActual)
-                        .addComponent(jtPesoActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jlPesoActual_kg)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlPesoActual)
+                    .addComponent(jtPesoActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlPesoActual_kg))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlPesoDeseado)
                     .addComponent(jtPesoDeseado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlPesoDeseado_kg))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jlEstado)
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jrbEstado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)))
+                    .addComponent(jrbEstado)
+                    .addComponent(jlEstado))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregarPaciente)
                     .addComponent(jbModificarPaciente)
                     .addComponent(jbEliminarPaciente)
-                    .addComponent(jbSalirRegistroPacientes)
-                    .addComponent(jbBuscarPaciente))
+                    .addComponent(jbLimpiarRegistro)
+                    .addComponent(jbSalirRegistroPacientes))
                 .addGap(10, 10, 10))
         );
 
@@ -291,15 +288,12 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                 return;
             }
             boolean activo = jrbEstado.isEnabled();
-            Boolean estado = activo;
+            Boolean estado = true;
             Integer dni = Integer.parseInt(jtDniPaciente.getText()); //Captura solo enteros.
             if (dni < 1000000 && estado == true|| dni > 99999999 && estado == true) {
                 JOptionPane.showMessageDialog(this, "Ingrese un DNI correcto.");
             }
-            
-            Double pesoActual = Double.parseDouble(jtPesoActual.getText());
-            Double pesoDeseado = Double.parseDouble(jtPesoActual.getText());
-            
+   
             pacienteActual = Dat_Pac.buscarPaciente(dni);
             if (pacienteActual != null) {
                 jtNombrePaciente.setText(pacienteActual.getNombre());
@@ -307,10 +301,11 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                 jtTelefonoPaciente.setText(String.valueOf(pacienteActual.getTelefono()));
                 jtPesoActual.setText(String.valueOf(pacienteActual.getPesoActual()));
                 jtPesoDeseado.setText(String.valueOf(pacienteActual.getPesoDeseado()));
+                jrbEstado.setSelected(true);
                 jrbEstado.setEnabled(true);
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Su DNI no fue ingresado correctamente\n o esta escrito en un formato incorrecto,\n por favor, vuelva a ingresarlo de vuelta.");
+            JOptionPane.showMessageDialog(this, "Su DNI no fue ingresado correctamente\n o esta escrito en un formato incorrecto.\n Por favor, vuelva a ingresarlo de vuelta.");
         }
     }//GEN-LAST:event_jbBuscarPacienteActionPerformed
 
@@ -399,6 +394,10 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         //jrbEstado.setEnabled(false);
     }//GEN-LAST:event_jrbEstadoActionPerformed
+
+    private void jbLimpiarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarRegistroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbLimpiarRegistroActionPerformed
     //nota: AGREGAR EL FONDO DE "multimedia/bg.png".
     public void limpiarCampos(){
         jtNombrePaciente.setText("");
@@ -410,10 +409,10 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
     };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JButton jbAgregarPaciente;
     private javax.swing.JButton jbBuscarPaciente;
     private javax.swing.JButton jbEliminarPaciente;
+    private javax.swing.JButton jbLimpiarRegistro;
     private javax.swing.JButton jbModificarPaciente;
     private javax.swing.JButton jbSalirRegistroPacientes;
     private javax.swing.JLabel jlDni;

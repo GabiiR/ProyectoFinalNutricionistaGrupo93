@@ -77,4 +77,31 @@ public class Data_Comidas {
             JOptionPane.showMessageDialog(null, "NO se pudo eliminar su comida.");
         }
     };
+    
+    public Comida buscarComida(String nombre){
+        Comida comida = null;
+        String sql = "SELECT * FROM `comida` WHERE `nombre`=? AND estado = 1";
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ResultSet rs = ps.executeQuery();
+            
+            if (rs.next()){
+                comida = new Comida();
+                comida.setNombre(rs.getString("nombre"));   
+                comida.setDetalle(rs.getString("detalle"));
+                comida.setCantCalorias(rs.getInt("cantCalorias"));
+                comida.setEstado(rs.getBoolean("estado"));
+                
+                JOptionPane.showMessageDialog(null, "Comida encontrada.");
+          } else if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "Comida NO encontrado.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "");
+        }
+        return comida;
+    };
 }

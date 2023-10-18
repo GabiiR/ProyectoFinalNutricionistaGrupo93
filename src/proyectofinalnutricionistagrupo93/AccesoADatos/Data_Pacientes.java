@@ -47,26 +47,26 @@ public class Data_Pacientes {
     
     public void modificarPaciente(Paciente paciente) {
         try {
-            String sql = "UPDATE paciente SET nombre = ?, domicilio = ?, telefono = ?, pesoActual = ?, pesoDeseado = ?, WHERE dni = ? AND estado = 1";
+            String sql = "UPDATE paciente SET nombre = ?, domicilio = ?, telefono = ?, pesoActual = ?, pesoDeseado = ? WHERE dni = ? AND estado = 1";
             
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, paciente.getNombre());
             ps.setString(2, paciente.getDomicilio());
             ps.setInt(3, paciente.getTelefono());
-            ps.setInt(4, paciente.getDni());
-            ps.setDouble(5, paciente.getPesoActual());
-            ps.setDouble(6, paciente.getPesoDeseado());
+            ps.setDouble(4, paciente.getPesoActual());
+            ps.setDouble(5, paciente.getPesoDeseado());
+            ps.setInt(6, paciente.getDni());
             
-            int rowsAffected= ps.executeUpdate(); //Ejecuta consulta "UPDATE".
+            int resultado= ps.executeUpdate(); //Ejecuta consulta "UPDATE".
             //ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
             
-            if (rowsAffected > 0){
+            if (resultado > 0){
                 //paciente.setIdPaciente(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se ha actualizado la información del paciente.");
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente.");
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente."+e);
         }
     };
     
@@ -103,8 +103,8 @@ public class Data_Pacientes {
                 paciente.setNombre(rs.getString("Nombre"));
                 paciente.setDomicilio(rs.getString("Domicilio"));
                 paciente.setTelefono(rs.getInt("Telefono"));
-                paciente.setPesoActual(rs.getDouble("Peso actual"));
-                paciente.setPesoActual(rs.getDouble("Peso deseado"));
+                paciente.setPesoActual(rs.getDouble("pesoActual"));
+                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));                    
                 
                 JOptionPane.showMessageDialog(null, "Paciente encontrado.");
             } else if (!rs.next()) {
@@ -112,7 +112,7 @@ public class Data_Pacientes {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente.");
+            JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente."+ e);
         }
         return paciente;
     };

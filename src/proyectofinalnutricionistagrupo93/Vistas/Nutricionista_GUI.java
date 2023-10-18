@@ -83,6 +83,11 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jmbComidas.setText("Comidas");
 
         jmiComidasOpc1.setText("Registro de comidas");
+        jmiComidasOpc1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiComidasOpc1ActionPerformed(evt);
+            }
+        });
         jmbComidas.add(jmiComidasOpc1);
 
         jMenuBar1.add(jmbComidas);
@@ -125,6 +130,12 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jDesktopPane1.add(HDP);
         HDP.show();
     }//GEN-LAST:event_jmiPacientesOpc2ActionPerformed
+
+    private void jmiComidasOpc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiComidasOpc1ActionPerformed
+       Registro_De_Comidas RDC = new Registro_De_Comidas();
+       jDesktopPane1.add(RDC);
+       RDC.show();
+    }//GEN-LAST:event_jmiComidasOpc1ActionPerformed
 
     /**
      * @param args the command line arguments

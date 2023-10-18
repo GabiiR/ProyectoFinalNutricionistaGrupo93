@@ -5,11 +5,14 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
-/**
- *
- * @author aldio
- */
+import javax.swing.JOptionPane;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Comidas;
+import proyectofinalnutricionistagrupo93.Entidades.Comida;
+
 public class Registro_De_Comidas extends javax.swing.JInternalFrame {
+
+    protected Data_Comidas Data_Comi = new Data_Comidas();
+    protected Comida comidaActual = null;
 
     /**
      * Creates new form Registro_De_Comidas
@@ -42,6 +45,7 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         jbBorrar = new javax.swing.JButton();
         jbModificar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
+        jbBuscarComida = new javax.swing.JButton();
 
         jLabel1.setText("Registro de Comidas:");
 
@@ -60,10 +64,32 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         jbAgregar.setText("Agregar");
 
         jbBorrar.setText("Borrar");
+        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBorrarActionPerformed(evt);
+            }
+        });
 
         jbModificar.setText("Modificar");
+        jbModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
+        jbBuscarComida.setText("Buscar Por Nombre");
+        jbBuscarComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarComidaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,34 +101,38 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                         .addGap(167, 167, 167)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel6))
+                        .addGap(51, 51, 51)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addComponent(jrbEstado)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jbAgregar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jbModificar)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jbBorrar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(jtDetalle, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtIDcomida, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtCantCalorias, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel6)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jbAgregar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jbBorrar)
-                                .addGap(35, 35, 35)
-                                .addComponent(jbModificar))
-                            .addComponent(jrbEstado)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jbSalir)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
-                                    .addComponent(jtDetalle)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jtIDcomida, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jtCantCalorias, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)))))))
-                .addContainerGap(73, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jbBuscarComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(107, 107, 107)
+                                        .addComponent(jbSalir)))))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,10 +141,12 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                     .addComponent(jrbEstado)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(16, 16, 16)
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jbBuscarComida)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
@@ -129,18 +161,83 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                             .addComponent(jtIDcomida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel6)))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbAgregar)
-                    .addComponent(jbBorrar)
-                    .addComponent(jbModificar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jbSalir)
-                .addGap(38, 38, 38))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(jbSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbAgregar)
+                            .addComponent(jbModificar)
+                            .addComponent(jbBorrar))))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+
+    }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void jbBuscarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarComidaActionPerformed
+        try {
+            if (jtNombre.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese una Comida");
+                return;
+            }
+            String nombre = jtNombre.getText();
+            comidaActual = Data_Comi.buscarComida(nombre);
+            if (comidaActual != null) {
+                jtNombre.setText(comidaActual.getNombre());
+                jtIDcomida.setText(String.valueOf(comidaActual.getIdComida()));
+                jtDetalle.setText(comidaActual.getDetalle());
+                jtCantCalorias.setText(String.valueOf(comidaActual.getCantCalorias()));
+                jrbEstado.setSelected(true);
+                jrbEstado.setEnabled(true);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "El Nombre no fue ingresado correctamente\n o esta escrito en un formato incorrecto.\n Por favor, vuelva a ingresarlo de vuelta.");
+
+        }
+    }//GEN-LAST:event_jbBuscarComidaActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        dispose(); //Cierra la ventana.
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarActionPerformed
+        try {
+            String nombre = jtNombre.getText();
+            comidaActual = Data_Comi.buscarComida(nombre);
+            try {
+                if (comidaActual != null) {
+                    Integer idcomida = Integer.parseInt(jtIDcomida.getText());
+                    String detalle = jtDetalle.getText();
+                    Integer cantCalorias = Integer.parseInt(jtCantCalorias.getText());
+                    Boolean estado = jrbEstado.isSelected();
+
+                    if (detalle.isEmpty() || cantCalorias == null) {
+                        JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
+                        return;
+                    } else {
+                        comidaActual = new Comida(nombre, detalle, cantCalorias, estado);
+                        comidaActual.setNombre(nombre);
+                        comidaActual.setCantCalorias(cantCalorias);
+                        comidaActual.setDetalle(detalle);
+                        comidaActual.setEstado(true);
+                        Data_Comi.modificarComida(comidaActual);
+                    }
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Los datos no fueron ingresados correctamente\n o esta escrito en un formato incorrecto.\n Por favor, vuelva a ingresar sus datos.");
+            }
+        } catch (StringIndexOutOfBoundsException e) { //poner la excepcion correspondiente para que unicamente se puedan ingresar letras
+            JOptionPane.showMessageDialog(this, "Error , vuelva a ingresar de vuelta el Nombre de la comida que desee modificar.");
+        }
+    }//GEN-LAST:event_jbModificarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -152,6 +249,7 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JButton jbAgregar;
     private javax.swing.JButton jbBorrar;
+    private javax.swing.JButton jbBuscarComida;
     private javax.swing.JButton jbModificar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JRadioButton jrbEstado;
