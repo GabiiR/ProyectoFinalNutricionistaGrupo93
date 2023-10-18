@@ -4,19 +4,19 @@ public class DietaComida {
     protected int idDietaComida; //ID.
     
     protected Comida comida;
-    protected Dieta dieta;
+    protected PlanNutricional dieta;
     protected Horario horario; //Horario.
 
     public DietaComida() {
     }
 
-    public DietaComida(Comida comida, Dieta dieta, Horario horario) {
+    public DietaComida(Comida comida, PlanNutricional dieta, Horario horario) {
         this.comida = comida;
         this.dieta = dieta;
         this.horario = horario;
     }
 
-    public DietaComida(int idDietaComida, Comida comida, Dieta dieta, Horario horario) {
+    public DietaComida(int idDietaComida, Comida comida, PlanNutricional dieta, Horario horario) {
         this.idDietaComida = idDietaComida;
         this.comida = comida;
         this.dieta = dieta;
@@ -39,11 +39,11 @@ public class DietaComida {
         this.comida = comida;
     }
 
-    public Dieta getDieta() {
+    public PlanNutricional getDieta() {
         return dieta;
     }
 
-    public void setDieta(Dieta dieta) {
+    public void setDieta(PlanNutricional dieta) {
         this.dieta = dieta;
     }
 

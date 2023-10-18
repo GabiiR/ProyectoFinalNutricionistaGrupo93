@@ -2,7 +2,7 @@ package proyectofinalnutricionistagrupo93.Entidades;
 
 import java.time.LocalDate;
 
-public class Dieta {
+public class PlanNutricional {
     protected int idDieta; //ID.
     protected String nombre;
     
@@ -15,10 +15,10 @@ public class Dieta {
     protected double pesoFinal;
     protected boolean estado;
 
-    public Dieta() {
+    public PlanNutricional() {
     }
 
-    public Dieta(String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
+    public PlanNutricional(String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
         this.nombre = nombre;
         this.paciente = paciente;
         this.fechaInicial = fechaInicial;
@@ -28,7 +28,7 @@ public class Dieta {
         this.estado = estado;
     }
 
-    public Dieta(int idDieta, String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
+    public PlanNutricional(int idDieta, String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
         this.idDieta = idDieta;
         this.nombre = nombre;
         this.paciente = paciente;
