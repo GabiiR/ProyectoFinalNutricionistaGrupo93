@@ -395,7 +395,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jrbEstadoActionPerformed
 
     private void jbLimpiarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarRegistroActionPerformed
-        // TODO add your handling code here:
+        limpiarCampos();
     }//GEN-LAST:event_jbLimpiarRegistroActionPerformed
     //nota: AGREGAR EL FONDO DE "multimedia/bg.png".
     public void limpiarCampos(){
