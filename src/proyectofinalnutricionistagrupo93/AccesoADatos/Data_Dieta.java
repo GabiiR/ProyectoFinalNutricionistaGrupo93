@@ -103,7 +103,7 @@ public class Data_Dieta{
                 dieta.setEstado(rs.getBoolean("Estado"));
                 dieta.setIdDieta(rs.getInt("IdDieta"));
                 dieta.setPorcion(rs.getInt("porcion"));
-                dieta.setHorario(Horario.valueOf("horario");
+                dieta.setHorario(Horario.valueOf("horario"));
                 
                 JOptionPane.showMessageDialog(null, "Dieta encontrado.");
             } else if (!rs.next()) {
