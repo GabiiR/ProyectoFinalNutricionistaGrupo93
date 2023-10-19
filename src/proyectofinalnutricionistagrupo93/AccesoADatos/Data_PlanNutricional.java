@@ -27,7 +27,7 @@ public class Data_PlanNutricional {
             ps.setString(2, plan.getNombre());
             ps.setInt(3, plan.getPaciente().getIdPaciente());
             ps.setDouble(3, plan.getPesoInicial());
-            ps.setDouble(4, plan.getPesoFinal());
+            ps.setDouble(4, plan.getPesoObjetivo());
             ps.setDate(5, Date.valueOf(plan.getFechaInicial()));
             ps.setDate(6, Date.valueOf(plan.getFechaInicial()));
             ps.setBoolean(7, plan.isEstado());
@@ -55,7 +55,7 @@ public class Data_PlanNutricional {
             ps.setDate(3, Date.valueOf(plan.getFechaInicial()));
             ps.setDate(4, Date.valueOf(plan.getFechaFinal()));
             ps.setDouble(5, plan.getPesoInicial());
-            ps.setDouble(6, plan.getPesoFinal());
+            ps.setDouble(6, plan.getPesoObjetivo());
             ps.setBoolean(7, plan.isEstado());
 
             int resultado = ps.executeUpdate(); //Ejecuta consulta "UPDATE".
@@ -103,7 +103,7 @@ public class Data_PlanNutricional {
                 plan.setPaciente(paciente);
                 plan.setNombre(rs.getString("nombre"));
                 plan.setPesoInicial(rs.getDouble("pesoInicial"));
-                plan.setPesoFinal(rs.getDouble("pesoObjetivo"));
+                plan.setPesoObjetivo(rs.getDouble("pesoObjetivo"));
                 plan.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
                 plan.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
                 plan.setIdDieta(rs.getInt("idDieta"));
@@ -119,6 +119,5 @@ public class Data_PlanNutricional {
         }
         return plan;
     }
-;
 
 }

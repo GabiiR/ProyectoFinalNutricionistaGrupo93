@@ -43,6 +43,11 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiComidasOpc1ActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmListaComidas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Lista de Comidas"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
         <Menu class="javax.swing.JMenu" name="jmbDietas">
@@ -50,9 +55,31 @@
             <Property name="text" type="java.lang.String" value="Dietas"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="jmiDietasOpc1">
+            <MenuItem class="javax.swing.JMenuItem" name="jmiDietasPacientes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Dietas de pacientes"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMListaDietas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Lista de Dietas"/>
+              </Properties>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jMenu1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Planes de Nutricion"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMPlandeNutricion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Plan de Nutricion"/>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMAsignacionPlanNutricion">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Asignacion de Plan de Nutricion"/>
               </Properties>
             </MenuItem>
           </SubComponents>

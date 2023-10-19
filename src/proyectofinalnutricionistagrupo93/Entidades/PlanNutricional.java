@@ -18,7 +18,7 @@ public class PlanNutricional {
     public PlanNutricional() {
     }
 
-    public PlanNutricional(String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
+    public PlanNutricional(String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoObjetivo, boolean estado) {
         this.nombre = nombre;
         this.paciente = paciente;
         this.fechaInicial = fechaInicial;
@@ -28,7 +28,7 @@ public class PlanNutricional {
         this.estado = estado;
     }
 
-    public PlanNutricional(int idDieta, String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoFinal, boolean estado) {
+    public PlanNutricional(int idDieta, String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoObjetivo, boolean estado) {
         this.idDieta = idDieta;
         this.nombre = nombre;
         this.paciente = paciente;
@@ -87,11 +87,11 @@ public class PlanNutricional {
         this.pesoInicial = pesoInicial;
     }
 
-    public double getPesoFinal() {
+    public double getPesoObjetivo() {
         return pesoObjetivo;
     }
 
-    public void setPesoFinal(double pesoFinal) {
+    public void setPesoObjetivo(double pesoObjetivo) {
         this.pesoObjetivo = pesoObjetivo;
     }
 

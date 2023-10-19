@@ -37,8 +37,13 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jmiPacientesOpc2 = new javax.swing.JMenuItem();
         jmbComidas = new javax.swing.JMenu();
         jmiComidasOpc1 = new javax.swing.JMenuItem();
+        jmListaComidas = new javax.swing.JMenuItem();
         jmbDietas = new javax.swing.JMenu();
-        jmiDietasOpc1 = new javax.swing.JMenuItem();
+        jmiDietasPacientes = new javax.swing.JMenuItem();
+        jMListaDietas = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMPlandeNutricion = new javax.swing.JMenuItem();
+        jMAsignacionPlanNutricion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu de nutricionista");
@@ -90,14 +95,30 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         });
         jmbComidas.add(jmiComidasOpc1);
 
+        jmListaComidas.setText("Lista de Comidas");
+        jmbComidas.add(jmListaComidas);
+
         jMenuBar1.add(jmbComidas);
 
         jmbDietas.setText("Dietas");
 
-        jmiDietasOpc1.setText("Dietas de pacientes");
-        jmbDietas.add(jmiDietasOpc1);
+        jmiDietasPacientes.setText("Dietas de pacientes");
+        jmbDietas.add(jmiDietasPacientes);
+
+        jMListaDietas.setText("Lista de Dietas");
+        jmbDietas.add(jMListaDietas);
 
         jMenuBar1.add(jmbDietas);
+
+        jMenu1.setText("Planes de Nutricion");
+
+        jMPlandeNutricion.setText("Plan de Nutricion");
+        jMenu1.add(jMPlandeNutricion);
+
+        jMAsignacionPlanNutricion.setText("Asignacion de Plan de Nutricion");
+        jMenu1.add(jMAsignacionPlanNutricion);
+
+        jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
 
@@ -173,12 +194,17 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JMenuItem jMAsignacionPlanNutricion;
+    private javax.swing.JMenuItem jMListaDietas;
+    private javax.swing.JMenuItem jMPlandeNutricion;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jmListaComidas;
     private javax.swing.JMenu jmbComidas;
     private javax.swing.JMenu jmbDietas;
     private javax.swing.JMenu jmbPacientes;
     private javax.swing.JMenuItem jmiComidasOpc1;
-    private javax.swing.JMenuItem jmiDietasOpc1;
+    private javax.swing.JMenuItem jmiDietasPacientes;
     private javax.swing.JMenuItem jmiPacientesOpc1;
     private javax.swing.JMenuItem jmiPacientesOpc2;
     // End of variables declaration//GEN-END:variables
