@@ -26,11 +26,11 @@ public class Data_PlanNutricional {
             ps.setInt(1, plan.getIdDieta());
             ps.setString(2, plan.getNombre());
             ps.setInt(3, plan.getPaciente().getIdPaciente());
-            ps.setDouble(3, plan.getPesoInicial());
-            ps.setDouble(4, plan.getPesoObjetivo());
-            ps.setDate(5, Date.valueOf(plan.getFechaInicial()));
-            ps.setDate(6, Date.valueOf(plan.getFechaInicial()));
-            ps.setBoolean(7, plan.isEstado());
+            ps.setDate(4, Date.valueOf(plan.getFechaInicial()));
+            ps.setDate(5, Date.valueOf(plan.getFechaFinal()));
+            ps.setDouble(6, plan.getPesoInicial());
+            ps.setDouble(7, plan.getPesoObjetivo());
+            ps.setBoolean(8, plan.isEstado());
             ps.executeUpdate(); //Ejecuta consulta "INSERT INTO".
 
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
