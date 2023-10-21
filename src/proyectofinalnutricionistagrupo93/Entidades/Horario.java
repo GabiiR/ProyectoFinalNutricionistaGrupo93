@@ -5,5 +5,5 @@ public enum Horario {
     ALMUERZO,
     MERIENDA,
     CENA,
-    SNACK,
+    SNACK
 }

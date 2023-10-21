@@ -5,7 +5,7 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
-import proyectofinalnutricionistagrupo93.Entidades.Dieta;
+import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
 /**
@@ -190,7 +190,7 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
     private javax.swing.JToggleButton jbAgregarDieta;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<Dieta> jcbDieta;
+    private javax.swing.JComboBox<DietaComida> jcbDieta;
     private javax.swing.JComboBox<Paciente> jcbPaciente;
     private javax.swing.JTextField jtPesoFin;
     private javax.swing.JTextField jtPesoIni;

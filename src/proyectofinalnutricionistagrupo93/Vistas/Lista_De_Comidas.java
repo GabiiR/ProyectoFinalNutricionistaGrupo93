@@ -5,7 +5,7 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
-import proyectofinalnutricionistagrupo93.Entidades.Dieta;
+import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
 
 /**
  *
@@ -253,7 +253,7 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JComboBox<Dieta> jcbComida;
+    private javax.swing.JComboBox<DietaComida> jcbComida;
     private javax.swing.JTextField jtPorcionA;
     private javax.swing.JTextField jtPorcionC;
     private javax.swing.JTextField jtPorcionD;

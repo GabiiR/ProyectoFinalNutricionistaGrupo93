@@ -117,6 +117,7 @@ public class Data_Comidas {
             
             if (rs.next()){
                 comida = new Comida();
+                comida.setIdComida(rs.getInt("idComida"));
                 comida.setNombre(rs.getString("nombre"));   
                 comida.setDetalle(rs.getString("detalle"));
                 comida.setCantCalorias(rs.getInt("cantCalorias"));

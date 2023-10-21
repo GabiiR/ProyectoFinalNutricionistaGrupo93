@@ -11,7 +11,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
-import proyectofinalnutricionistagrupo93.Entidades.PlanNutricional;
+import proyectofinalnutricionistagrupo93.Entidades.Dieta;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
 /**

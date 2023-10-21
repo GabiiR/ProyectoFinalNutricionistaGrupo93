@@ -1,105 +1,113 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
+import java.time.LocalDate;
+
 public class Dieta {
-    private int idDieta; //ID.    
-    private Comida comida;
-    private PlanNutricional dieta;
-    private Horario horario; //Horario.
-    private int idPlanNutricional;
-    private int idComida;
-    private int porcion;
-    private boolean estado;
+    protected int idDieta; //ID.
+    protected String nombre;
     
+    protected Paciente paciente; //Paciente.java
+    
+    protected LocalDate fechaInicial;
+    protected LocalDate fechaFinal; //Finalizar dieta.
+    
+    protected double pesoInicial;
+    protected double pesoObjetivo;
+    protected boolean estado;
 
     public Dieta() {
     }
 
-    public Dieta(Comida comida, PlanNutricional dieta, Horario horario) {
-        this.comida = comida;
-        this.dieta = dieta;
-        this.horario = horario;
+    public Dieta(String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoObjetivo, boolean estado) {
+        this.nombre = nombre;
+        this.paciente = paciente;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+        this.pesoInicial = pesoInicial;
+        this.pesoObjetivo = pesoObjetivo;
+        this.estado = estado;
     }
 
-    public Dieta(int idDieta, Comida comida, PlanNutricional dieta, Horario horario) {
+    public Dieta(int idDieta, String nombre, Paciente paciente, LocalDate fechaInicial, LocalDate fechaFinal, double pesoInicial, double pesoObjetivo, boolean estado) {
         this.idDieta = idDieta;
-        this.comida = comida;
-        this.dieta = dieta;
-        this.horario = horario;
+        this.nombre = nombre;
+        this.paciente = paciente;
+        this.fechaInicial = fechaInicial;
+        this.fechaFinal = fechaFinal;
+        this.pesoInicial = pesoInicial;
+        this.pesoObjetivo = pesoObjetivo;
+        this.estado = estado;
     }
 
     public int getIdDieta() {
         return idDieta;
     }
 
-    public void setIdDieta(int idDietaComida) {
-        this.idDieta = idDietaComida;
+    public void setIdDieta(int idDieta) {
+        this.idDieta = idDieta;
     }
 
-    public Comida getComida() {
-        return comida;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setComida(Comida comida) {
-        this.comida = comida;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public PlanNutricional getDieta() {
-        return dieta;
+    public Paciente getPaciente() {
+        return paciente;
     }
 
-    public void setDieta(PlanNutricional dieta) {
-        this.dieta = dieta;
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
     }
 
-    public Horario getHorario() {
-        return horario;
+    public LocalDate getFechaInicial() {
+        return fechaInicial;
     }
 
-    public void setHorario(Horario horario) {
-        this.horario = horario;
-    }
-    
-    public int getIdPlanNutricional() {
-        return idPlanNutricional;
+    public void setFechaInicial(LocalDate fechaInicial) {
+        this.fechaInicial = fechaInicial;
     }
 
-   
-    public void setIdPlanNutricional(int idPlanNutricional) {
-        this.idPlanNutricional = idPlanNutricional;
+    public LocalDate getFechaFinal() {
+        return fechaFinal;
     }
 
-    
-    public int getIdComida() {
-        return idComida;
+    public void setFechaFinal(LocalDate fechaFinal) {
+        this.fechaFinal = fechaFinal;
     }
 
-   
-    public void setIdComida(int idComida) {
-        this.idComida = idComida;
+    public double getPesoInicial() {
+        return pesoInicial;
     }
 
-  
-    public int getPorcion() {
-        return porcion;
+    public void setPesoInicial(double pesoInicial) {
+        this.pesoInicial = pesoInicial;
     }
 
-   
-    public void setPorcion(int porcion) {
-        this.porcion = porcion;
+    public double getPesoObjetivo() {
+        return pesoObjetivo;
     }
 
-   
+    public void setPesoObjetivo(double pesoObjetivo) {
+        this.pesoObjetivo = pesoObjetivo;
+    }
+
     public boolean isEstado() {
         return estado;
     }
 
-  
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
+
     @Override
     public String toString() {
-        return "DietaComida{" + "comida=" + getComida() + ", dieta=" + getDieta() + ", horario=" + getHorario() + '}';
-    }   
+        return "Dieta{" + "nombre=" + nombre + ", paciente=" + paciente.getNombre() + ", fechaInicial=" +
+                fechaInicial + ", fechaFinal=" + fechaFinal + ", pesoInicial=" + pesoInicial 
+                + ", pesoFinal=" + pesoObjetivo + '}';
+    }
+
 }

@@ -202,11 +202,11 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
         try {
-            Integer id = Integer.parseInt(jtIDcomida.getText());
-            comidaActual = Data_Comi.buscarComidaID(id);
+            String nombre = jtNombre.getText(); 
+            comidaActual = Data_Comi.buscarComida(nombre);
 
             if (comidaActual != null) {
-                String nombre = jtNombre.getText();
+                
                 String detalle = jtDetalle.getText();
                 Integer cantCalorias = Integer.parseInt(jtCantCalorias.getText());
                 Boolean estado = jrbEstado.isSelected();
@@ -217,7 +217,7 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                 } else {
                     comidaActual = new Comida(nombre, detalle, cantCalorias, estado);
                     comidaActual.setNombre(nombre);
-                    comidaActual.setIdComida(id);
+                    //comidaActual.setIdComida(id);
                     comidaActual.setCantCalorias(cantCalorias);
                     comidaActual.setDetalle(detalle);
                     comidaActual.setEstado(estado);
@@ -244,6 +244,7 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                 jtCantCalorias.setText(String.valueOf(comidaActual.getCantCalorias()));
                 jrbEstado.setSelected(true);
                 jrbEstado.setEnabled(true);
+                
                 jbModificar.setEnabled(true);
                 jbBorrar.setEnabled(true);
             }
@@ -264,12 +265,12 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
             comidaActual = Data_Comi.buscarComida(nombre);
             try {
                 if (comidaActual != null) {
-                    Integer idcomida = Integer.parseInt(jtIDcomida.getText());
+                    Integer idComida = Integer.parseInt(jtIDcomida.getText());
                     String detalle = jtDetalle.getText();
                     Integer cantCalorias = Integer.parseInt(jtCantCalorias.getText());
                     Boolean estado = jrbEstado.isSelected();
 
-                    if (detalle.isEmpty() || cantCalorias == null || idcomida == null) {
+                    if (detalle.isEmpty() || cantCalorias == null || idComida == null) {
                         JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
                         return;
                     } else {
@@ -295,7 +296,7 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
     private void jbAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarActionPerformed
         try {
             String nombre = jtNombre.getText();
-            Integer id = Integer.parseInt(jtIDcomida.getText());
+            //Integer idComida = Integer.parseInt(jtIDcomida.getText());
             String detalle = jtDetalle.getText();
             Integer cantCalorias = Integer.parseInt(jtCantCalorias.getText());
             Boolean estado = jrbEstado.isSelected();
@@ -306,7 +307,7 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
 
             if (comidaActual == null) {
                 estado = true;
-                comidaActual = new Comida(nombre, detalle, id, estado);
+                comidaActual = new Comida(nombre, detalle, cantCalorias, estado);
                 Data_Comi.agregarComida(comidaActual);
                 JOptionPane.showMessageDialog(this, "Se agrego la comida correctamente.");
                 limpiarCampos();
