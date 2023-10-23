@@ -31,47 +31,47 @@ public class Data_Historial{
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 historial.setIdHistorial(rs.getInt(1));
-                //mensaje
+                JOptionPane.showMessageDialog(null, "Historial agregado con exito.");
+            
             }
             rs.close();
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(historialdata.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Data_Historial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void modificarVisita(Visita visita) {
-        String sql = "UPDATE visita SET idDieta=?, idPaciente=?, peso=?, fecha=?, estado=? WHERE idVisita=? ";
+    public void modificarVisita(Historial historial) {
+        String sql = "UPDATE historial SET  idPaciente=?, peso=?, fecha=?, estado=? WHERE idVisita=? ";
         try {
-            PreparedStatement ps = conec.prepareStatement(sql);
-            ps.setInt(1, visita.getDieta().getIdDieta());
-            ps.setInt(2, visita.getPaciente().getIdPaciente());
-            ps.setDouble(3, visita.getPeso());
-            ps.setDate(4, Date.valueOf(visita.getFecha()));
-            ps.setInt(5, visita.getEstado());
-            ps.setInt(6, visita.getIdVisita());
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, historial.getPaciente().getIdPaciente());
+            ps.setDouble(2, historial.getPesoControl());
+            ps.setDate(3, Date.valueOf(historial.getFechaRegistro()));
+            ps.setBoolean(4, historial.isEstado());
+            ps.setInt(5, historial.getIdHistorial());
             ps.executeUpdate();
             ps.close();
-            //mensaje
+            JOptionPane.showMessageDialog(null, "historial modificado con exito.");
+            
         } catch (SQLException ex) {
-            Logger.getLogger(VisitaData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Data_Historial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public void eliminarVisita(Visita visita) {
-        String sql = "UPDATE visita SET estado=0 WHERE idVisita=?";
+    public void eliminarVisita(Historial historial) {
+        String sql = "UPDATE historial SET estado=0 WHERE idVisita=?";
         try {
-            PreparedStatement ps = conec.prepareStatement(sql);
-            ps.setInt(1, visita.getIdVisita());
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, historial.getIdHistorial());
             ps.executeUpdate();
             ps.close();
-            //mensaje
+            JOptionPane.showMessageDialog(null, "Historial eliminado con exito.");
+            
         } catch (SQLException ex) {
-            Logger.getLogger(VisitaData.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Data_Historial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     
 } 
-    
-}
