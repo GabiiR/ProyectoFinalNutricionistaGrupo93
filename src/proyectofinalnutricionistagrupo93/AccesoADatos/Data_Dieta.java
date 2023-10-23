@@ -6,6 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 import proyectofinalnutricionistagrupo93.Entidades.Dieta;
@@ -106,7 +110,6 @@ public class Data_Dieta {
                 plan.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
                 plan.setPesoInicial(rs.getDouble("pesoInicial"));
                 plan.setPesoObjetivo(rs.getDouble("pesoObjetivo"));
-                //plan.setIdDieta(rs.getInt("idDieta"));
                 plan.setEstado(true);
 
                 JOptionPane.showMessageDialog(null, "Plan Nutricional encontrado.");
@@ -119,5 +122,68 @@ public class Data_Dieta {
         }
         return plan;
     }
+    
+    
+    //revisaar el orden segun las columnas de la tabla
+    public List<Dieta> listaDietasActivas() {
+        List<Dieta> lista = new ArrayList<>();
+        Data_Pacientes pdata = new Data_Pacientes();
+        String sql = "SELECT * FROM dieta WHERE dieta.estado = 1";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Dieta dieta = new Dieta();
+                Paciente paciente = new Paciente();
+                dieta.setNombre(rs.getString(1));
+                paciente = pdata.buscarPacienteID(rs.getInt(2));
+                dieta.setPaciente(paciente);
+                dieta.setPesoInicial(rs.getDouble(3));
+                dieta.setPesoObjetivo(rs.getDouble(4));
+                dieta.setFechaInicial(rs.getDate(5).toLocalDate());
+                dieta.setFechaFinal(rs.getDate(6).toLocalDate());
+                dieta.setIdDieta(rs.getInt(7));
+                dieta.setEstado(rs.getBoolean(8));
+                lista.add(dieta);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Data_Dieta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;  
+    }
+     //revisaar el orden segun las columnas de la tabla
+    public List<Dieta> listaDietaActivaPACIENTE(int id) {
+        List<Dieta> lista = new ArrayList<>();
+        Data_Pacientes pdata = new Data_Pacientes();
+        String sql = "SELECT * FROM dieta WHERE dieta.estado = 1 AND dieta.idpaciente = ?";
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Dieta dieta = new Dieta();
+                Paciente paciente = new Paciente();
+                dieta.setNombre(rs.getString(1));
+                paciente = pdata.buscarPacienteID(rs.getInt(2));
+                dieta.setPaciente(paciente);
+                dieta.setPesoInicial(rs.getDouble(3));
+                dieta.setPesoObjetivo(rs.getDouble(4));
+                dieta.setFechaInicial(rs.getDate(5).toLocalDate());
+                dieta.setFechaFinal(rs.getDate(6).toLocalDate());
+                dieta.setIdDieta(rs.getInt(7));
+                dieta.setEstado(rs.getBoolean(8));
+                lista.add(dieta);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Data_Dieta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;  
+    } 
+    
+    
 
 }
