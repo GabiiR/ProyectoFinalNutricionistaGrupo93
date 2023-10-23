@@ -96,10 +96,8 @@ public class Data_DietaComida{
             
             ResultSet rs = ps.executeQuery();
             if (rs.next()){
-                dieta = new DietaComida();
-                //comida = new Comida();               
+                dieta = new DietaComida();          
                 dieta.setIdComida(rs.getInt("idComida"));
-                //dieta.setComida(comida);
                 dieta.setEstado(rs.getBoolean("estado"));
                 dieta.setIdDieta(rs.getInt("IdDieta"));
                 dieta.setPorcion(rs.getInt("porcion"));
