@@ -16,6 +16,7 @@ public class Historial {
     protected Paciente paciente;
     protected double pesoControl;
     protected LocalDate fechaRegistro;
+    private boolean estado;
 
     public Historial() {
     }
@@ -65,8 +66,19 @@ public class Historial {
         this.fechaRegistro = fechaRegistro;
     }
     
+    public boolean isEstado() {
+        return estado;
+    }
+
+   
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
+    
     @Override
     public String toString() {
         return "pesoControl= " + pesoControl + " fecha registro= " + fechaRegistro;
     }
+
+ 
 }
