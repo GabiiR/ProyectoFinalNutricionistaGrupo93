@@ -5,6 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import proyectofinalnutricionistagrupo93.Entidades.Comida;
 
@@ -133,4 +136,30 @@ public class Data_Comidas {
         }
         return comida;
     };
+    
+    //revisar nombre de columnas
+    public ArrayList<Comida> listaComida() {
+        ArrayList<Comida> comidas = new ArrayList<>();
+        Comida comida = null;
+        
+        try {
+            String sql = "SELECT * FROM comida WHERE estado = 1";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                comida = new Comida();
+                comida.setIdComida(rs.getInt("idComida"));
+                comida.setNombre(rs.getString("nombre"));
+                comida.setDetalle(rs.getString("detalle"));
+                comida.setCantCalorias(rs.getInt("calorias"));
+                comida.setEstado(rs.getBoolean("estado"));
+                comidas.add(comida);
+            }
+            rs.close();
+            ps.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Data_Comidas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return comidas;
+    }
 }
