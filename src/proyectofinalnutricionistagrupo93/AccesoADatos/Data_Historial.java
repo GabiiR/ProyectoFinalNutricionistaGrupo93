@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -71,6 +73,30 @@ public class Data_Historial{
         } catch (SQLException ex) {
             Logger.getLogger(Data_Historial.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public List<Historial> buscarHistorialXPacientes(int id){
+        String sql= "SELECT * from historial WHERE idpaciente = ?";
+        List <Historial> historial = new ArrayList<>();
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Historial visita = new Historial();
+                visita.setIdHistorial(rs.getInt(""));
+                visita.setPesoControl(rs.getInt(""));
+                visita.setFechaRegistro(rs.getDate("").toLocalDate());
+                historial.add(visita);
+
+            }
+            JOptionPane.showMessageDialog(null, "Historial encontrado.");
+            
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se encontraron datos de Historial.");
+        }
+        return historial;
     }
     
     

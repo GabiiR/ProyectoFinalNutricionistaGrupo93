@@ -10,8 +10,10 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Historial;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Dieta;
+import proyectofinalnutricionistagrupo93.Entidades.Historial;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
 /**
@@ -32,12 +34,9 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
     public Historial_De_Pacientes() {
         initComponents();
         List<Paciente> listaPaci = Data_Pac.listarPacientes();
-        //Data_Pac.listarPacientes();
-
-        /*--------------------------------------*/
         crearTabla();
         cargarDatos((ArrayList<Paciente>) listaPaci);
-        
+
     }
 
     /**
@@ -127,18 +126,24 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbSeleccionarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionarPacienteActionPerformed
-        
+
         //borrarFila();
-        
         int filaseleccionada = jcbSeleccionarPaciente.getSelectedIndex();// Selecciona la 
         //borrarFila();
-            if(filaseleccionada !=-1){
+        if (filaseleccionada != -1) {
             Paciente p = (Paciente) jcbSeleccionarPaciente.getSelectedItem();
-           
-            modeloTabla.addRow(new Object[]{p.getNombre(), p.getDni(), p.getDomicilio(), p.getTelefono(), p.getPesoActual(), p.getPesoDeseado()});
-           
+            int idPaciente = p.getIdPaciente();
+            cargarHistorial(idPaciente);
         }
-        //borrarFila();
+    }
+
+    public void cargarHistorial(int idPaciente) {
+        borrarFila();
+        Data_Historial vdata = new Data_Historial();
+        List<Historial> historial = vdata.buscarHistorialXPacientes(idPaciente);
+        for (Historial visita : historial) {
+            modeloTabla.addRow(new Object[]{visita.getPesoControl(), visita.getFechaRegistro(), visita.getIdHistorial()});
+        }
     }//GEN-LAST:event_jcbSeleccionarPacienteActionPerformed
 
     private void jbBorrarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarFilaActionPerformed
@@ -169,7 +174,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
         listaPaci.forEach((p) -> {
             jcbSeleccionarPaciente.addItem(p);
         });
-        //modeloTabla.addRow(new Object[]{paciente.getNombre(), paciente.getDni(), paciente.getDomicilio(), paciente.getTelefono(), paciente.getPesoActual(), paciente.getPesoDeseado()});
+        modeloTabla.addRow(new Object[]{paciente.getNombre(), paciente.getDni(), paciente.getDomicilio(), paciente.getTelefono(), paciente.getPesoActual(), paciente.getPesoDeseado()});
     }
 
     private void borrarFila() {

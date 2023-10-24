@@ -118,7 +118,7 @@ public class Data_Pacientes {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente." + e);
+            JOptionPane.showMessageDialog(null, "No se encontraron datos de su paciente.");
         }
         return paciente;
     }
@@ -157,7 +157,7 @@ public class Data_Pacientes {
         }
         return paciente;
     }
-   
+
     public ArrayList<Paciente> listarPacientes() {
         List<Paciente> listaPaci = new ArrayList<>();
 
@@ -171,12 +171,17 @@ public class Data_Pacientes {
             while (rs.next()) {
                 Paciente paciente = new Paciente();
                 paciente.setIdPaciente(rs.getInt("idPaciente"));
-                paciente.setNombre(rs.getString("nombre"));
                 paciente.setDni(rs.getInt("dni"));
-                paciente.setDomicilio(rs.getString("domicilio"));
-                paciente.setTelefono(rs.getInt("telefono"));
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setApellido(rs.getString("apellido"));
+                paciente.setGenero(rs.getString("genero"));
+                paciente.setEdad(rs.getInt("edad"));
+                paciente.setAltura(rs.getFloat("altura"));
                 paciente.setPesoActual(rs.getDouble("pesoActual"));
                 paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
+                paciente.setDomicilio(rs.getString("domicilio"));
+                paciente.setTelefono(rs.getInt("telefono"));
+                paciente.setMail(rs.getString("mail"));
                 paciente.setEstado(rs.getBoolean("estado"));
                 listaPaci.add(paciente);
             }
@@ -184,7 +189,7 @@ public class Data_Pacientes {
             JOptionPane.showMessageDialog(null, "Exito al encontrar pacientes");
 
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes");
+            JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes" + ex);
         }
         return (ArrayList<Paciente>) listaPaci;
     }
