@@ -39,12 +39,14 @@ public class Data_Comidas {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "NO se pudo agregar su comida a su dieta.");
         }
-    };
+    }
+
+    ;
     
     public void modificarComida(Comida comida) {
         try {
             String sql = "UPDATE comida SET nombre = ?, detalle = ?, cantCalorias = ?, estado = ?";
-            
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, comida.getNombre());
             ps.setString(2, comida.getDetalle());
@@ -62,44 +64,48 @@ public class Data_Comidas {
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "NO se pudo modificar su comida.");
         }
-    };
+    }
+
+    ;
     
     public void eliminarComida(int idComida) {
         String sql = "UPDATE comida SET estado = ? WHERE idComida = ? AND estado = 1";
         try {
-            
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setBoolean(1, false);
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-              JOptionPane.showMessageDialog(null, "Se elimino correctamente su comida.");
+                JOptionPane.showMessageDialog(null, "Se elimino correctamente su comida.");
             }
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "NO se pudo eliminar su comida.");
         }
-    };
+    }
+
+    ;
     
-    public Comida buscarComidaID(int id){
+    public Comida buscarComidaID(int id) {
         Comida comidaID = null;
         String sql = "SELECT * FROM comida WHERE idComida=? AND estado = 1";
         try {
-            
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()){
+
+            if (rs.next()) {
                 comidaID = new Comida();
-                comidaID.setNombre(rs.getString("nombre"));   
+                comidaID.setNombre(rs.getString("nombre"));
                 comidaID.setDetalle(rs.getString("detalle"));
                 comidaID.setCantCalorias(rs.getInt("cantCalorias"));
                 comidaID.setIdComida(id);
                 comidaID.setEstado(rs.getBoolean("estado"));
-                
+
                 JOptionPane.showMessageDialog(null, "Comida encontrada.");
-          } else if (!rs.next()) {
+            } else if (!rs.next()) {
                 JOptionPane.showMessageDialog(null, "Comida NO encontrado.");
             }
             ps.close();
@@ -107,27 +113,29 @@ public class Data_Comidas {
             JOptionPane.showMessageDialog(null, "");
         }
         return comidaID;
-    };
+    }
+
+    ;
     
-    public Comida buscarComida(String nombre){
+    public Comida buscarComida(String nombre) {
         Comida comida = null;
         String sql = "SELECT * FROM `comida` WHERE `nombre`=? AND estado = 1";
         try {
-            
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, nombre);
             ResultSet rs = ps.executeQuery();
-            
-            if (rs.next()){
+
+            if (rs.next()) {
                 comida = new Comida();
                 comida.setIdComida(rs.getInt("idComida"));
-                comida.setNombre(rs.getString("nombre"));   
+                comida.setNombre(rs.getString("nombre"));
                 comida.setDetalle(rs.getString("detalle"));
                 comida.setCantCalorias(rs.getInt("cantCalorias"));
                 comida.setEstado(rs.getBoolean("estado"));
-                
+
                 JOptionPane.showMessageDialog(null, "Comida encontrada.");
-          } else if (!rs.next()) {
+            } else if (!rs.next()) {
                 JOptionPane.showMessageDialog(null, "Comida NO encontrado.");
             }
             ps.close();
@@ -135,17 +143,22 @@ public class Data_Comidas {
             JOptionPane.showMessageDialog(null, "");
         }
         return comida;
-    };
+    }
+
+    ;
     
     //revisar nombre de columnas
-    public ArrayList<Comida> listaComida() {
+    public ArrayList<Comida> listaComida(int mayorA, int menorA) {
         ArrayList<Comida> comidas = new ArrayList<>();
         Comida comida = null;
-        
+
         try {
-            String sql = "SELECT * FROM comida WHERE estado = 1";
+            String sql = "SELECT * FROM comida WHERE estado = 1"; //agregar maximos y minimos
             PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, mayorA);
+            ps.setInt(2, menorA);
             ResultSet rs = ps.executeQuery();
+
             while (rs.next()) {
                 comida = new Comida();
                 comida.setIdComida(rs.getInt("idComida"));
