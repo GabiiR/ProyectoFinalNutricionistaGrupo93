@@ -16,10 +16,6 @@ import proyectofinalnutricionistagrupo93.Entidades.Dieta;
 import proyectofinalnutricionistagrupo93.Entidades.Historial;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
-/**
- *
- * @author Gabi
- */
 public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modeloTabla = new DefaultTableModel();
@@ -78,6 +74,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ));
+        jtTablaPac.setEnabled(false);
         jtTablaPac.setName(""); // NOI18N
         jtTablaPac.setPreferredSize(new java.awt.Dimension(350, 64));
         jScrollPane1.setViewportView(jtTablaPac);
@@ -147,7 +144,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jcbSeleccionarPacienteActionPerformed
 
     private void jbBorrarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarFilaActionPerformed
-        // TODO add your handling code here:
+    
         int fila = jtTablaPac.getSelectedRow();
         if(fila != -1 ){
             modeloTabla.removeRow(fila);
