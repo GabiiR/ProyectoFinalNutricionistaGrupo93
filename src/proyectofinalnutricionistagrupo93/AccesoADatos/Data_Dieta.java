@@ -155,7 +155,7 @@ public class Data_Dieta {
     }
     
     //revisaar el orden segun las columnas de la tabla
-    public List<Dieta> listaDietasActivas() {
+    public ArrayList<Dieta> listaDietasActivas() {
         List<Dieta> lista = new ArrayList<>();
         Data_Pacientes pdata = new Data_Pacientes();
         String sql = "SELECT * FROM dieta WHERE dieta.estado = 1";
@@ -176,12 +176,11 @@ public class Data_Dieta {
                 dieta.setEstado(rs.getBoolean(8));
                 lista.add(dieta);
             }
-            rs.close();
             ps.close();
         } catch (SQLException ex) {
             Logger.getLogger(Data_Dieta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lista;  
+        return (ArrayList<Dieta>) lista;  
     }
      //revisaar el orden segun las columnas de la tabla
     public List<Dieta> listaDietaActivaPACIENTE(int id) {

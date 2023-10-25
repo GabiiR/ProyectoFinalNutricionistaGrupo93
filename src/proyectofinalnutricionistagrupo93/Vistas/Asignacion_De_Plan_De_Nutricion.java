@@ -1,24 +1,34 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Dieta;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
+import proyectofinalnutricionistagrupo93.Entidades.Dieta;
 import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
-/**
- *
- * @author Gabi
- */
+
 public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame {
+
+    protected Paciente paciente = new Paciente(); //Datos del paciente.
+    protected Data_Pacientes Data_Pac = new Data_Pacientes(); //Metodos del paciente.
+    protected ArrayList<Paciente> listaP;
+
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
+
+    protected Dieta dieta = new Dieta();
+    protected Data_Dieta Data_Dieta = new Data_Dieta();
+    protected ArrayList<Dieta> listaDieta;
 
     /**
      * Creates new form Asignacion_De_Dietas
      */
     public Asignacion_De_Plan_De_Nutricion() {
         initComponents();
+        listaP = (ArrayList<Paciente>) Data_Pac.listarPacientes();
+        cargarDatosPacientes();
     }
 
     /**
@@ -35,9 +45,9 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
         jLabel2 = new javax.swing.JLabel();
         jcbPaciente = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jFechaInicial = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jFechaFinal = new com.toedter.calendar.JDateChooser();
         jbAgregarDieta = new javax.swing.JToggleButton();
         jbSalir = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -46,7 +56,7 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
         jLabel7 = new javax.swing.JLabel();
         jtPesoFin = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jbLimpiar = new javax.swing.JButton();
+        jbNuevo = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jtPlanNutri = new javax.swing.JTextField();
 
@@ -56,13 +66,31 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
 
         jLabel1.setText("Seleccionar dieta :");
 
+        jcbDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbDietaActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Seleccionar paciente :");
+
+        jcbPaciente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbPacienteActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Fecha inicial :");
 
         jLabel4.setText("Fecha final :");
 
         jbAgregarDieta.setText("Agregar dieta");
+        jbAgregarDieta.setEnabled(false);
+        jbAgregarDieta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbAgregarDietaActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
 
@@ -74,7 +102,7 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
 
         jLabel8.setText("kg");
 
-        jbLimpiar.setText("Limpiar");
+        jbNuevo.setText("Nuevo");
 
         jLabel9.setText("Nombre de plan nutricional :");
 
@@ -90,11 +118,11 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(68, 68, 68)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -127,7 +155,7 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jbAgregarDieta)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jbLimpiar)))
+                                .addComponent(jbNuevo)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jbSalir)))
                 .addContainerGap())
@@ -150,7 +178,7 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel5)
                         .addComponent(jtPesoIni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -158,7 +186,7 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
                         .addComponent(jtPesoFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,17 +195,42 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregarDieta)
                     .addComponent(jbSalir)
-                    .addComponent(jbLimpiar))
+                    .addComponent(jbNuevo))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private void cargarDatosPacientes() {
+        for (Paciente item : listaP) {
+            jcbPaciente.addItem(item);
+        }
+    }
+     private void cargarDatosDieta() {
+        for (Dieta item : listaDieta) {
+            jcbDieta.addItem(item);
+        }
+    }
+    private void jcbDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDietaActionPerformed
+        jbAgregarDieta.setEnabled(true);
+    }//GEN-LAST:event_jcbDietaActionPerformed
 
+    private void jcbPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPacienteActionPerformed
+        cargarDatosDieta();
+    }//GEN-LAST:event_jcbPacienteActionPerformed
 
+    private void jbAgregarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarDietaActionPerformed
+        try {
+
+            
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_jbAgregarDietaActionPerformed
+
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private com.toedter.calendar.JDateChooser jFechaFinal;
+    private com.toedter.calendar.JDateChooser jFechaInicial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -188,9 +241,9 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JToggleButton jbAgregarDieta;
-    private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<DietaComida> jcbDieta;
+    private javax.swing.JComboBox<Dieta> jcbDieta;
     private javax.swing.JComboBox<Paciente> jcbPaciente;
     private javax.swing.JTextField jtPesoFin;
     private javax.swing.JTextField jtPesoIni;
