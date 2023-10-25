@@ -5,19 +5,26 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Dieta;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
+import proyectofinalnutricionistagrupo93.Entidades.Dieta;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
 public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
     protected Paciente paciente = new Paciente(); //Datos del paciente.
     protected Data_Pacientes Data_Pac = new Data_Pacientes(); //Metodos del paciente.
+    protected Data_Dieta Data_Com = new Data_Dieta();
     protected ArrayList<Paciente> listaPaci = new ArrayList<>();
     protected Paciente pacienteActual = null;
+    protected Dieta dietaActual = null; 
 
     /**
      * Creates new form Plan_De_Nutricion
@@ -51,7 +58,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        jEstado = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -87,6 +94,12 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
         jLabel8.setText("KG");
 
         jLabel9.setText("Estado:");
+
+        jEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEstadoActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Agregar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -145,7 +158,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                             .addComponent(jtNombrePlan)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton1)
+                                    .addComponent(jEstado)
                                     .addComponent(jFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
@@ -206,7 +219,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jRadioButton1))
+                    .addComponent(jEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -251,6 +264,10 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jcbPacientesActionPerformed
 
+    private void jEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jEstadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -258,6 +275,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JRadioButton jEstado;
     private com.toedter.calendar.JDateChooser jFechaFinal;
     private com.toedter.calendar.JDateChooser jFechaInicial;
     private javax.swing.JLabel jLabel1;
@@ -269,7 +287,6 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JComboBox<Paciente> jcbPacientes;
     private javax.swing.JTextField jtNombrePlan;
     private javax.swing.JTextField jtPesoInicial;
@@ -278,15 +295,23 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
     private void cargarDatos(int idPaciente) {
         try {
-            pacienteActual = Data_Pac.buscarPacienteID(idPaciente);
-            if (pacienteActual != null) {
-                jtNombrePaciente.setText(pacienteActual.getNombre());
-                jtDomicilioPaciente.setText(pacienteActual.getDomicilio());
-                jtTelefonoPaciente.setText(String.valueOf(pacienteActual.getTelefono()));
-                jtPesoActual.setText(String.valueOf(pacienteActual.getPesoActual()));
-                jtPesoDeseado.setText(String.valueOf(pacienteActual.getPesoDeseado()));
-                jrbEstado.setSelected(true);
-                jrbEstado.setEnabled(true);
+            dietaActual = Data_Com.buscarDietaxPaciente(idPaciente);
+            if (dietaActual != null) {
+                jtNombrePlan.setText(dietaActual.getNombre());
+                jtPesoInicial.setText(String.valueOf(dietaActual.getPesoInicial()));
+                jtPesoObjetivo.setText(String.valueOf(dietaActual.getPesoObjetivo()));
+                
+                //no se si funciona 
+                
+                LocalDate fi = dietaActual.getFechaInicial();
+                java.util.Date datei = java.util.Date.from(fi.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                jFechaInicial.setDate(datei);
+                LocalDate ff = dietaActual.getFechaInicial();
+                java.util.Date datef = java.util.Date.from(ff.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                jFechaInicial.setDate(datef);
+                
+                jEstado.setSelected(true);
+                jEstado.setEnabled(true);
             }
         } catch (Exception e) {
         }
