@@ -140,13 +140,13 @@ public class Data_Comidas {
         return comida;
     }
     
-    //revisar nombre de columnas
+   
     public ArrayList<Comida> listaComida() {
         ArrayList<Comida> comidas = new ArrayList<>();
         Comida comida = null;
 
         try {
-            String sql = "SELECT * FROM comida WHERE estado = 1"; //agregar maximos y minimos
+            String sql = "SELECT * FROM comida WHERE estado = 1"; 
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
@@ -171,7 +171,7 @@ public class Data_Comidas {
         
 
         try {
-            String sql = "SELECT * FROM comida WHERE estado = 1 AND cantCalorias >= ? AND cantCalorias <= ?"; //agregar maximos y minimos
+            String sql = "SELECT * FROM comida WHERE estado = 1 AND cantCalorias >= ? AND cantCalorias <= ?"; 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, mayor);
             ps.setInt(2, menor);

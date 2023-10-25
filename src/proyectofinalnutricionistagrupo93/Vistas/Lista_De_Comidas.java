@@ -170,8 +170,6 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
         List<Comida> listacomidas = Data_Com.listaComida();
         crearTabla();
         cargaComidas();
-
-
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimpiarActionPerformed
