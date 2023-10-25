@@ -48,7 +48,6 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
         jcbSeleccionarPaciente = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtTablaPac = new javax.swing.JTable();
-        jbBorrarFila = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -79,30 +78,18 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
         jtTablaPac.setPreferredSize(new java.awt.Dimension(350, 64));
         jScrollPane1.setViewportView(jtTablaPac);
 
-        jbBorrarFila.setText("Borrar fila");
-        jbBorrarFila.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBorrarFilaActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jlSeleccionarPaciente)
-                                .addGap(18, 18, 18)
-                                .addComponent(jcbSeleccionarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(jbBorrarFila)))
+                        .addComponent(jlSeleccionarPaciente)
+                        .addGap(18, 18, 18)
+                        .addComponent(jcbSeleccionarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,9 +101,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
                     .addComponent(jcbSeleccionarPaciente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbBorrarFila)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -124,9 +109,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
 
     private void jcbSeleccionarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionarPacienteActionPerformed
 
-        //borrarFila();
         int filaseleccionada = jcbSeleccionarPaciente.getSelectedIndex();// Selecciona la 
-        //borrarFila();
         if (filaseleccionada != -1) {
             Paciente p = (Paciente) jcbSeleccionarPaciente.getSelectedItem();
             int idPaciente = p.getIdPaciente();
@@ -139,30 +122,18 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
         Data_Historial vdata = new Data_Historial();
         List<Historial> historial = vdata.buscarHistorialXPacientes(idPaciente);
         for (Historial visita : historial) {
-            modeloTabla.addRow(new Object[]{visita.getPesoControl(), visita.getFechaRegistro(), visita.getIdHistorial()});
+            modeloTabla.addRow(new Object[]{visita.getIdHistorial(), visita.getIdPaciente(), visita.getPesoControl(), visita.getFechaRegistro()});
         }
     }//GEN-LAST:event_jcbSeleccionarPacienteActionPerformed
 
-    private void jbBorrarFilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarFilaActionPerformed
-    
-        int fila = jtTablaPac.getSelectedRow();
-        if(fila != -1 ){
-            modeloTabla.removeRow(fila);
-        }else{
-            JOptionPane.showMessageDialog(this, "No puede seleccionar una fila vacia!!");
-        }
-                
-    }//GEN-LAST:event_jbBorrarFilaActionPerformed
-
     private void crearTabla() {
-        modeloTabla.addColumn("Nombre");
-        modeloTabla.addColumn("Dni");
+        modeloTabla.addColumn("idHistorial");
+        modeloTabla.addColumn("idPaciente");
 
-        modeloTabla.addColumn("Domicilio");
-        modeloTabla.addColumn("Telefono");
-
+        //modeloTabla.addColumn("Domicilio");
+        //modeloTabla.addColumn("Telefono");
         modeloTabla.addColumn("Peso actual");
-        modeloTabla.addColumn("Peso deseado");
+        modeloTabla.addColumn("fecha Registro");
         jtTablaPac.setModel(modeloTabla);
     }
 
@@ -175,16 +146,15 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
     }
 
     private void borrarFila() {
-         int indice = modeloTabla.getRowCount();
-         for(int i=indice; i<=0; i--){
-             modeloTabla.removeRow(i);
-         }         
+        int indice = modeloTabla.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
+            modeloTabla.removeRow(i);
         }
-    
+    }
+
     //modeloTabla.removeRow(i);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbBorrarFila;
     private javax.swing.JComboBox<Paciente> jcbSeleccionarPaciente;
     private javax.swing.JLabel jlSeleccionarPaciente;
     private javax.swing.JTable jtTablaPac;

@@ -41,33 +41,32 @@ public class Data_Comidas {
         }
     }
 
-    ;
-    
-    public void modificarComida(Comida comida) {
+    public void modificarComida(Comida comidaActual) {
+        String sql = "UPDATE comida SET nombre = ?, detalle = ?, cantCalorias = ?, estado = ?";
         try {
-            String sql = "UPDATE comida SET nombre = ?, detalle = ?, cantCalorias = ?, estado = ?";
 
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, comida.getNombre());
-            ps.setString(2, comida.getDetalle());
-            ps.setInt(3, comida.getCantCalorias());
-            ps.setBoolean(4, comida.isEstado());
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, comidaActual.getNombre());
+            ps.setString(2, comidaActual.getDetalle());
+            ps.setInt(3, comidaActual.getCantCalorias());
+            ps.setBoolean(4, comidaActual.isEstado());
+
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
 
             if (rs.next()) {
-                comida.setIdComida(rs.getInt(1));
+                comidaActual.setIdComida(rs.getInt(1));
+                JOptionPane.showMessageDialog(null, comidaActual);
                 JOptionPane.showMessageDialog(null, "Se modifico correctamente su comida.");
             }
             ps.close();
         } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e);
             JOptionPane.showMessageDialog(null, "NO se pudo modificar su comida.");
         }
     }
 
-    ;
-    
     public void eliminarComida(int idComida) {
         String sql = "UPDATE comida SET estado = ? WHERE idComida = ? AND estado = 1";
         try {
@@ -98,15 +97,15 @@ public class Data_Comidas {
 
             if (rs.next()) {
                 comidaID = new Comida();
+                comidaID.setIdComida(id);
                 comidaID.setNombre(rs.getString("nombre"));
                 comidaID.setDetalle(rs.getString("detalle"));
                 comidaID.setCantCalorias(rs.getInt("cantCalorias"));
-                comidaID.setIdComida(id);
                 comidaID.setEstado(rs.getBoolean("estado"));
 
-                JOptionPane.showMessageDialog(null, "Comida encontrada.");
+                JOptionPane.showMessageDialog(null, "Comida encontrada por ID.");
             } else if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "Comida NO encontrado.");
+                JOptionPane.showMessageDialog(null, "Comida NO encontrado por ID.");
             }
             ps.close();
         } catch (SQLException e) {
@@ -134,9 +133,10 @@ public class Data_Comidas {
                 comida.setCantCalorias(rs.getInt("cantCalorias"));
                 comida.setEstado(rs.getBoolean("estado"));
 
-                JOptionPane.showMessageDialog(null, "Comida encontrada.");
+                JOptionPane.showMessageDialog(null, "Comida encontrada por nombre.");
             } else if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "Comida NO encontrado.");
+                JOptionPane.showMessageDialog(null, "Comida NO encontrado por nombre.");
+
             }
             ps.close();
         } catch (SQLException e) {
@@ -164,14 +164,13 @@ public class Data_Comidas {
                 comida.setIdComida(rs.getInt("idComida"));
                 comida.setNombre(rs.getString("nombre"));
                 comida.setDetalle(rs.getString("detalle"));
-                comida.setCantCalorias(rs.getInt("calorias"));
+                comida.setCantCalorias(rs.getInt("cantCalorias"));
                 comida.setEstado(rs.getBoolean("estado"));
                 comidas.add(comida);
             }
-            rs.close();
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Data_Comidas.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas... " + ex);
         }
         return comidas;
     }

@@ -13,7 +13,7 @@ import java.time.LocalDate;
  */
 public class Historial {
     protected int idHistorial;
-    protected Paciente paciente;
+    protected int idPaciente;
     protected double pesoControl;
     protected LocalDate fechaRegistro;
     private boolean estado;
@@ -21,17 +21,19 @@ public class Historial {
     public Historial() {
     }
 
-    public Historial(int idHistorial, Paciente paciente, double pesoControl, LocalDate fechaRegistro) {
-        this.idHistorial = idHistorial;
-        this.paciente = paciente;
+    public Historial(int idPaciente, double pesoControl, LocalDate fechaRegistro, boolean estado) {
+        this.idPaciente = idPaciente;
         this.pesoControl = pesoControl;
         this.fechaRegistro = fechaRegistro;
+        this.estado = estado;
     }
 
-    public Historial(Paciente paciente, double pesoControl, LocalDate fechaRegistro) {
-        this.paciente = paciente;
+    public Historial(int idHistorial, int idPaciente, double pesoControl, LocalDate fechaRegistro, boolean estado) {
+        this.idHistorial = idHistorial;
+        this.idPaciente = idPaciente;
         this.pesoControl = pesoControl;
         this.fechaRegistro = fechaRegistro;
+        this.estado = estado;
     }
 
     public int getIdHistorial() {
@@ -42,12 +44,12 @@ public class Historial {
         this.idHistorial = idHistorial;
     }
 
-    public Paciente getPaciente() {
-        return paciente;
+    public int getIdPaciente() {
+        return idPaciente;
     }
 
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
+    public void setIdPaciente(int idPaciente) {
+        this.idPaciente = idPaciente;
     }
 
     public double getPesoControl() {
@@ -65,20 +67,20 @@ public class Historial {
     public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
-    
+
     public boolean isEstado() {
         return estado;
     }
 
-   
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
+
     @Override
     public String toString() {
-        return "pesoControl= " + pesoControl + " fecha registro= " + fechaRegistro;
+        return "Historial{" + "idPaciente=" + idPaciente + ", pesoControl=" + pesoControl + ", fechaRegistro=" + fechaRegistro + '}';
     }
 
+   
  
 }
