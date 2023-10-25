@@ -25,7 +25,7 @@ public class Data_Historial{
         String sql = "INSERT INTO historial (idPaciente, peso, fecha, estado) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, org.mariadb.jdbc.Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, historial.getPaciente().getIdPaciente());
+            ps.setInt(1, historial.getIdPaciente());
             ps.setDouble(2, historial.getPesoControl());
             ps.setDate(3, Date.valueOf(historial.getFechaRegistro()));
             ps.setBoolean(5, historial.isEstado());
@@ -47,7 +47,7 @@ public class Data_Historial{
         String sql = "UPDATE historial SET  idPaciente=?, peso=?, fecha=?, estado=? WHERE idVisita=? ";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, historial.getPaciente().getIdPaciente());
+            ps.setInt(1, historial.getIdPaciente());
             ps.setDouble(2, historial.getPesoControl());
             ps.setDate(3, Date.valueOf(historial.getFechaRegistro()));
             ps.setBoolean(4, historial.isEstado());
@@ -76,7 +76,7 @@ public class Data_Historial{
     }
     
     public List<Historial> buscarHistorialXPacientes(int id){
-        String sql= "SELECT * from historial WHERE idpaciente = ?";
+        String sql= "SELECT * from historial WHERE idPaciente = ?";
         List <Historial> historial = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -84,9 +84,10 @@ public class Data_Historial{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Historial visita = new Historial();
-                visita.setIdHistorial(rs.getInt(""));
-                visita.setPesoControl(rs.getInt(""));
-                visita.setFechaRegistro(rs.getDate("").toLocalDate());
+                visita.setIdHistorial(rs.getInt("idHistorial"));
+                visita.setPesoControl(rs.getInt("peso"));
+                visita.setFechaRegistro(rs.getDate("fecha").toLocalDate());
+                visita.setIdPaciente(rs.getInt("idPaciente"));
                 historial.add(visita);
 
             }

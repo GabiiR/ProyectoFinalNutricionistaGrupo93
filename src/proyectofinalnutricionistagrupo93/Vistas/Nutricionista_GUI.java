@@ -96,16 +96,36 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jmbComidas.add(jmiComidasOpc1);
 
         jmListaComidas.setText("Lista de Comidas");
+        jmListaComidas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmListaComidasActionPerformed(evt);
+            }
+        });
         jmbComidas.add(jmListaComidas);
 
         jMenuBar1.add(jmbComidas);
 
         jmbDietas.setText("Dietas");
+        jmbDietas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmbDietasActionPerformed(evt);
+            }
+        });
 
         jmiDietasPacientes.setText("Dietas de pacientes");
+        jmiDietasPacientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiDietasPacientesActionPerformed(evt);
+            }
+        });
         jmbDietas.add(jmiDietasPacientes);
 
         jMListaDietas.setText("Lista de Dietas");
+        jMListaDietas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMListaDietasActionPerformed(evt);
+            }
+        });
         jmbDietas.add(jMListaDietas);
 
         jMenuBar1.add(jmbDietas);
@@ -113,9 +133,19 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jMenu1.setText("Planes de Nutricion");
 
         jMPlandeNutricion.setText("Plan de Nutricion");
+        jMPlandeNutricion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMPlandeNutricionActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMPlandeNutricion);
 
         jMAsignacionPlanNutricion.setText("Asignacion de Plan de Nutricion");
+        jMAsignacionPlanNutricion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMAsignacionPlanNutricionActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMAsignacionPlanNutricion);
 
         jMenuBar1.add(jMenu1);
@@ -157,6 +187,46 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
        jDesktopPane1.add(RDC);
        RDC.show();
     }//GEN-LAST:event_jmiComidasOpc1ActionPerformed
+
+    private void jmListaComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaComidasActionPerformed
+        // TODO add your handling code here:
+        Lista_De_Comidas LDC = new Lista_De_Comidas();
+        jDesktopPane1.add(LDC);
+        LDC.show();
+    }//GEN-LAST:event_jmListaComidasActionPerformed
+
+    private void jmbDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmbDietasActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jmbDietasActionPerformed
+
+    private void jMListaDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListaDietasActionPerformed
+        // TODO add your handling code here:
+         Lista_De_Dietas LDD = new Lista_De_Dietas();
+        jDesktopPane1.add(LDD);
+        LDD.show();
+    }//GEN-LAST:event_jMListaDietasActionPerformed
+
+    private void jMPlandeNutricionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMPlandeNutricionActionPerformed
+        // TODO add your handling code here:
+        Plan_De_Nutricion PDN = new Plan_De_Nutricion();
+        jDesktopPane1.add(PDN);
+        PDN.show();
+    }//GEN-LAST:event_jMPlandeNutricionActionPerformed
+
+    private void jMAsignacionPlanNutricionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAsignacionPlanNutricionActionPerformed
+        // TODO add your handling code here:
+        Asignacion_De_Plan_De_Nutricion APDN = new Asignacion_De_Plan_De_Nutricion();
+        jDesktopPane1.add(APDN);
+        APDN.show();
+    }//GEN-LAST:event_jMAsignacionPlanNutricionActionPerformed
+
+    private void jmiDietasPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDietasPacientesActionPerformed
+        // TODO add your handling code here:
+        Registro_De_Dietas RDD = new Registro_De_Dietas();
+        jDesktopPane1.add(RDD);
+        RDD.show();
+    }//GEN-LAST:event_jmiDietasPacientesActionPerformed
 
     /**
      * @param args the command line arguments
