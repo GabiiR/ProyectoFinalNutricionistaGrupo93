@@ -1,14 +1,17 @@
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import static java.lang.Double.parseDouble;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Dieta;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Dieta;
 import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
-
 
 public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
@@ -21,6 +24,7 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
     protected Dieta dieta = new Dieta();
     protected Data_Dieta Data_Dieta = new Data_Dieta();
     protected ArrayList<Dieta> listaDieta;
+    protected Dieta dietaActual = null;
 
     /**
      * Creates new form Asignacion_De_Dietas
@@ -206,7 +210,8 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
             jcbPaciente.addItem(item);
         }
     }
-     private void cargarDatosDieta() {
+
+    private void cargarDatosDieta() {
         for (Dieta item : listaDieta) {
             jcbDieta.addItem(item);
         }
@@ -221,13 +226,33 @@ public class Asignacion_De_Plan_De_Nutricion extends javax.swing.JInternalFrame 
 
     private void jbAgregarDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarDietaActionPerformed
         try {
+            int pacienteSeleccionado = jcbPaciente.getSelectedIndex();
+            int dietaSeleccionada = jcbDieta.getSelectedIndex();
+            Data_Pac.buscarPacienteID(pacienteSeleccionado);
+            Data_Dieta.buscarDieta(dietaSeleccionada);
+            String nombre = jtPlanNutri.getText();
+            Double pesoI = parseDouble(jtPesoIni.getText());
+            Double pesof = parseDouble(jtPesoFin.getText());
 
-            
+            java.util.Date Fechafin = jFechaFinal.getDate();
+            LocalDate fechaf = Fechafin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            java.util.Date FechaIn = jFechaInicial.getDate();
+            LocalDate fechai = FechaIn.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            if (nombre.isEmpty() || pesoI == null || pesof == null || fechaf == null || fechai == null) {
+                JOptionPane.showMessageDialog(null, "No puede haber campos vacios.");
+                return;
+            }
+            Boolean estado = true;
+            dietaActual = new Dieta(, nombre, paciente, fechai, fechaf, pesoInicial, pesoObjetivo, estado);
+            Data_Dieta.agregarDieta(dietaActual);
+            JOptionPane.showMessageDialog(null, "Se guardo un nueva dieta con Exito!");
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_jbAgregarDietaActionPerformed
 
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.toedter.calendar.JDateChooser jFechaFinal;
     private com.toedter.calendar.JDateChooser jFechaInicial;
