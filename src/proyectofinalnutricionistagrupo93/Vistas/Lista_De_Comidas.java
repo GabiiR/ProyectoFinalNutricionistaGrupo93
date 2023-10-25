@@ -5,13 +5,22 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Comidas;
+import proyectofinalnutricionistagrupo93.Entidades.Comida;
 import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
+import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
-/**
- *
- * @author Zennon
- */
 public class Lista_De_Comidas extends javax.swing.JInternalFrame {
+
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
+
+    protected Comida comida = new Comida();
+    protected Data_Comidas Data_Com = new Data_Comidas();
+    protected ArrayList<Comida> listacomidas = new ArrayList<>();
 
     /**
      * Creates new form Listado_De_Comidas
@@ -30,7 +39,7 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jtTablaPac = new javax.swing.JTable();
+        jtTablaComida = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -44,7 +53,7 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setTitle("Lista de comidas");
 
-        jtTablaPac.setModel(new javax.swing.table.DefaultTableModel(
+        jtTablaComida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -55,10 +64,10 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6"
             }
         ));
-        jtTablaPac.setEnabled(false);
-        jtTablaPac.setName(""); // NOI18N
-        jtTablaPac.setPreferredSize(new java.awt.Dimension(350, 64));
-        jScrollPane1.setViewportView(jtTablaPac);
+        jtTablaComida.setEnabled(false);
+        jtTablaComida.setName(""); // NOI18N
+        jtTablaComida.setPreferredSize(new java.awt.Dimension(350, 64));
+        jScrollPane1.setViewportView(jtTablaComida);
 
         jLabel12.setText("Cantidad de Calorias");
 
@@ -80,8 +89,18 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
         });
 
         jLimpiar.setText("Limpiar");
+        jLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLimpiarActionPerformed(evt);
+            }
+        });
 
         jSalir.setText("Salir");
+        jSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,7 +126,7 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLimpiar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSalir)
+                .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
@@ -137,11 +156,38 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
     private void jMayorAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMayorAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMayorAActionPerformed
+    private void cargaComidas() {
+        Integer mayor = Integer.parseInt(jMayorA.getText());
+        Integer menor = Integer.parseInt(jMenorA.getText());
+        
+        listacomidas = (ArrayList) Data_Com.listaComidaXfiltro(mayor,menor);
+        for (Comida c : listacomidas) {
+            modeloTabla.addRow(new Object[]{c.getIdComida(),c.getNombre(),c.getDetalle(),c.getCantCalorias()});
+        }
+    }
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
-       //BUSCAR COMIDAS SEGUN CALORIAS
-       
+        List<Comida> listacomidas = Data_Com.listaComida();
+        crearTabla();
+        cargaComidas();
+
+
     }//GEN-LAST:event_jBuscarActionPerformed
+
+    private void jLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimpiarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLimpiarActionPerformed
+
+    private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSalirActionPerformed
+    private void crearTabla() {
+        modeloTabla.addColumn("");
+        modeloTabla.addColumn("");
+        modeloTabla.addColumn("");
+        modeloTabla.addColumn("");
+        jtTablaComida.setModel(modeloTabla);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -154,6 +200,6 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jMenorA;
     private javax.swing.JButton jSalir;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jtTablaPac;
+    private javax.swing.JTable jtTablaComida;
     // End of variables declaration//GEN-END:variables
 }

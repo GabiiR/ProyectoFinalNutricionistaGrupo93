@@ -42,28 +42,23 @@ public class Data_Comidas {
     }
 
     public void modificarComida(Comida comidaActual) {
-        String sql = "UPDATE comida SET nombre = ?, detalle = ?, cantCalorias = ?, estado = ?";
+        String sql = "UPDATE comida SET detalle = ?, cantCalorias = ?, estado = ?";
         try {
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, comidaActual.getNombre());
             ps.setString(2, comidaActual.getDetalle());
             ps.setInt(3, comidaActual.getCantCalorias());
             ps.setBoolean(4, comidaActual.isEstado());
 
-            ps.executeUpdate();
+           int resultado =  ps.executeUpdate();
 
-            ResultSet rs = ps.getGeneratedKeys();
-
-            if (rs.next()) {
-                comidaActual.setIdComida(rs.getInt(1));
-                JOptionPane.showMessageDialog(null, comidaActual);
+            if (resultado>0) {
+                
                 JOptionPane.showMessageDialog(null, "Se modifico correctamente su comida.");
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-            JOptionPane.showMessageDialog(null, "NO se pudo modificar su comida.");
+            JOptionPane.showMessageDialog(null, "No se pudo modificar su comida."+e);
         }
     }
 
@@ -144,19 +139,15 @@ public class Data_Comidas {
         }
         return comida;
     }
-
-    ;
     
     //revisar nombre de columnas
-    public ArrayList<Comida> listaComida(int mayorA, int menorA) {
+    public ArrayList<Comida> listaComida() {
         ArrayList<Comida> comidas = new ArrayList<>();
         Comida comida = null;
 
         try {
             String sql = "SELECT * FROM comida WHERE estado = 1"; //agregar maximos y minimos
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, mayorA);
-            ps.setInt(2, menorA);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -172,6 +163,33 @@ public class Data_Comidas {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas... " + ex);
         }
-        return comidas;
+        return (ArrayList<Comida>)comidas;
+    }
+     public ArrayList<Comida> listaComidaXfiltro(int mayor,int menor) {
+        ArrayList<Comida> comidas = new ArrayList<>();
+        Comida comida = null;
+        
+
+        try {
+            String sql = "SELECT * FROM comida WHERE estado = 1 AND cantCalorias >= ? AND cantCalorias <= ?"; //agregar maximos y minimos
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, mayor);
+            ps.setInt(2, menor);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                comida = new Comida();
+                comida.setIdComida(rs.getInt("idComida"));
+                comida.setNombre(rs.getString("nombre"));
+                comida.setDetalle(rs.getString("detalle"));
+                comida.setCantCalorias(rs.getInt("cantCalorias"));
+                comida.setEstado(rs.getBoolean("estado"));
+                comidas.add(comida);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas... " + ex);
+        }
+        return (ArrayList<Comida>)comidas;
     }
 }
