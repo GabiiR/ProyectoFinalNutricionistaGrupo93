@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,7 +22,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
     protected Paciente paciente = new Paciente(); //Datos del paciente.
     protected Data_Pacientes Data_Pac = new Data_Pacientes(); //Metodos del paciente.
-    protected Data_Dieta Data_Com = new Data_Dieta();
+    protected Data_Dieta Data_Dieta = new Data_Dieta();
     protected ArrayList<Paciente> listaPaci = new ArrayList<>();
     protected Paciente pacienteActual = null;
     protected Dieta dietaActual = null; 
@@ -59,11 +60,12 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jEstado = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jEliminar = new javax.swing.JButton();
+        jGuardar = new javax.swing.JButton();
+        jLimpiar = new javax.swing.JButton();
+        jSalir = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jtIdPlan = new javax.swing.JTextField();
 
         setClosable(true);
         setIconifiable(true);
@@ -101,38 +103,40 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jEliminar.setText("Eliminar");
+        jEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jEliminarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Borrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jGuardar.setText("Guardar");
+        jGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jGuardarActionPerformed(evt);
             }
         });
 
-        jButton3.setText("Modificar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jLimpiar.setText("Nuevo");
+        jLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jLimpiarActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Limpiar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jSalir.setText("Salir");
+        jSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jSalirActionPerformed(evt);
             }
         });
 
-        jButton5.setText("Salir");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jLabel10.setText("ID de Plan:");
+
+        jtIdPlan.setEnabled(false);
+        jtIdPlan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jtIdPlanActionPerformed(evt);
             }
         });
 
@@ -169,18 +173,20 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7)
                                             .addComponent(jLabel8))))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                .addGap(0, 106, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jLimpiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(jGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5)
-                            .addComponent(jButton4))
-                        .addGap(0, 16, Short.MAX_VALUE)))
+                        .addComponent(jEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addComponent(jSalir)
+                        .addGap(13, 13, 13))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(65, 65, 65)
+                        .addComponent(jtIdPlan)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -192,7 +198,11 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(jtNombrePlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(jtIdPlan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
                             .addComponent(jcbPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -222,37 +232,33 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                     .addComponent(jEstado))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton5)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jEliminar)
+                    .addComponent(jGuardar)
+                    .addComponent(jLimpiar)
+                    .addComponent(jSalir))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
+         if (dietaActual !=null){
+        Data_Dieta.eliminarDieta(dietaActual.getIdDieta());
+        dietaActual = null;
+        limpiarCampos();
+        }else{
+        JOptionPane.showMessageDialog(null, "Debe seleccionar una Dieta");
+        }
+    }//GEN-LAST:event_jEliminarActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimpiarActionPerformed
+        limpiarCampos();
+    }//GEN-LAST:event_jLimpiarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
+    private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jSalirActionPerformed
 
 
     private void jcbPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPacientesActionPerformed
@@ -268,17 +274,57 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jEstadoActionPerformed
 
+    private void jtIdPlanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIdPlanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtIdPlanActionPerformed
+
+    private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
+        try {
+            Integer idDieta = Integer.parseInt(jtIdPlan.getText());
+            String nombre = jtNombrePlan.getText();
+            Double pesoInicial = Double.parseDouble(jtPesoInicial.getText());
+            Double pesoObjetivo = Double.parseDouble(jtPesoObjetivo.getText());
+            Integer idPaciente = Integer.parseInt(jtIdPlan.getText());
+            java.util.Date fechaFinal =jFechaFinal.getDate();
+            LocalDate fechaf=fechaFinal.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            java.util.Date fechaInicial =jFechaInicial.getDate();
+            LocalDate fechai =fechaInicial.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            if (nombre.isEmpty() || pesoInicial ==  null || pesoObjetivo == null || fechaf == null || fechai == null) {
+                JOptionPane.showMessageDialog(null, "No puede haber campos vacios.");
+                return;
+            }
+
+            Boolean estado = jEstado.isSelected();
+
+            if (dietaActual == null) {
+                dietaActual = new Dieta(idDieta, nombre, paciente, fechai, fechaf, pesoInicial, pesoObjetivo, estado);
+                Data_Dieta.agregarDieta(dietaActual);
+                JOptionPane.showMessageDialog(null, "Se guardo un nueva dieta con Exito!");
+            } else {
+                dietaActual.setNombre(nombre);
+                dietaActual.setPesoInicial(pesoInicial);
+                dietaActual.setPesoObjetivo(pesoObjetivo);
+                dietaActual.setFechaFinal(fechaf);
+                dietaActual.setFechaInicial(fechai);
+                Data_Dieta.modificarDieta(dietaActual);
+                JOptionPane.showMessageDialog(null, "Se guardaron las modificaciones al dieta Correctamente");
+            }
+            limpiarCampos();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jGuardarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jEliminar;
     private javax.swing.JRadioButton jEstado;
     private com.toedter.calendar.JDateChooser jFechaFinal;
     private com.toedter.calendar.JDateChooser jFechaInicial;
+    private javax.swing.JButton jGuardar;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -287,7 +333,10 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JButton jLimpiar;
+    private javax.swing.JButton jSalir;
     private javax.swing.JComboBox<Paciente> jcbPacientes;
+    private javax.swing.JTextField jtIdPlan;
     private javax.swing.JTextField jtNombrePlan;
     private javax.swing.JTextField jtPesoInicial;
     private javax.swing.JTextField jtPesoObjetivo;
@@ -295,12 +344,12 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
     private void cargarDatos(int idPaciente) {
         try {
-            dietaActual = Data_Com.buscarDietaxPaciente(idPaciente);
+            dietaActual = Data_Dieta.buscarDietaxPaciente(idPaciente);
             if (dietaActual != null) {
                 jtNombrePlan.setText(dietaActual.getNombre());
                 jtPesoInicial.setText(String.valueOf(dietaActual.getPesoInicial()));
                 jtPesoObjetivo.setText(String.valueOf(dietaActual.getPesoObjetivo()));
-                
+                jtIdPlan.setText(String.valueOf(dietaActual.getIdDieta()));
                 //no se si funciona 
                 
                 LocalDate fi = dietaActual.getFechaInicial();
@@ -315,5 +364,14 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
             }
         } catch (Exception e) {
         }
+    }
+    private void limpiarCampos() {
+        jtNombrePlan.setText("");
+        jtIdPlan.setText("");
+        jtPesoObjetivo.setText("");
+        jtPesoInicial.setText("");
+        jFechaFinal.setDate(new Date());    
+        jFechaInicial.setDate(new Date());
+        jEstado.setSelected(true);
     }
 }
