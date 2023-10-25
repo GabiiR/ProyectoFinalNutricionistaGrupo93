@@ -104,7 +104,38 @@ public class Data_Dieta {
             if (rs.next()) {
                 Paciente paciente = new Paciente();  
                 plan.setNombre(rs.getString("nombre"));
+                paciente.setIdPaciente(rs.getInt("idPaciente"));
+                plan.setPaciente(paciente);
+                plan.setIdDieta(id);
+                plan.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
+                plan.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                plan.setPesoInicial(rs.getDouble("pesoInicial"));
+                plan.setPesoObjetivo(rs.getDouble("pesoObjetivo"));
+                plan.setEstado(true);
+
+                JOptionPane.showMessageDialog(null, "Plan Nutricional encontrado.");
+            } else if (!rs.next()) {
+                JOptionPane.showMessageDialog(null, "Plan Nutricional No encontrado.");
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "No se encontraron datos del Plan.");
+        }
+        return plan;
+    }
+    public Dieta buscarDietaxPaciente(int id) {
+        Dieta plan = null;
+        try {
+            String sql = "SELECT * WHERE idPaciente= ? AND estado = 1"; //agregar el from
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                Paciente paciente = new Paciente();  
+                plan.setNombre(rs.getString("nombre"));
                 paciente.setIdPaciente(id);
+                plan.setIdDieta(rs.getInt("IdDieta"));
                 plan.setPaciente(paciente);
                 plan.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
                 plan.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
@@ -114,15 +145,14 @@ public class Data_Dieta {
 
                 JOptionPane.showMessageDialog(null, "Plan Nutricional encontrado.");
             } else if (!rs.next()) {
-                JOptionPane.showMessageDialog(null, "Plan Nutricional NO encontrado.");
+                JOptionPane.showMessageDialog(null, "Plan Nutricional No encontrado.");
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos de la Dieta." + e);
+            JOptionPane.showMessageDialog(null, "No se encontraron datos del Plan" );
         }
         return plan;
     }
-    
     
     //revisaar el orden segun las columnas de la tabla
     public List<Dieta> listaDietasActivas() {
