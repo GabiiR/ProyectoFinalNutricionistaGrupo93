@@ -45,8 +45,22 @@ public class Data_Pacientes {
         }
     }
 
-    ;
-    
+    public void modificarPesoPaciente(double peso, int id){
+        try {
+            String sql = "UPDATE paciente SET pesoActual = ? WHERE idPaciente = ? AND estado = 1";
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setDouble(1, peso);
+            ps.setInt(2, id);
+            int resultado = ps.executeUpdate(); 
+             if (resultado > 0) {
+                JOptionPane.showMessageDialog(null, "Se ha actualizado la información de peso del paciente.");
+            }
+            ps.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente.");
+        }
+    }
     public void modificarPaciente(Paciente paciente) {
         try {
             String sql = "UPDATE paciente SET nombre = ?, domicilio = ?, telefono = ?, pesoActual = ?, pesoDeseado = ? WHERE dni = ? AND estado = 1";
@@ -68,11 +82,9 @@ public class Data_Pacientes {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente." + e);
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente.");
         }
     }
-
-    ;
     
     public void eliminarPaciente(int dni) {
         try {

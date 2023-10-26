@@ -161,6 +161,7 @@ public class Registro_De_Historial extends javax.swing.JInternalFrame {
             
             historialactual = new Historial(pacienteSeleccionado.getIdPaciente(),peso,fecha,true);
             Data_Historial.cargarVisita(historialactual);
+            Data_Pac.modificarPesoPaciente(peso, pacienteSeleccionado.getIdPaciente());
             }else{
                 JOptionPane.showMessageDialog(null, "Debe ingresar un peso");
             }
