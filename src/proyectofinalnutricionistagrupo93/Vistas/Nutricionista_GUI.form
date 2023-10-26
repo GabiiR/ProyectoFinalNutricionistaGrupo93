@@ -71,7 +71,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMListaDietas">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Comidas Por Dieta"/>
+                <Property name="text" type="java.lang.String" value="Lista de Dietas"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMListaDietasActionPerformed"/>
