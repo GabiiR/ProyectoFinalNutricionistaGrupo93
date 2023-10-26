@@ -28,7 +28,8 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
     protected Dieta dietaActual = null;
     protected Data_Comidas Data_Comida = new Data_Comidas();
     protected Comida comidaActual = null;
-
+    protected Data_DietaComida Data_DietaComida = new Data_DietaComida();
+    
     /**
      * Creates new form Lista_De_ComidasxDieta
      */
@@ -53,6 +54,8 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTabla = new javax.swing.JTable();
         jSalir = new javax.swing.JButton();
+        JElimina = new javax.swing.JButton();
+        jModificar = new javax.swing.JButton();
 
         jLabel1.setText("Seleccione una dieta :");
 
@@ -73,12 +76,27 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTabla.setEnabled(false);
         jScrollPane1.setViewportView(jTabla);
 
         jSalir.setText("Salir");
         jSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jSalirActionPerformed(evt);
+            }
+        });
+
+        JElimina.setText("Eliminar Registro");
+        JElimina.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JEliminaActionPerformed(evt);
+            }
+        });
+
+        jModificar.setText("Modificar");
+        jModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jModificarActionPerformed(evt);
             }
         });
 
@@ -89,7 +107,12 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JElimina)
+                        .addGap(63, 63, 63)
+                        .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(jLabel1)
@@ -108,7 +131,10 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                .addComponent(jSalir)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSalir)
+                    .addComponent(JElimina)
+                    .addComponent(jModificar))
                 .addContainerGap())
         );
 
@@ -123,6 +149,33 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbDietaActionPerformed
 
+    private void JEliminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminaActionPerformed
+       int filaseleccionada = jTabla.getSelectedRow();
+        if(filaseleccionada !=-1){
+            int idcomida = (Integer) modeloTabla.getValueAt(filaseleccionada,0);
+            
+            Data_DietaComida.eliminarDietaComida(idcomida);
+            borrarFila();
+        }else{
+            
+        }
+    }//GEN-LAST:event_JEliminaActionPerformed
+
+    private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
+        int filaseleccionada = jTabla.getSelectedRow();
+        if(filaseleccionada !=-1){
+            int idDieta = (Integer) modeloTabla.getValueAt(filaseleccionada,0);
+            String horario = (String) modeloTabla.getValueAt(filaseleccionada,0);
+            int porcion = (Integer) modeloTabla.getValueAt(filaseleccionada,0);
+            Dieta dieta = (Dieta) jcbDieta.getSelectedItem();
+            
+            Data_DietaComida.modificarDietaComida(idDieta,horario,porcion,dieta.getIdDieta());
+            borrarFila();
+        }else{
+            
+        }
+    }//GEN-LAST:event_jModificarActionPerformed
+
      public void cargarComidas(int idDieta) {
         borrarFila();
         Data_DietaComida dcdata = new Data_DietaComida();
@@ -134,7 +187,9 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton JElimina;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jModificar;
     private javax.swing.JButton jSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTabla;
@@ -147,9 +202,9 @@ private void cargarDatosDieta(ArrayList<Dieta> listaDieta) {
     }
 private void crearTabla() {
         modeloTabla.addColumn("IdComida");
-        modeloTabla.addColumn("IdDieta");
-        modeloTabla.addColumn("Nombre");
-        
+        modeloTabla.addColumn("Horario");
+        modeloTabla.addColumn("Porcion");
+               
         jTabla.setModel(modeloTabla);
     }
    private void borrarFila() {
