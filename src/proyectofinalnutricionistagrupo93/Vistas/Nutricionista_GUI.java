@@ -207,7 +207,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
 
     private void jmiDietasPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDietasPacientesActionPerformed
         // TODO add your handling code here:
-        Registro_De_DietaComida RDD = new Registro_De_DietaComida();
+        Registro_De_ComidasDieta RDD = new Registro_De_ComidasDieta();
         jDesktopPane1.add(RDD);
         RDD.show();
     }//GEN-LAST:event_jmiDietasPacientesActionPerformed

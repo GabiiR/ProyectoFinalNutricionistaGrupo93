@@ -287,7 +287,8 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
             String nombre = jtNombrePlan.getText();
             Double pesoInicial = Double.parseDouble(jtPesoInicial.getText());
             Double pesoObjetivo = Double.parseDouble(jtPesoObjetivo.getText());
-            int pacienteIndex = jcbPacientes.getSelectedIndex();java.util.Date fechaFinal = jFechaFinal.getDate();
+            int pacienteIndex = jcbPacientes.getSelectedIndex();
+            java.util.Date fechaFinal = jFechaFinal.getDate();
             Paciente pacienteSeleccionado = (Paciente) jcbPacientes.getItemAt(pacienteIndex);
             LocalDate fechaf = fechaFinal.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             java.util.Date fechaInicial = jFechaInicial.getDate();

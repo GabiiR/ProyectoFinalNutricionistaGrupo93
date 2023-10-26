@@ -3,11 +3,14 @@ package proyectofinalnutricionistagrupo93.Vistas;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Comidas;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Dieta;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Data_DietaComida;
 import proyectofinalnutricionistagrupo93.Entidades.Comida;
 import proyectofinalnutricionistagrupo93.Entidades.Dieta;
+import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
 
 public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
 
@@ -18,6 +21,8 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
     protected Data_Comidas Data_Comida = new Data_Comidas();
     protected ArrayList<Comida> listaPaci = new ArrayList<>();
     protected Comida comidaActual = null;
+    protected Data_DietaComida Data_DietaComida = new Data_DietaComida();
+    protected DietaComida dietaComidaActual = null;
 
     public Registro_De_DietaComida() {
         initComponents();
@@ -51,7 +56,7 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
         jcbAlmuerzo = new javax.swing.JComboBox<>();
         jcbDesayuno = new javax.swing.JComboBox<>();
         jSalir = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jAgregarComidas = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -124,10 +129,10 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jAgregarComidas.setText("Agregar");
+        jAgregarComidas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jAgregarComidasActionPerformed(evt);
             }
         });
 
@@ -213,7 +218,7 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
                                     .addGap(18, 18, 18)
                                     .addComponent(jtPorcionS))))
                         .addGroup(layout.createSequentialGroup()
-                            .addComponent(jButton1)
+                            .addComponent(jAgregarComidas)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jbLimpiar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
@@ -273,7 +278,7 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
                             .addComponent(jtPorcionC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGap(18, 18, 18)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
+                        .addComponent(jAgregarComidas)
                         .addComponent(jSalir)
                         .addComponent(jbLimpiar))
                     .addContainerGap(18, Short.MAX_VALUE)))
@@ -314,12 +319,49 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
         dispose();
     }//GEN-LAST:event_jSalirActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jAgregarComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jAgregarComidasActionPerformed
+        try {
+            int dietaIndex = jcbDietas.getSelectedIndex();
+            Dieta dietaSeleccionado = (Dieta) jcbDietas.getItemAt(dietaIndex);
+            int desayunondex = jcbDietas.getSelectedIndex();
+            Comida desayunoSeleccionado = (Comida) jcbDesayuno.getItemAt(dietaIndex);
+            int almuerzoIndex = jcbDietas.getSelectedIndex();
+            Comida almuerzoSeleccionado = (Comida) jcbAlmuerzo.getItemAt(almuerzoIndex);
+            int meriendaIndex = jcbDietas.getSelectedIndex();
+            Comida meriendaSeleccionado = (Comida) jcbMerienda.getItemAt(meriendaIndex);
+            int cenaIndex = jcbDietas.getSelectedIndex();
+            Comida cenaSeleccionado = (Comida) jcbCena.getItemAt(cenaIndex);
+            int snackIndex = jcbDietas.getSelectedIndex();
+            Comida snackSeleccionado = (Comida) jcbSnack.getItemAt(snackIndex);
+            Integer porcionD = Integer.parseInt(jtPorcionD.getText());
+            Integer porcionA = Integer.parseInt(jtPorcionA.getText());
+            Integer porcionM = Integer.parseInt(jtPorcionM.getText());
+            Integer porcionS = Integer.parseInt(jtPorcionS.getText());
+            Integer porcionC = Integer.parseInt(jtPorcionC.getText());
+            Boolean estado = true; 
+            
+            if(porcionA == null || porcionC == null || porcionD == null || porcionM == null || porcionS == null){
+                 JOptionPane.showMessageDialog(null, "No puede haber campos de porcion vacios.");
+                return;
+            }
+            if (dietaComidaActual == null) {
+                dietaComidaActual = new DietaComida(desayunoSeleccionado.getIdComida(),dietaSeleccionado.getIdDieta(),null,porcionA,estado);
+                Data_DietaComida.agregarDietaComida(dietaComidaActual);
+            }
+            
+            
+        } catch (Exception e) {
+                
+                }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jAgregarComidasActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        // TODO add your handling code here:
+       limpiarCampos();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jtPorcionSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtPorcionSActionPerformed
@@ -332,7 +374,7 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jAgregarComidas;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
@@ -374,5 +416,12 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
             jcbCena.addItem(c);
         });
     }
-
+    private void limpiarCampos() {
+        jtPorcionA.setText("");
+        jtPorcionC.setText("");
+        jtPorcionD.setText("");
+        jtPorcionM.setText("");
+        jtPorcionS.setText("");      
+        
+    }
 }
