@@ -165,27 +165,27 @@ public class Data_Dieta {
     public ArrayList<Dieta> listaDietasActivas() {
         List<Dieta> lista = new ArrayList<>();
         Data_Pacientes pdata = new Data_Pacientes();
-        String sql = "SELECT * FROM dieta WHERE dieta.estado = 1";
+        String sql = "SELECT * FROM dieta WHERE estado = 1";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Dieta dieta = new Dieta();
                 Paciente paciente = new Paciente();
-                dieta.setNombre(rs.getString(1));
-                paciente = pdata.buscarPacienteID(rs.getInt(2));
+                dieta.setIdDieta(rs.getInt(1));
+                dieta.setNombre(rs.getString(2));
+                paciente = pdata.buscarPacienteID(rs.getInt(3));
                 dieta.setPaciente(paciente);
-                dieta.setPesoInicial(rs.getDouble(3));
-                dieta.setPesoObjetivo(rs.getDouble(4));
-                dieta.setFechaInicial(rs.getDate(5).toLocalDate());
-                dieta.setFechaFinal(rs.getDate(6).toLocalDate());
-                dieta.setIdDieta(rs.getInt(7));
+                dieta.setFechaInicial(rs.getDate(4).toLocalDate());
+                dieta.setFechaFinal(rs.getDate(5).toLocalDate());
+                dieta.setPesoInicial(rs.getDouble(6));
+                dieta.setPesoObjetivo(rs.getDouble(7));
                 dieta.setEstado(rs.getBoolean(8));
                 lista.add(dieta);
             }
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Data_Dieta.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(null, "No se encontraron datos del Plan");
         }
         return (ArrayList<Dieta>) lista;
     }

@@ -291,6 +291,7 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                         comidaActual.setDetalle(detalle);
                         comidaActual.setEstado(true);
                         Data_Comi.modificarComida(comidaActual);
+                        JOptionPane.showMessageDialog(this, comidaActual);
                         JOptionPane.showMessageDialog(this, "Se modifico la comida correctamente.");
                         limpiarCampos();
 
