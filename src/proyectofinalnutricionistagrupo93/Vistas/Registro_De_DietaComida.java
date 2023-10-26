@@ -167,7 +167,7 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 438, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -216,7 +216,7 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
                             .addComponent(jButton1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jbLimpiar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 215, Short.MAX_VALUE)
                             .addComponent(jSalir)))
                     .addContainerGap()))
         );
@@ -371,6 +371,7 @@ public class Registro_De_DietaComida extends javax.swing.JInternalFrame {
             jcbDesayuno.addItem(c);
             jcbMerienda.addItem(c);
             jcbAlmuerzo.addItem(c);
+            jcbCena.addItem(c);
         });
     }
 
