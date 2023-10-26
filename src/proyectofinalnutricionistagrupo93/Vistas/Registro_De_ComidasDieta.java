@@ -42,7 +42,7 @@ public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
         cargarDatosDieta((ArrayList<Dieta>) listaDieta);
         List<Comida> listaComida = Data_Comida.listaComida();
         cargarDatosComida((ArrayList<Comida>) listaComida);
-        
+        cargarDatosHorario();
     }
 
     /**
