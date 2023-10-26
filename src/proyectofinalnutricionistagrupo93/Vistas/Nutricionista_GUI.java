@@ -43,7 +43,6 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jMListaDietas = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMPlandeNutricion = new javax.swing.JMenuItem();
-        jMAsignacionPlanNutricion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menu de nutricionista");
@@ -140,14 +139,6 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         });
         jMenu1.add(jMPlandeNutricion);
 
-        jMAsignacionPlanNutricion.setText("Asignacion de Plan de Nutricion");
-        jMAsignacionPlanNutricion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMAsignacionPlanNutricionActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMAsignacionPlanNutricion);
-
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -214,13 +205,6 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         PDN.show();
     }//GEN-LAST:event_jMPlandeNutricionActionPerformed
 
-    private void jMAsignacionPlanNutricionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMAsignacionPlanNutricionActionPerformed
-        // TODO add your handling code here:
-        Asignacion_De_Plan_De_Nutricion APDN = new Asignacion_De_Plan_De_Nutricion();
-        jDesktopPane1.add(APDN);
-        APDN.show();
-    }//GEN-LAST:event_jMAsignacionPlanNutricionActionPerformed
-
     private void jmiDietasPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiDietasPacientesActionPerformed
         // TODO add your handling code here:
         Registro_De_Dietas RDD = new Registro_De_Dietas();
@@ -264,7 +248,6 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenuItem jMAsignacionPlanNutricion;
     private javax.swing.JMenuItem jMListaDietas;
     private javax.swing.JMenuItem jMPlandeNutricion;
     private javax.swing.JMenu jMenu1;

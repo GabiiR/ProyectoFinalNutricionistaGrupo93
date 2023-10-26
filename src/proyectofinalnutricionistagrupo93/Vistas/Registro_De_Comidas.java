@@ -60,7 +60,14 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
 
         jLabel6.setText("Estado:");
 
+        jtCantCalorias.setEnabled(false);
+
         jtIDcomida.setEditable(false);
+        jtIDcomida.setEnabled(false);
+
+        jtDetalle.setEnabled(false);
+
+        jrbEstado.setEnabled(false);
 
         jbAgregar.setText("Agregar");
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
@@ -254,6 +261,9 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "El Nombre no fue ingresado correctamente\n o esta escrito en un formato incorrecto.\n Por favor, vuelva a ingresarlo de vuelta.");
 
         }
+        jrbEstado.setSelected(true);
+        jtCantCalorias.setEnabled(true);
+        jtDetalle.setEnabled(true);
     }//GEN-LAST:event_jbBuscarComidaActionPerformed
 
     private void jbLimpiarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarCamposActionPerformed

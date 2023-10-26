@@ -41,7 +41,7 @@ public class Data_Dieta {
             if (rs.next()) { //Verifica si todos los datos estan disponibles para crear la columna.
                 plan.setIdDieta(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Plan Nutricional agregado con exito.");
-            }          
+            }
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al agregar Plan Nutricional.");
@@ -51,7 +51,7 @@ public class Data_Dieta {
 
     public void modificarDieta(Dieta plan) {
         try {
-            String sql = "UPDATE dieta SET  nombre = ?, paciente = ?, fechaInicial = ?, fechaFinal =?, pesoInicial = ?, pesoObjetivo = ?  WHERE idDieta = ? AND estado = 1";
+            String sql = "UPDATE dieta SET  nombre = ?, paciente = ?, fechaInicial = ?, fechaFinal =?, pesoInicial = ?, pesoObjetivo = ?, estado = ?  WHERE idDieta = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, plan.getNombre());
             ps.setInt(2, plan.getPaciente().getIdPaciente());
@@ -59,7 +59,8 @@ public class Data_Dieta {
             ps.setDate(4, Date.valueOf(plan.getFechaFinal()));
             ps.setDouble(5, plan.getPesoInicial());
             ps.setDouble(6, plan.getPesoObjetivo());
-            ps.setInt(7, plan.getIdDieta());
+            ps.setBoolean(7, plan.isEstado());
+            ps.setInt(8, plan.getIdDieta());
 
             int resultado = ps.executeUpdate(); //Ejecuta consulta "UPDATE".
             if (resultado > 0) {
@@ -70,7 +71,7 @@ public class Data_Dieta {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar el Plan Nutricional.");
         }
     }
-    
+
     public void eliminarDieta(int id) {
         try {
             String sql = "UPDATE plannutricional SET estado = ? WHERE idDieta = ? AND estado = 1";
@@ -91,17 +92,17 @@ public class Data_Dieta {
             JOptionPane.showMessageDialog(null, "Error al eliminar el Plan Nutricional.");
         }
     }
-   
+
     public Dieta buscarDieta(int id) {
-        Dieta plan = null;
         try {
-            String sql = "SELECT * WHERE idDieta = ? AND estado = 1"; //agregar el from
+            String sql = "SELECT * FROM dieta WHERE idDieta = ? AND estado = 1"; //agregar el from
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                Paciente paciente = new Paciente();  
+                Dieta plan = new Dieta();
+                Paciente paciente = new Paciente();
                 plan.setNombre(rs.getString("nombre"));
                 paciente.setIdPaciente(rs.getInt("idPaciente"));
                 plan.setPaciente(paciente);
@@ -113,46 +114,53 @@ public class Data_Dieta {
                 plan.setEstado(true);
 
                 JOptionPane.showMessageDialog(null, "Plan Nutricional encontrado.");
-            } else if (!rs.next()) {
+                return plan;
+            } else {
                 JOptionPane.showMessageDialog(null, "Plan Nutricional No encontrado.");
             }
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se encontraron datos del Plan.");
         }
-        return plan;
+        return null;
     }
+
     public Dieta buscarDietaxPaciente(int id) {
-        Dieta plan = null;
+        //Dieta plan = null;
         try {
-            String sql = "SELECT * WHERE idPaciente= ? AND estado = 1"; //agregar el from
+            String sql = "SELECT * FROM dieta WHERE paciente= ? AND estado = 1"; //agregar el from
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
+
             if (rs.next()) {
-                Paciente paciente = new Paciente();  
-                plan.setNombre(rs.getString("nombre"));
-                paciente.setIdPaciente(id);
-                plan.setIdDieta(rs.getInt("IdDieta"));
-                plan.setPaciente(paciente);
-                plan.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
-                plan.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
-                plan.setPesoInicial(rs.getDouble("pesoInicial"));
-                plan.setPesoObjetivo(rs.getDouble("pesoObjetivo"));
-                plan.setEstado(true);
+                Paciente paciente = new Paciente();
+                    Dieta plan = new Dieta();
+                    plan.setNombre(rs.getString("nombre"));
+                    paciente.setIdPaciente(id);
+                    plan.setIdDieta(rs.getInt("IdDieta"));
+                    plan.setPaciente(paciente);
+                    plan.setFechaInicial(rs.getDate("fechaInicial").toLocalDate());
+                    plan.setFechaFinal(rs.getDate("fechaFinal").toLocalDate());
+                    plan.setPesoInicial(rs.getDouble("pesoInicial"));
+                    plan.setPesoObjetivo(rs.getDouble("pesoObjetivo"));
+                    plan.setEstado(true);
+                    
 
                 JOptionPane.showMessageDialog(null, "Plan Nutricional encontrado.");
-            } else if (!rs.next()) {
+                return plan;
+            } else {
                 JOptionPane.showMessageDialog(null, "Plan Nutricional No encontrado.");
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos del Plan" );
+            JOptionPane.showMessageDialog(null, "No se encontraron datos del Plan");
         }
-        return plan;
+        
+       return null;
     }
-    
+
     //revisaar el orden segun las columnas de la tabla
     public ArrayList<Dieta> listaDietasActivas() {
         List<Dieta> lista = new ArrayList<>();
@@ -179,16 +187,17 @@ public class Data_Dieta {
         } catch (SQLException ex) {
             Logger.getLogger(Data_Dieta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return (ArrayList<Dieta>) lista;  
+        return (ArrayList<Dieta>) lista;
     }
-     //revisaar el orden segun las columnas de la tabla
+    //revisaar el orden segun las columnas de la tabla
+
     public List<Dieta> listaDietaActivaPACIENTE(int id) {
         List<Dieta> lista = new ArrayList<>();
         Data_Pacientes pdata = new Data_Pacientes();
         String sql = "SELECT * FROM dieta WHERE dieta.estado = 1 AND dieta.idpaciente = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Dieta dieta = new Dieta();
@@ -209,9 +218,7 @@ public class Data_Dieta {
         } catch (SQLException ex) {
             Logger.getLogger(Data_Dieta.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return lista;  
-    } 
-    
-    
+        return lista;
+    }
 
 }

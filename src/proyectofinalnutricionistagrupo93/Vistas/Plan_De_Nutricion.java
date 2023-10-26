@@ -80,6 +80,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Paciente:");
 
+        jcbPacientes.setFocusTraversalPolicyProvider(true);
         jcbPacientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jcbPacientesActionPerformed(evt);
@@ -251,7 +252,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
             dietaActual = null;
             limpiarCampos();
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar una Dieta");
+            JOptionPane.showMessageDialog(null, "Para eliminar una dieta, el paciente debe tener una");
         }
     }//GEN-LAST:event_jEliminarActionPerformed
 
@@ -265,7 +266,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
 
     private void jcbPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPacientesActionPerformed
-        int filaseleccionada = jcbPacientes.getSelectedIndex();// Selecciona la 
+        int filaseleccionada = jcbPacientes.getSelectedIndex();
         if (filaseleccionada != -1) {
             Paciente p = (Paciente) jcbPacientes.getSelectedItem();
             int idPaciente = p.getIdPaciente();
@@ -308,6 +309,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                 dietaActual.setPesoObjetivo(pesoObjetivo);
                 dietaActual.setFechaFinal(fechaf);
                 dietaActual.setFechaInicial(fechai);
+                dietaActual.setEstado(estado);
                 Data_Dieta.modificarDieta(dietaActual);
             }
             limpiarCampos();
@@ -364,7 +366,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                 jFechaInicial.setDate(datei);
                 LocalDate ff = dietaActual.getFechaInicial();
                 java.util.Date datef = java.util.Date.from(ff.atStartOfDay(ZoneId.systemDefault()).toInstant());
-                jFechaInicial.setDate(datef);
+                jFechaFinal.setDate(datef);
 
                 jEstado.setSelected(true);
                 jEstado.setEnabled(true);
