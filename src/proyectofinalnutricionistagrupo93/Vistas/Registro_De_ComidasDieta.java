@@ -226,6 +226,8 @@ public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
             if (dietaComidaActual == null) {
                 dietaComidaActual = new DietaComida(desayunoSeleccionado.getIdComida(), dietaSeleccionado.getIdDieta(), horarioSeleccionado, porcion, estado);
                 Data_DietaComida.agregarDietaComida(dietaComidaActual);
+            }else {
+            //modificar dietacomida
             }
 
         } catch (Exception e) {
