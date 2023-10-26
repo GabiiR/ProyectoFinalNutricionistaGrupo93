@@ -193,7 +193,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
 
     private void jMListaDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListaDietasActionPerformed
         // TODO add your handling code here:
-         Lista_De_Dietas LDD = new Lista_De_Dietas();
+         Lista_De_ComidasxDieta LDD = new Lista_De_ComidasxDieta();
         jDesktopPane1.add(LDD);
         LDD.show();
     }//GEN-LAST:event_jMListaDietasActionPerformed

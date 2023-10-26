@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import proyectofinalnutricionistagrupo93.Entidades.Comida;
 import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
@@ -109,9 +110,30 @@ public class Data_DietaComida{
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos de la Dieta."+ e);
+            JOptionPane.showMessageDialog(null, "No se encontraron datos de la Dieta.");
         }
         return dieta;
     };
-    
+    public ArrayList<DietaComida> listaComidaxdieta(int idDieta) {
+        ArrayList<DietaComida> comidasxdieta = new ArrayList<>();
+        DietaComida comida = null;
+
+        try {
+            String sql = "SELECT * FROM DietaComida WHERE idDieta=? AND estado = 1"; 
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1,idDieta);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                comida = new DietaComida();
+                comida.setIdComida(rs.getInt("idComida"));
+                comida.setIdDieta(rs.getInt("idDieta"));
+                comidasxdieta.add(comida);
+            }
+            ps.close();
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas... ");
+        }
+        return (ArrayList<DietaComida>)comidasxdieta;
+    }
 }

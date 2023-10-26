@@ -23,7 +23,7 @@ import proyectofinalnutricionistagrupo93.Entidades.Horario;
  */
 public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modeloTabla = new DefaultTableModel();
+   
     protected Data_Dieta Data_Dieta = new Data_Dieta();
     protected ArrayList<Dieta> listaDieta = new ArrayList<>();
     protected Dieta dietaActual = null;
@@ -65,6 +65,8 @@ public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
         jtPorcion = new javax.swing.JTextField();
         jSalir = new javax.swing.JButton();
         jbLimpiar = new javax.swing.JButton();
+
+        setTitle("Registro De Comidas Por Dieta");
 
         jlDietas.setText("Nombre de la dieta :");
 
