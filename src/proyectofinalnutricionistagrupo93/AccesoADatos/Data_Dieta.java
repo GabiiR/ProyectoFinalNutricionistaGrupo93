@@ -24,17 +24,16 @@ public class Data_Dieta {
 
     public void agregarDieta(Dieta plan) {
         try {
-            String sql = "INSERT INTO dieta (nombre, paciente, fechaInicial, fechaFinal, pesoInicial, pesoObjetivo, estado) VALUES (?,?,?,?,?,?,?,?)"; //Plantilla DB.
+            String sql = "INSERT INTO dieta (nombre, paciente, fechaInicial, fechaFinal, pesoInicial, pesoObjetivo, estado) VALUES (?,?,?,?,?,?,?)"; //Plantilla DB.
 
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS); //Agrega a los valores de la linea 20, lo de la linea 23 en adelante.
-            ps.setInt(1, plan.getIdDieta());
-            ps.setString(2, plan.getNombre());
-            ps.setInt(3, plan.getPaciente().getIdPaciente());
-            ps.setDate(4, Date.valueOf(plan.getFechaInicial()));
-            ps.setDate(5, Date.valueOf(plan.getFechaFinal()));
-            ps.setDouble(6, plan.getPesoInicial());
-            ps.setDouble(7, plan.getPesoObjetivo());
-            ps.setBoolean(8, plan.isEstado());
+            ps.setString(1, plan.getNombre());
+            ps.setInt(2, plan.getPaciente().getIdPaciente());
+            ps.setDate(3, Date.valueOf(plan.getFechaInicial()));
+            ps.setDate(4, Date.valueOf(plan.getFechaFinal()));
+            ps.setDouble(5, plan.getPesoInicial());
+            ps.setDouble(6, plan.getPesoObjetivo());
+            ps.setBoolean(7, plan.isEstado());
             ps.executeUpdate(); //Ejecuta consulta "INSERT INTO".
 
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
@@ -42,7 +41,7 @@ public class Data_Dieta {
             if (rs.next()) { //Verifica si todos los datos estan disponibles para crear la columna.
                 plan.setIdDieta(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Plan Nutricional agregado con exito.");
-            }
+            }          
             ps.close();
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "Error al agregar Plan Nutricional.");

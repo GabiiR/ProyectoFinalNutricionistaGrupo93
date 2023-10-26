@@ -20,12 +20,14 @@ import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
 public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
+
     protected Paciente paciente = new Paciente(); //Datos del paciente.
     protected Data_Pacientes Data_Pac = new Data_Pacientes(); //Metodos del paciente.
     protected Data_Dieta Data_Dieta = new Data_Dieta();
     protected ArrayList<Paciente> listaPaci = new ArrayList<>();
     protected Paciente pacienteActual = null;
-    protected Dieta dietaActual = null; 
+    protected Dieta dietaActual = null;
 
     /**
      * Creates new form Plan_De_Nutricion
@@ -33,6 +35,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
     public Plan_De_Nutricion() {
         initComponents();
         List<Paciente> listaPaci = Data_Pac.listarPacientes();
+        cargarDatosPaciente((ArrayList<Paciente>) listaPaci);
     }
 
     /**
@@ -243,12 +246,12 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEliminarActionPerformed
-         if (dietaActual !=null){
-        Data_Dieta.eliminarDieta(dietaActual.getIdDieta());
-        dietaActual = null;
-        limpiarCampos();
-        }else{
-        JOptionPane.showMessageDialog(null, "Debe seleccionar una Dieta");
+        if (dietaActual != null) {
+            Data_Dieta.eliminarDieta(dietaActual.getIdDieta());
+            dietaActual = null;
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar una Dieta");
         }
     }//GEN-LAST:event_jEliminarActionPerformed
 
@@ -280,17 +283,16 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
     private void jGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jGuardarActionPerformed
         try {
-            Integer idDieta = Integer.parseInt(jtIdPlan.getText());
             String nombre = jtNombrePlan.getText();
             Double pesoInicial = Double.parseDouble(jtPesoInicial.getText());
             Double pesoObjetivo = Double.parseDouble(jtPesoObjetivo.getText());
-            Integer idPaciente = Integer.parseInt(jtIdPlan.getText());
-            java.util.Date fechaFinal =jFechaFinal.getDate();
-            LocalDate fechaf=fechaFinal.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-            java.util.Date fechaInicial =jFechaInicial.getDate();
-            LocalDate fechai =fechaInicial.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            int pacienteIndex = jcbPacientes.getSelectedIndex();java.util.Date fechaFinal = jFechaFinal.getDate();
+            Paciente pacienteSeleccionado = (Paciente) jcbPacientes.getItemAt(pacienteIndex);
+            LocalDate fechaf = fechaFinal.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            java.util.Date fechaInicial = jFechaInicial.getDate();
+            LocalDate fechai = fechaInicial.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-            if (nombre.isEmpty() || pesoInicial ==  null || pesoObjetivo == null || fechaf == null || fechai == null) {
+            if (nombre.isEmpty() || pesoInicial == null || pesoObjetivo == null || fechaf == null || fechai == null) {
                 JOptionPane.showMessageDialog(null, "No puede haber campos vacios.");
                 return;
             }
@@ -298,9 +300,8 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
             Boolean estado = jEstado.isSelected();
 
             if (dietaActual == null) {
-                dietaActual = new Dieta(idDieta, nombre, paciente, fechai, fechaf, pesoInicial, pesoObjetivo, estado);
+                dietaActual = new Dieta(nombre, pacienteSeleccionado, fechai, fechaf, pesoInicial, pesoObjetivo, estado);
                 Data_Dieta.agregarDieta(dietaActual);
-                JOptionPane.showMessageDialog(null, "Se guardo un nueva dieta con Exito!");
             } else {
                 dietaActual.setNombre(nombre);
                 dietaActual.setPesoInicial(pesoInicial);
@@ -308,7 +309,6 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                 dietaActual.setFechaFinal(fechaf);
                 dietaActual.setFechaInicial(fechai);
                 Data_Dieta.modificarDieta(dietaActual);
-                JOptionPane.showMessageDialog(null, "Se guardaron las modificaciones al dieta Correctamente");
             }
             limpiarCampos();
         } catch (Exception e) {
@@ -341,6 +341,13 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtPesoInicial;
     private javax.swing.JTextField jtPesoObjetivo;
     // End of variables declaration//GEN-END:variables
+ private void cargarDatosPaciente(ArrayList<Paciente> listaPaci) {
+
+        listaPaci.forEach((p) -> {
+            jcbPacientes.addItem(p);
+        });
+        modeloTabla.addRow(new Object[]{paciente.getNombre(), paciente.getDni(), paciente.getDomicilio(), paciente.getTelefono(), paciente.getPesoActual(), paciente.getPesoDeseado()});
+    }
 
     private void cargarDatos(int idPaciente) {
         try {
@@ -351,27 +358,33 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                 jtPesoObjetivo.setText(String.valueOf(dietaActual.getPesoObjetivo()));
                 jtIdPlan.setText(String.valueOf(dietaActual.getIdDieta()));
                 //no se si funciona 
-                
+
                 LocalDate fi = dietaActual.getFechaInicial();
                 java.util.Date datei = java.util.Date.from(fi.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 jFechaInicial.setDate(datei);
                 LocalDate ff = dietaActual.getFechaInicial();
                 java.util.Date datef = java.util.Date.from(ff.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 jFechaInicial.setDate(datef);
-                
+
                 jEstado.setSelected(true);
                 jEstado.setEnabled(true);
+            }else{
+                jtNombrePlan.setEnabled(true);
+                jEstado.setSelected(false);
+                jEstado.setEnabled(true);
             }
+           
         } catch (Exception e) {
         }
     }
+
     private void limpiarCampos() {
         jtNombrePlan.setText("");
         jtIdPlan.setText("");
         jtPesoObjetivo.setText("");
         jtPesoInicial.setText("");
-        jFechaFinal.setDate(new Date());    
-        jFechaInicial.setDate(new Date());
+        jFechaFinal.setDate(null);
+        jFechaInicial.setDate(null);
         jEstado.setSelected(true);
     }
 }
