@@ -187,18 +187,12 @@ public class Data_Pacientes {
             while (rs.next()) {
                 Paciente paciente = new Paciente();
                 paciente.setIdPaciente(rs.getInt("idPaciente"));
-                paciente.setDni(rs.getInt("dni"));
                 paciente.setNombre(rs.getString("nombre"));
                 paciente.setApellido(rs.getString("apellido"));
                 paciente.setGenero(rs.getString("genero"));
                 paciente.setEdad(rs.getInt("edad"));
-                paciente.setAltura(rs.getFloat("altura"));
                 paciente.setPesoActual(rs.getDouble("pesoActual"));
                 paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
-                paciente.setDomicilio(rs.getString("domicilio"));
-                paciente.setTelefono(rs.getInt("telefono"));
-                paciente.setMail(rs.getString("mail"));
-                paciente.setEstado(rs.getBoolean("estado"));               
                 paciente.setFechaFin(rs.getDate("fechaFinal").toLocalDate());
                 listaPaci.add(paciente);
             }
@@ -211,4 +205,38 @@ public class Data_Pacientes {
         return (ArrayList<Paciente>) listaPaci;
     }
 
+    public ArrayList<Paciente> listarPacientesfiltro() {
+        List<Paciente> listaPacientexfiltro = new ArrayList<>();
+
+        String sql = "SELECT d.fechaFinal, p.*\n"
+                + "FROM dieta AS d\n"
+                + "INNER JOIN paciente AS p ON d.paciente = p.idPaciente\n"
+                + "WHERE p.estado = 1\n"
+                + "      AND p.pesoObjetivo > p.pesoActual\n"
+                + "      AND d.fechaFinal < CURDATE();";
+        PreparedStatement ps = null;
+
+        try {
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Paciente paciente = new Paciente();
+                paciente.setIdPaciente(rs.getInt("idPaciente"));
+                paciente.setNombre(rs.getString("nombre"));
+                paciente.setApellido(rs.getString("apellido"));
+                paciente.setEdad(rs.getInt("edad"));
+                paciente.setPesoActual(rs.getDouble("pesoActual"));
+                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
+                paciente.setFechaFin(rs.getDate("fechaFinal").toLocalDate());
+                listaPacientexfiltro.add(paciente);
+            }
+            ps.close();
+            JOptionPane.showMessageDialog(null, "Exito al encontrar pacientes");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes" + ex);
+        }
+        return (ArrayList<Paciente>) listaPacientexfiltro;
+    }
 }

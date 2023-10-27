@@ -1,4 +1,3 @@
-
 package proyectofinalnutricionistagrupo93.Vistas;
 
 import java.util.ArrayList;
@@ -7,19 +6,19 @@ import javax.swing.table.DefaultTableModel;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
-
 public class Lista_De_Pacientes extends javax.swing.JInternalFrame {
-private DefaultTableModel modeloTabla = new DefaultTableModel();
-protected Paciente comida = new Paciente();
+
+    private DefaultTableModel modeloTabla = new DefaultTableModel();
+    protected Paciente comida = new Paciente();
     protected Data_Pacientes Data_Pac = new Data_Pacientes();
-    protected ArrayList<Paciente> listaPaciente= new ArrayList<>();
+    protected ArrayList<Paciente> listaPaciente = new ArrayList<>();
+
     public Lista_De_Pacientes() {
         initComponents();
         List<Paciente> listaPaciente = Data_Pac.listarPacientes();
         crearTabla();
         cargarPacientes();
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -41,6 +40,11 @@ protected Paciente comida = new Paciente();
         jLabel14.setText("FILTRO");
 
         jCheckBox1.setText("Pacientes que no han llegado al peso buscado");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jtTablaComida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -113,8 +117,14 @@ protected Paciente comida = new Paciente();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jSalirActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        borratabla();
+        cargarPacientesXfiltro();
+        
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -130,15 +140,27 @@ protected Paciente comida = new Paciente();
         modeloTabla.addColumn("Id Paciente");
         modeloTabla.addColumn("Nombre");
         modeloTabla.addColumn("Apellido");
+        modeloTabla.addColumn("Edad");
         modeloTabla.addColumn("Peso Actual");
         modeloTabla.addColumn("Peso Objetivo");
         modeloTabla.addColumn("Fecha Final");
         jtTablaComida.setModel(modeloTabla);
     }
+
     private void cargarPacientes() {
-       listaPaciente = (ArrayList) Data_Pac.listarPacientes();
+        listaPaciente = (ArrayList) Data_Pac.listarPacientes();
         for (Paciente p : listaPaciente) {
-            modeloTabla.addRow(new Object[]{p.getIdPaciente(),p.getNombre(),p.getApellido(),p.getPesoActual(),p.getPesoDeseado(),p.getFechaFin()});
+            modeloTabla.addRow(new Object[]{p.getIdPaciente(), p.getNombre(), p.getApellido(),p.getEdad(), p.getPesoActual(), p.getPesoDeseado(), p.getFechaFin()});
         }
+    }
+    private void cargarPacientesXfiltro() {
+        listaPaciente = (ArrayList) Data_Pac.listarPacientesfiltro();
+        for (Paciente p : listaPaciente) {
+            modeloTabla.addRow(new Object[]{p.getIdPaciente(), p.getNombre(), p.getApellido(),p.getEdad(), p.getPesoActual(), p.getPesoDeseado(), p.getFechaFin()});
+        }
+    }
+    private void borratabla() {
+        DefaultTableModel model = (DefaultTableModel) jtTablaComida.getModel();
+        model.setRowCount(0);
     }
 }
