@@ -58,7 +58,7 @@ public class Data_Comidas {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo modificar su comida."+e);
+            JOptionPane.showMessageDialog(null, "No se pudo modificar su comida.");
         }
     }
 
@@ -161,7 +161,7 @@ public class Data_Comidas {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas... " + ex);
+            JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas... ");
         }
         return (ArrayList<Comida>)comidas;
     }
@@ -188,7 +188,7 @@ public class Data_Comidas {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas... " + ex);
+            JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas... ");
         }
         return (ArrayList<Comida>)comidas;
     }

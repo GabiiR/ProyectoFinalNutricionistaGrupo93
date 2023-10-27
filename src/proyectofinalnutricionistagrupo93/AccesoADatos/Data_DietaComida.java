@@ -41,7 +41,7 @@ public class Data_DietaComida {
             ps.close();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al agregar Dieta." + e);
+            JOptionPane.showMessageDialog(null, "Error al agregar Dieta.");
 
         }
     }
@@ -60,11 +60,11 @@ public class Data_DietaComida {
             int resultado = ps.executeUpdate(); //Ejecuta consulta "UPDATE".
             if (resultado > 0) {
                 
-                JOptionPane.showMessageDialog(null, "Se ha actualizado la Dieta. " + resultado );
+                JOptionPane.showMessageDialog(null, "Se ha actualizado la Dieta. ");
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar la Dieta." + e );
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la Dieta.");
         }
     }
 

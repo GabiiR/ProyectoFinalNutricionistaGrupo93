@@ -216,7 +216,7 @@ public class Data_Dieta {
             rs.close();
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Data_Dieta.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(null, "No se creo la lista");
         }
         return lista;
     }

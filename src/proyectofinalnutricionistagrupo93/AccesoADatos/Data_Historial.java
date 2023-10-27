@@ -37,7 +37,7 @@ public class Data_Historial{
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Historial no agregado"+ ex);
+            JOptionPane.showMessageDialog(null, "Historial no agregado");
         }
     }
 
@@ -55,7 +55,7 @@ public class Data_Historial{
             JOptionPane.showMessageDialog(null, "historial modificado con exito.");
             
         } catch (SQLException ex) {
-            Logger.getLogger(Data_Historial.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se modifico el Historial.");
         }
     }
 
@@ -69,7 +69,7 @@ public class Data_Historial{
             JOptionPane.showMessageDialog(null, "Historial eliminado con exito.");
             
         } catch (SQLException ex) {
-            Logger.getLogger(Data_Historial.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se elimino el Historial.");
         }
     }
     

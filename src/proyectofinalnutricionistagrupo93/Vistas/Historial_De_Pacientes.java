@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package proyectofinalnutricionistagrupo93.Vistas;
 
 import java.util.ArrayList;
@@ -32,6 +28,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
         List<Paciente> listaPaci = Data_Pac.listarPacientes();
         crearTabla();
         cargarDatos((ArrayList<Paciente>) listaPaci);
+        borrarFila();
 
     }
 
@@ -109,7 +106,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbSeleccionarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSeleccionarPacienteActionPerformed
-
+        borrarFila();
         int filaseleccionada = jcbSeleccionarPaciente.getSelectedIndex();// Selecciona la 
         if (filaseleccionada != -1) {
             Paciente p = (Paciente) jcbSeleccionarPaciente.getSelectedItem();
@@ -130,9 +127,6 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
     private void crearTabla() {
         modeloTabla.addColumn("idHistorial");
         modeloTabla.addColumn("idPaciente");
-
-        //modeloTabla.addColumn("Domicilio");
-        //modeloTabla.addColumn("Telefono");
         modeloTabla.addColumn("Peso actual");
         modeloTabla.addColumn("fecha Registro");
         jtTablaPac.setModel(modeloTabla);
@@ -152,8 +146,8 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
             modeloTabla.removeRow(i);
         }
     }
-
-    //modeloTabla.removeRow(i);
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<Paciente> jcbSeleccionarPaciente;
