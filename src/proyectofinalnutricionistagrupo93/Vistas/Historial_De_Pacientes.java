@@ -51,6 +51,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
         setResizable(true);
         setTitle("Historial de pacientes");
 

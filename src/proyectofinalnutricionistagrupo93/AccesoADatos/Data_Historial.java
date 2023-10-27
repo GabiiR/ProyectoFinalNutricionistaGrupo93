@@ -22,24 +22,22 @@ public class Data_Historial{
     }
     
    public void cargarVisita(Historial historial) {
-        String sql = "INSERT INTO historial (idPaciente, peso, fecha, estado) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO historial (idPaciente, peso, fecha, estado) VALUES (?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql, org.mariadb.jdbc.Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, historial.getIdPaciente());
             ps.setDouble(2, historial.getPesoControl());
             ps.setDate(3, Date.valueOf(historial.getFechaRegistro()));
-            ps.setBoolean(5, historial.isEstado());
+            ps.setBoolean(4, historial.isEstado());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 historial.setIdHistorial(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Historial agregado con exito.");
-            
             }
-            rs.close();
             ps.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Data_Historial.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Historial no agregado"+ ex);
         }
     }
 

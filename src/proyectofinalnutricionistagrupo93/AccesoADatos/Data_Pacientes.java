@@ -75,10 +75,8 @@ public class Data_Pacientes {
             ps.setInt(6, paciente.getDni());
 
             int resultado = ps.executeUpdate(); //Ejecuta consulta "UPDATE".
-            //ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
-
+            
             if (resultado > 0) {
-                //paciente.setIdPaciente(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Se ha actualizado la información del paciente.");
             }
             ps.close();
@@ -107,8 +105,7 @@ public class Data_Pacientes {
         }
     }
 
-    ;
-    
+ 
     public Paciente buscarPaciente(int dni) {
         Paciente paciente = null;
         try {
@@ -136,8 +133,7 @@ public class Data_Pacientes {
         return paciente;
     }
 
-    ;
-    
+
      public Paciente buscarPacienteID(int id) {
         Paciente paciente = null;
         try {
@@ -192,7 +188,7 @@ public class Data_Pacientes {
                 paciente.setGenero(rs.getString("genero"));
                 paciente.setEdad(rs.getInt("edad"));
                 paciente.setPesoActual(rs.getDouble("pesoActual"));
-                paciente.setPesoDeseado(rs.getDouble("pesoObjetivo"));
+                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
                 paciente.setFechaFin(rs.getDate("fechaFinal").toLocalDate());
                 listaPaci.add(paciente);
             }
@@ -210,7 +206,7 @@ public class Data_Pacientes {
                 + "FROM dieta AS d\n"
                 + "INNER JOIN paciente AS p ON d.paciente = p.idPaciente\n"
                 + "WHERE p.estado = 1\n"
-                + "      AND p.pesoObjetivo > p.pesoActual\n"
+                + "      AND p.pesoDeseado > p.pesoActual\n"
                 + "      AND d.fechaFinal < CURDATE();";
         PreparedStatement ps = null;
 
@@ -225,7 +221,7 @@ public class Data_Pacientes {
                 paciente.setApellido(rs.getString("apellido"));
                 paciente.setEdad(rs.getInt("edad"));
                 paciente.setPesoActual(rs.getDouble("pesoActual"));
-                paciente.setPesoDeseado(rs.getDouble("pesoObjetivo"));
+                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
                 paciente.setFechaFin(rs.getDate("fechaFinal").toLocalDate());
                 listaPacientexfiltro.add(paciente);
             }

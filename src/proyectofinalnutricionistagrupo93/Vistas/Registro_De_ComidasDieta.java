@@ -66,6 +66,10 @@ public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
         jSalir = new javax.swing.JButton();
         jbLimpiar = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Registro De Comidas Por Dieta");
 
         jlDietas.setText("Nombre de la dieta :");
@@ -211,8 +215,8 @@ public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
             int dietaIndex = jcbDietas.getSelectedIndex();
             Dieta dietaSeleccionado = (Dieta) jcbDietas.getItemAt(dietaIndex);
             int comidandex = jcbComida.getSelectedIndex();
-            Comida desayunoSeleccionado = (Comida) jcbComida.getItemAt(comidandex);
-            int horarioIndex = jcbDietas.getSelectedIndex();
+            Comida ComidaSeleccionado = (Comida) jcbComida.getItemAt(comidandex);
+            int horarioIndex = jcbHorarios.getSelectedIndex();
             Horario horarioSeleccionado = (Horario) jcbHorarios.getItemAt(horarioIndex);
             
             Integer porcion = Integer.parseInt(jtPorcion.getText());
@@ -224,7 +228,7 @@ public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
                 return;
             }
             if (dietaComidaActual == null) {
-                dietaComidaActual = new DietaComida(desayunoSeleccionado.getIdComida(), dietaSeleccionado.getIdDieta(), horarioSeleccionado, porcion, estado);
+                dietaComidaActual = new DietaComida(ComidaSeleccionado.getIdComida(), dietaSeleccionado.getIdDieta(), horarioSeleccionado, porcion, estado);
                 Data_DietaComida.agregarDietaComida(dietaComidaActual);
             }else {
             //modificar dietacomida

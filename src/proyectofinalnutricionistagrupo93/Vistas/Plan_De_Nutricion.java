@@ -72,6 +72,8 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Plan de Nutricion");
 
         jLabel1.setText("Nombre del Plan:");

@@ -34,8 +34,9 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jmbPacientes = new javax.swing.JMenu();
         jmiPacientesOpc1 = new javax.swing.JMenuItem();
-        jmiPacientesOpc2 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jmiPacientesOpc2 = new javax.swing.JMenuItem();
         jmbComidas = new javax.swing.JMenu();
         jmiComidasOpc1 = new javax.swing.JMenuItem();
         jmListaComidas = new javax.swing.JMenuItem();
@@ -75,13 +76,13 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         });
         jmbPacientes.add(jmiPacientesOpc1);
 
-        jmiPacientesOpc2.setText("Historial de pacientes");
-        jmiPacientesOpc2.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem2.setText("Registro Historial");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiPacientesOpc2ActionPerformed(evt);
+                jMenuItem2ActionPerformed(evt);
             }
         });
-        jmbPacientes.add(jmiPacientesOpc2);
+        jmbPacientes.add(jMenuItem2);
 
         jMenuItem1.setText("Lista de pacientes");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +91,14 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
             }
         });
         jmbPacientes.add(jMenuItem1);
+
+        jmiPacientesOpc2.setText("Historial de pacientes");
+        jmiPacientesOpc2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPacientesOpc2ActionPerformed(evt);
+            }
+        });
+        jmbPacientes.add(jmiPacientesOpc2);
 
         jMenuBar1.add(jmbPacientes);
 
@@ -228,6 +237,12 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         LDP.show();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+      Registro_De_Historial RDH = new Registro_De_Historial();
+      jDesktopPane1.add(RDH);
+        RDH.show();
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -266,6 +281,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jmListaComidas;
     private javax.swing.JMenu jmbComidas;
     private javax.swing.JMenu jmbDietas;

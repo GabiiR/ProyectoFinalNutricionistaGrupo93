@@ -54,6 +54,12 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
         JElimina = new javax.swing.JButton();
         jModificar = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+        setTitle("Lista de comidas de una dieta");
+
         jLabel1.setText("Seleccione una dieta :");
 
         jcbDieta.addActionListener(new java.awt.event.ActionListener() {
@@ -73,7 +79,6 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTabla.setEnabled(false);
         jScrollPane1.setViewportView(jTabla);
 
         jSalir.setText("Salir");
@@ -143,7 +148,8 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jSalirActionPerformed
 
     private void jcbDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDietaActionPerformed
-        // TODO add your handling code here:
+         Dieta d = (Dieta) jcbDieta.getSelectedItem();
+         cargarComidas(d.getIdDieta());
     }//GEN-LAST:event_jcbDietaActionPerformed
 
     private void JEliminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminaActionPerformed

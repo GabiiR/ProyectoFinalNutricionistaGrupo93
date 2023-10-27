@@ -41,6 +41,7 @@ public class Registro_De_Historial extends javax.swing.JInternalFrame {
         jGuardar = new javax.swing.JButton();
         jSalir = new javax.swing.JButton();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -162,6 +163,7 @@ public class Registro_De_Historial extends javax.swing.JInternalFrame {
             historialactual = new Historial(pacienteSeleccionado.getIdPaciente(),peso,fecha,true);
             Data_Historial.cargarVisita(historialactual);
             Data_Pac.modificarPesoPaciente(peso, pacienteSeleccionado.getIdPaciente());
+              JOptionPane.showMessageDialog(null, "Historial Creado");
             }else{
                 JOptionPane.showMessageDialog(null, "Debe ingresar un peso");
             }

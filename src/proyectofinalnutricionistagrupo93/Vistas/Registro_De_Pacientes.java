@@ -57,6 +57,8 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Registro de pacientes");
 
         jlNombreCompleto.setText("Nombre Completo :");
@@ -302,10 +304,12 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                 jtPesoDeseado.setText(String.valueOf(pacienteActual.getPesoDeseado()));
                 jrbEstado.setSelected(true);
                 jrbEstado.setEnabled(true);
+                jbAgregarPaciente.setEnabled(false);
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Su DNI no fue ingresado correctamente\n o esta escrito en un formato incorrecto.\n Por favor, vuelva a ingresarlo de vuelta.");
         }
+        
     }//GEN-LAST:event_jbBuscarPacienteActionPerformed
 
     private void jbModificarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarPacienteActionPerformed
@@ -323,7 +327,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                     Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText()); //Obtiene un telefono (int).
                     
                     Double pesoActual = Double.parseDouble(jtPesoActual.getText());
-                    Double pesoDeseado = Double.parseDouble(jtPesoActual.getText());
+                    Double pesoDeseado = Double.parseDouble(jtPesoDeseado.getText());
 
                     //Comprueba campos vacios:
                     if (nombre.isEmpty() || domicilio.isEmpty()) { //Verifica si hay espacios vacios en [Nombre] y [Domicilio].
@@ -366,7 +370,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                 Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText()); //Obtiene un telefono (int).
                 
                 Double pesoActual = Double.parseDouble(jtPesoActual.getText());
-                Double pesoDeseado = Double.parseDouble(jtPesoActual.getText());
+                Double pesoDeseado = Double.parseDouble(jtPesoDeseado.getText());
 
                 //Comprueba campos vacios:
                 if (nombre.isEmpty() || domicilio.isEmpty()) { //Verifica si hay espacios vacios en [Nombre] y [Domicilio].

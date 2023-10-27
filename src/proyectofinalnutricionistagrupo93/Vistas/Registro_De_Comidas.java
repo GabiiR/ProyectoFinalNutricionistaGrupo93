@@ -48,6 +48,11 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         jbBuscarComida = new javax.swing.JButton();
         jbSalir1 = new javax.swing.JButton();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
+
         jLabel1.setText("Registro de Comidas:");
 
         jLabel2.setText("Nombre:");
@@ -70,6 +75,7 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         jrbEstado.setEnabled(false);
 
         jbAgregar.setText("Agregar");
+        jbAgregar.setEnabled(false);
         jbAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAgregarActionPerformed(evt);
@@ -253,8 +259,12 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
                 jrbEstado.setEnabled(true);
                 
                 jbModificar.setEnabled(true);
+                jbAgregar.setEnabled(false);
                 jbBorrar.setEnabled(true);
                 jtNombre.setEnabled(false);
+            }else{
+                jtNombre.setEnabled(true);
+                jbAgregar.setEnabled(true);
             }
 
         } catch (Exception e) {
@@ -361,5 +371,11 @@ public class Registro_De_Comidas extends javax.swing.JInternalFrame {
         jtDetalle.setText("");
         jtIDcomida.setText("");
         jrbEstado.setSelected(false);
+        jtNombre.setEnabled(true);
+        jtCantCalorias.setEnabled(false);
+        jtDetalle.setEnabled(false);
+        jbAgregar.setEnabled(false);
+        jbBorrar.setEnabled(false);
+        jbModificar.setEnabled(false);
     }
 }

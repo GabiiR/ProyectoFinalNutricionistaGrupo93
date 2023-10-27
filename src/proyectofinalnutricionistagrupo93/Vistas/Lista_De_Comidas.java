@@ -46,6 +46,8 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         setTitle("Lista de comidas");
 
         jtTablaComida.setModel(new javax.swing.table.DefaultTableModel(

@@ -30,19 +30,18 @@ public class Data_DietaComida {
             ps.setString(3, String.valueOf(dieta.getHorario()));
             ps.setString(4, String.valueOf(dieta.getPorcion()));
             ps.setBoolean(5, dieta.isEstado());
-
             ps.executeUpdate(); //Ejecuta consulta "INSERT INTO".
 
             ResultSet rs = ps.getGeneratedKeys(); //Almacena datos de la consulta.
 
             if (rs.next()) { //Verifica si todos los datos estan disponibles para crear la columna.
-                dieta.setIdDieta(rs.getInt(1));
+                dieta.setIdDietaComida(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Dieta agregado con exito.");
             }
             ps.close();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al agregar Dieta.");
+            JOptionPane.showMessageDialog(null, "Error al agregar Dieta." + e);
 
         }
     }
