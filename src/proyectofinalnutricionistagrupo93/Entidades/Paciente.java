@@ -163,7 +163,7 @@ public class Paciente {
     }
     @Override
     public String toString() {
-        return getNombre() +", "+ getDni() +"-"+ isEstado();
+        return getNombre() +", "+ getDni();
     }
 
 
