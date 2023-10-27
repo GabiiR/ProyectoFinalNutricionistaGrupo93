@@ -175,10 +175,10 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jSalirActionPerformed
     private void crearTabla() {
-        modeloTabla.addColumn("");
-        modeloTabla.addColumn("");
-        modeloTabla.addColumn("");
-        modeloTabla.addColumn("");
+        modeloTabla.addColumn("IdComida");
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Detalle");
+        modeloTabla.addColumn("Cantidad De Calorias");
         jtTablaComida.setModel(modeloTabla);
     }
 

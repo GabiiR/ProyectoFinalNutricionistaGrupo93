@@ -1,5 +1,7 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
+import java.time.LocalDate;
+
 public class Paciente {
     private int idPaciente; //ID.
     
@@ -15,6 +17,7 @@ public class Paciente {
     private double pesoActual;
     private double pesoDeseado;
     private boolean estado = false;
+    private LocalDate fechaFin; 
 
     public Paciente() {
     }
@@ -149,9 +152,19 @@ public class Paciente {
     public void setMail(String mail) {
         this.mail = mail;
     }
-    
+        
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+   
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
+    }
     @Override
     public String toString() {
         return getNombre() +", "+ getDni() +"-"+ isEstado();
     }
+
+
 }

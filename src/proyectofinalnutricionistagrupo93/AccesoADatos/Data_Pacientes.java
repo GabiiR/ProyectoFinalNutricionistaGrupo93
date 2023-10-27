@@ -45,15 +45,15 @@ public class Data_Pacientes {
         }
     }
 
-    public void modificarPesoPaciente(double peso, int id){
+    public void modificarPesoPaciente(double peso, int id) {
         try {
             String sql = "UPDATE paciente SET pesoActual = ? WHERE idPaciente = ? AND estado = 1";
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setDouble(1, peso);
             ps.setInt(2, id);
-            int resultado = ps.executeUpdate(); 
-             if (resultado > 0) {
+            int resultado = ps.executeUpdate();
+            if (resultado > 0) {
                 JOptionPane.showMessageDialog(null, "Se ha actualizado la información de peso del paciente.");
             }
             ps.close();
@@ -61,6 +61,7 @@ public class Data_Pacientes {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente.");
         }
     }
+
     public void modificarPaciente(Paciente paciente) {
         try {
             String sql = "UPDATE paciente SET nombre = ?, domicilio = ?, telefono = ?, pesoActual = ?, pesoDeseado = ? WHERE dni = ? AND estado = 1";
@@ -85,7 +86,7 @@ public class Data_Pacientes {
             JOptionPane.showMessageDialog(null, "No se pudo actualizar la información del paciente.");
         }
     }
-    
+
     public void eliminarPaciente(int dni) {
         try {
             String sql = "UPDATE paciente SET estado = ? WHERE dni = ? AND estado = 1";
@@ -173,7 +174,10 @@ public class Data_Pacientes {
     public ArrayList<Paciente> listarPacientes() {
         List<Paciente> listaPaci = new ArrayList<>();
 
-        String sql = "SELECT * from paciente";
+        String sql = "SELECT d.fechaFinal, p.*\n"
+                + "FROM dieta AS d\n"
+                + "INNER JOIN paciente AS p ON d.paciente = p.idPaciente\n"
+                + "WHERE p.estado = 1;";
         PreparedStatement ps = null;
 
         try {
@@ -194,7 +198,8 @@ public class Data_Pacientes {
                 paciente.setDomicilio(rs.getString("domicilio"));
                 paciente.setTelefono(rs.getInt("telefono"));
                 paciente.setMail(rs.getString("mail"));
-                paciente.setEstado(rs.getBoolean("estado"));
+                paciente.setEstado(rs.getBoolean("estado"));               
+                paciente.setFechaFin(rs.getDate("fechaFinal").toLocalDate());
                 listaPaci.add(paciente);
             }
             ps.close();

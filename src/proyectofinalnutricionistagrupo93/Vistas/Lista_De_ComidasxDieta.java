@@ -15,10 +15,7 @@ import proyectofinalnutricionistagrupo93.Entidades.Comida;
 import proyectofinalnutricionistagrupo93.Entidades.Dieta;
 import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
 
-/**
- *
- * @author Zennon
- */
+
 public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modeloTabla = new DefaultTableModel();
