@@ -53,7 +53,6 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
         jTabla = new javax.swing.JTable();
         jSalir = new javax.swing.JButton();
         JElimina = new javax.swing.JButton();
-        jModificar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -94,6 +93,7 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTabla.setEnabled(false);
         jScrollPane1.setViewportView(jTabla);
 
         jSalir.setText("Salir");
@@ -110,25 +110,17 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
             }
         });
 
-        jModificar.setText("Modificar");
-        jModificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jModificarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(6, 6, 6)
                         .addComponent(JElimina)
-                        .addGap(63, 63, 63)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
@@ -150,8 +142,7 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jSalir)
-                    .addComponent(JElimina)
-                    .addComponent(jModificar))
+                    .addComponent(JElimina))
                 .addContainerGap())
         );
 
@@ -174,25 +165,8 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
 
             Data_DietaComida.eliminarDietaComida(idregistro);
             borrarFila();
-        } else {
-
         }
     }//GEN-LAST:event_JEliminaActionPerformed
-
-    private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
-        int filaseleccionada = jTabla.getSelectedRow();
-        if (filaseleccionada != -1) {
-            int idregistro = (Integer) modeloTabla.getValueAt(filaseleccionada, 0);
-            Integer idComida = (Integer) modeloTabla.getValueAt(filaseleccionada, 1); // Mantén el valor como Integer
-            String comida = (String) modeloTabla.getValueAt(filaseleccionada, 2);
-            int porcion = (Integer) modeloTabla.getValueAt(filaseleccionada, 4);
-
-            Dieta dieta = (Dieta) jcbDieta.getSelectedItem();
-
-            Data_DietaComida.modificarDietaComida(idregistro, idComida, porcion, dieta.getIdDieta());
-            borrarFila();
-        }
-    }//GEN-LAST:event_jModificarActionPerformed
 
     public void cargarComidas(int idDieta) {
         borrarFila();
@@ -207,7 +181,6 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JElimina;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JButton jModificar;
     private javax.swing.JButton jSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTabla;
