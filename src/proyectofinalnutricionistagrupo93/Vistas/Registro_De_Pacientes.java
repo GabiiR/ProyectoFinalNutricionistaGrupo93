@@ -5,10 +5,13 @@
  */
 package proyectofinalnutricionistagrupo93.Vistas;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JOptionPane;
+import proyectofinalnutricionistagrupo93.AccesoADatos.Conexion;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Paciente;
 
@@ -240,42 +243,104 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbSalirRegistroPacientesActionPerformed
 
     private void jbAgregarPacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAgregarPacienteActionPerformed
+        
+        //1. Comprueba campos vacios:
+        if (jtNombrePaciente.getText().isEmpty() || jtDniPaciente.getText().isEmpty() || jtDomicilioPaciente.getText().isEmpty() || jlTelefono.getText().isEmpty() || jtPesoActual.getText().isEmpty() || jtPesoDeseado.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
+            return;
+        } else {
+            try {
+                String nombreCompleto = jtNombrePaciente.getText(); //Obtiene nombre completo del paciente.
+                Integer dni = Integer.parseInt(jtDniPaciente.getText()); //Captura solo enteros. Obtiene DNi del paciente.
+
+                String domicilio = jtDomicilioPaciente.getText(); //Obtiene domicilio del paciente.
+                Integer celular = Integer.parseInt(jtTelefonoPaciente.getText()); //Obtiene celular del paciente.
+
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+                Double pesoActual = Double.parseDouble(jtPesoActual.getText()); //Obtiene peso actual del paciente.
+                Double pesoDeseado = Double.parseDouble(jtPesoDeseado.getText()); //Obtiene peso deseado del paciente.
+
+                //2. Comprueba digitos del Dni:
+                if (dni < 1000000 || dni > 99999999) { //7 u 8 digitos. Comprueba digitos.
+                    JOptionPane.showMessageDialog(this, "Por favor, ingrese un número de DNI entre 7 u 8 digitos.");
+                    return;
+                } else {
+                    try {
+                        Connection con = Conexion.getConexion();
+                        String consulta = "SELECT * FROM paciente WHERE dni = ?";
+                        PreparedStatement ps = con.prepareStatement(consulta);
+                        ps.setInt(1, dni);
+
+                        ResultSet rs = ps.executeQuery();
+
+                        if (rs.next()) {
+                            JOptionPane.showMessageDialog(this, "El DNI ya existe en la base de datos");
+                            return;
+                        } else {
+                            
+                            //3. SE AGREGA PACIENTE.
+                            if (pacienteActual == null) {
+                                boolean estado = true; //Paciente se transforma en activo.
+                                pacienteActual = new Paciente(nombreCompleto, dni, domicilio, celular, pesoActual, pesoDeseado, estado);
+                                Dat_Pac.agregarPaciente(pacienteActual);
+                            }
+
+                            //Si llega con exito hasta acá, agrega al paciente con exito a la DB.
+                            /*----------------------------------------------------------------*/
+                            //JOptionPane.showMessageDialog(this, "Se agrego al paciente correctamente.");
+                            limpiarCampos();
+                        }
+                        rs.close();
+                        ps.close();
+                        con.close();
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(this, "Ingrese un DNI correcto.");
+                    }
+                }
+                /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "Su DNI, telefono o peso no fue ingresado correctamente\n o esta escrito en un formato incorrecto.\n Por favor, vuelva a ingresar sus datos.");
+            }
+        }
+        
+        /*
         try {
             String nombre = jtNombrePaciente.getText();
             Integer dni = Integer.parseInt(jtDniPaciente.getText()); //Captura solo enteros.
-            
+
             //Comprueba digitos del Dni:
             if (dni < 1000000 || dni > 99999999) { //7 u 8 digitos.
                 JOptionPane.showMessageDialog(this, "Por favor, ingrese un número de DNI correcto.");
                 return;
             }
-            
+
             String domicilio = jtDomicilioPaciente.getText();
             Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText());
-            
+
             //Comprueba campos vacios:
-            if (nombre.isEmpty() || domicilio.isEmpty()){
+            if (nombre.isEmpty() || domicilio.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
                 return;
             }
-            
+
             Double pesoActual = Double.parseDouble(jtPesoActual.getText());
             Double pesoDeseado = Double.parseDouble(jtPesoActual.getText());
-            
+
             if (pacienteActual == null) {
                 boolean estado = true; //Paciente se transforma en activo.
                 pacienteActual = new Paciente(nombre, dni, domicilio, telefono, pesoActual, pesoDeseado, estado);
                 Dat_Pac.agregarPaciente(pacienteActual);
             }
-            
+
             //Si llega con exito hasta acá, agrega al paciente con exito a la DB.
-            /*----------------------------------------------------------------*/
-            
+            //----------------------------------------------------------------
             JOptionPane.showMessageDialog(this, "Se agrego al paciente correctamente.");
             limpiarCampos();
-            
+
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Su DNI, telefono o peso no fue ingresado correctamente\n o esta escrito en un formato incorrecto.n Por favor, vuelva a ingresar sus datos.");}
+            JOptionPane.showMessageDialog(this, "Su DNI, telefono o peso no fue ingresado correctamente\n o esta escrito en un formato incorrecto.n Por favor, vuelva a ingresar sus datos.");
+        }
+        */
     }//GEN-LAST:event_jbAgregarPacienteActionPerformed
 
     private void jtNombrePacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombrePacienteActionPerformed
