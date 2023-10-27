@@ -19,6 +19,7 @@ public class Data_Pacientes {
     }
 
     public void agregarPaciente(Paciente paciente) {
+        
         try {
             String sql = "INSERT INTO paciente (nombre, dni, domicilio, telefono, pesoActual, pesoDeseado, estado)" + "VALUES (?,?,?,?,?,?,?)"; //Plantilla DB.
 
