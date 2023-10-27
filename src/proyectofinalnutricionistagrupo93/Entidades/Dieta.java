@@ -105,7 +105,7 @@ public class Dieta {
 
     @Override
     public String toString() {
-        return "Dieta: " + nombre + ", paciente: " + paciente.getNombre();
+        return  nombre + ", Paciente: " + paciente.getNombre();
     }
 
 }

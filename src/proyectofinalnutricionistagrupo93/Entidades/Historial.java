@@ -78,7 +78,7 @@ public class Historial {
 
     @Override
     public String toString() {
-        return "Historial{" + "idPaciente=" + idPaciente + ", pesoControl=" + pesoControl + ", fechaRegistro=" + fechaRegistro + '}';
+        return "IdPaciente:" + idPaciente + ", Peso Control:" + pesoControl + ", Fecha Registro:" + fechaRegistro;
     }
 
    

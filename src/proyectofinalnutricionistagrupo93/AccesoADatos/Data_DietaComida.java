@@ -46,16 +46,16 @@ public class Data_DietaComida {
         }
     }
 
-    public void modificarDietaComida(int idregistro,int idcomida,int porcion, int iddieta) {
+    public void modificarDietaComida(DietaComida dieta) {
         try {
             String sql = "UPDATE dietacomida SET  idComida = ?, porcion=? WHERE idDieta = ? AND idDietaComida = ? AND estado = '1'";
 
             PreparedStatement ps = con.prepareStatement(sql);
             
-            ps.setInt(1, idcomida);            
-            ps.setInt(2, porcion);
-            ps.setInt(3, iddieta);
-            ps.setInt(4, idregistro);
+            ps.setInt(1, dieta.getIdComida());            
+            ps.setInt(2, dieta.getPorcion());
+            ps.setInt(3, dieta.getIdDieta());
+            ps.setInt(4, dieta.getIdDietaComida());
 
             int resultado = ps.executeUpdate(); //Ejecuta consulta "UPDATE".
             if (resultado > 0) {

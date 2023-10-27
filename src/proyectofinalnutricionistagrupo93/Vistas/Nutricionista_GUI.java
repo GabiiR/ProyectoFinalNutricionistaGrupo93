@@ -43,6 +43,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jmbDietas = new javax.swing.JMenu();
         jmiDietasPacientes = new javax.swing.JMenuItem();
         jMListaDietas = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMPlandeNutricion = new javax.swing.JMenuItem();
 
@@ -145,6 +146,14 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         });
         jmbDietas.add(jMListaDietas);
 
+        jMenuItem3.setText("Modificar Registros de la Dieta");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jmbDietas.add(jMenuItem3);
+
         jMenuBar1.add(jmbDietas);
 
         jMenu1.setText("Planes de Nutricion");
@@ -192,9 +201,9 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiPacientesOpc2ActionPerformed
 
     private void jmiComidasOpc1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiComidasOpc1ActionPerformed
-       Registro_De_Comidas RDC = new Registro_De_Comidas();
-       jDesktopPane1.add(RDC);
-       RDC.show();
+        Registro_De_Comidas RDC = new Registro_De_Comidas();
+        jDesktopPane1.add(RDC);
+        RDC.show();
     }//GEN-LAST:event_jmiComidasOpc1ActionPerformed
 
     private void jmListaComidasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmListaComidasActionPerformed
@@ -206,12 +215,12 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
 
     private void jmbDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmbDietasActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_jmbDietasActionPerformed
 
     private void jMListaDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMListaDietasActionPerformed
         // TODO add your handling code here:
-         Lista_De_ComidasxDieta LDD = new Lista_De_ComidasxDieta();
+        Lista_De_ComidasxDieta LDD = new Lista_De_ComidasxDieta();
         jDesktopPane1.add(LDD);
         LDD.show();
     }//GEN-LAST:event_jMListaDietasActionPerformed
@@ -238,10 +247,16 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-      Registro_De_Historial RDH = new Registro_De_Historial();
-      jDesktopPane1.add(RDH);
+        Registro_De_Historial RDH = new Registro_De_Historial();
+        jDesktopPane1.add(RDH);
         RDH.show();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        Modificar_Comida_de_Dieta MCD = new Modificar_Comida_de_Dieta();
+        jDesktopPane1.add(MCD);
+        MCD.show();
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -282,6 +297,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jmListaComidas;
     private javax.swing.JMenu jmbComidas;
     private javax.swing.JMenu jmbDietas;

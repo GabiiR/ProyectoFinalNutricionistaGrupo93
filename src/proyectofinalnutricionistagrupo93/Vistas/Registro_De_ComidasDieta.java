@@ -17,13 +17,8 @@ import proyectofinalnutricionistagrupo93.Entidades.Dieta;
 import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
 import proyectofinalnutricionistagrupo93.Entidades.Horario;
 
-/**
- *
- * @author Zennon
- */
 public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
 
-   
     protected Data_Dieta Data_Dieta = new Data_Dieta();
     protected ArrayList<Dieta> listaDieta = new ArrayList<>();
     protected Dieta dietaActual = null;
@@ -33,6 +28,7 @@ public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
     protected Data_DietaComida Data_DietaComida = new Data_DietaComida();
     protected DietaComida dietaComidaActual = null;
     protected ArrayList<Horario> listaHorarios = new ArrayList<>();
+
     /**
      * Creates new form Registro_De_ComidasDieta
      */
@@ -218,9 +214,9 @@ public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
             Comida ComidaSeleccionado = (Comida) jcbComida.getItemAt(comidandex);
             int horarioIndex = jcbHorarios.getSelectedIndex();
             Horario horarioSeleccionado = (Horario) jcbHorarios.getItemAt(horarioIndex);
-            
+
             Integer porcion = Integer.parseInt(jtPorcion.getText());
-           
+
             Boolean estado = true;
 
             if (porcion == null) {
@@ -230,13 +226,11 @@ public class Registro_De_ComidasDieta extends javax.swing.JInternalFrame {
             if (dietaComidaActual == null) {
                 dietaComidaActual = new DietaComida(ComidaSeleccionado.getIdComida(), dietaSeleccionado.getIdDieta(), horarioSeleccionado, porcion, estado);
                 Data_DietaComida.agregarDietaComida(dietaComidaActual);
-            }else {
-            //modificar dietacomida
             }
 
         } catch (Exception e) {
-JOptionPane.showMessageDialog(null, "No puede agregar nueva DietaComida.");
-                
+            JOptionPane.showMessageDialog(null, "No puede agregar nueva DietaComida.");
+
         }
 
     }//GEN-LAST:event_jAgregarComidasActionPerformed
@@ -278,12 +272,12 @@ JOptionPane.showMessageDialog(null, "No puede agregar nueva DietaComida.");
             jcbComida.addItem(c);
         });
     }
-       private void cargarDatosHorario() {
-         for (Horario aux : Horario.values()) {
+
+    private void cargarDatosHorario() {
+        for (Horario aux : Horario.values()) {
             jcbHorarios.addItem(aux);
         }
     }
-    
 
     private void limpiarCampos() {
         jtPorcion.setText("");
