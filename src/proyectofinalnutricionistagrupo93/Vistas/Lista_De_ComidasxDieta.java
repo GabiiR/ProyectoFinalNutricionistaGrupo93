@@ -15,7 +15,6 @@ import proyectofinalnutricionistagrupo93.Entidades.Comida;
 import proyectofinalnutricionistagrupo93.Entidades.Dieta;
 import proyectofinalnutricionistagrupo93.Entidades.DietaComida;
 
-
 public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modeloTabla = new DefaultTableModel();
@@ -26,7 +25,7 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
     protected Data_Comidas Data_Comida = new Data_Comidas();
     protected Comida comidaActual = null;
     protected Data_DietaComida Data_DietaComida = new Data_DietaComida();
-    
+
     /**
      * Creates new form Lista_De_ComidasxDieta
      */
@@ -35,6 +34,8 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
         List<Dieta> listaDieta = Data_Dieta.listaDietasActivas();
         cargarDatosDieta((ArrayList<Dieta>) listaDieta);
         crearTabla();
+        Dieta d = (Dieta) jcbDieta.getSelectedItem();
+        cargarComidas(d.getIdDieta());
     }
 
     /**
@@ -73,12 +74,26 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTabla);
 
         jSalir.setText("Salir");
@@ -148,45 +163,45 @@ public class Lista_De_ComidasxDieta extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jSalirActionPerformed
 
     private void jcbDietaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbDietaActionPerformed
-         Dieta d = (Dieta) jcbDieta.getSelectedItem();
-         cargarComidas(d.getIdDieta());
+        Dieta d = (Dieta) jcbDieta.getSelectedItem();
+        cargarComidas(d.getIdDieta());
     }//GEN-LAST:event_jcbDietaActionPerformed
 
     private void JEliminaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JEliminaActionPerformed
-       int filaseleccionada = jTabla.getSelectedRow();
-        if(filaseleccionada !=-1){
-            int idcomida = (Integer) modeloTabla.getValueAt(filaseleccionada,0);
-            
-            Data_DietaComida.eliminarDietaComida(idcomida);
+        int filaseleccionada = jTabla.getSelectedRow();
+        if (filaseleccionada != -1) {
+            int idregistro = (Integer) modeloTabla.getValueAt(filaseleccionada, 0);
+
+            Data_DietaComida.eliminarDietaComida(idregistro);
             borrarFila();
-        }else{
-            
+        } else {
+
         }
     }//GEN-LAST:event_JEliminaActionPerformed
 
     private void jModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jModificarActionPerformed
         int filaseleccionada = jTabla.getSelectedRow();
-        if(filaseleccionada !=-1){
-            int idDieta = (Integer) modeloTabla.getValueAt(filaseleccionada,0);
-            String horario = (String) modeloTabla.getValueAt(filaseleccionada,0);
-            int porcion = (Integer) modeloTabla.getValueAt(filaseleccionada,0);
+        if (filaseleccionada != -1) {
+            int idregistro = (Integer) modeloTabla.getValueAt(filaseleccionada, 0);
+            Integer idComida = (Integer) modeloTabla.getValueAt(filaseleccionada, 1); // Mantén el valor como Integer
+            String comida = (String) modeloTabla.getValueAt(filaseleccionada, 2);
+            int porcion = (Integer) modeloTabla.getValueAt(filaseleccionada, 4);
+
             Dieta dieta = (Dieta) jcbDieta.getSelectedItem();
-            
-            Data_DietaComida.modificarDietaComida(idDieta,horario,porcion,dieta.getIdDieta());
+
+            Data_DietaComida.modificarDietaComida(idregistro, idComida, porcion, dieta.getIdDieta());
             borrarFila();
-        }else{
-            
         }
     }//GEN-LAST:event_jModificarActionPerformed
 
-     public void cargarComidas(int idDieta) {
+    public void cargarComidas(int idDieta) {
         borrarFila();
         Data_DietaComida dcdata = new Data_DietaComida();
         List<DietaComida> dietaComida = dcdata.listaComidaxdieta(idDieta);
         for (DietaComida comidas : dietaComida) {
-            modeloTabla.addRow(new Object[]{comidas.getIdComida(),comidas.getHorario(),comidas.getPorcion()});
+            modeloTabla.addRow(new Object[]{comidas.getIdDietaComida(), comidas.getIdComida(), comidas.getNombreComida(), comidas.getHorario(), comidas.getPorcion()});
         }
-    }                                                      
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -203,14 +218,18 @@ private void cargarDatosDieta(ArrayList<Dieta> listaDieta) {
             jcbDieta.addItem(d);
         });
     }
-private void crearTabla() {
+
+    private void crearTabla() {
+        modeloTabla.addColumn("IdRegistro");
         modeloTabla.addColumn("IdComida");
+        modeloTabla.addColumn("Comida");
         modeloTabla.addColumn("Horario");
         modeloTabla.addColumn("Porcion");
-               
+
         jTabla.setModel(modeloTabla);
     }
-   private void borrarFila() {
+
+    private void borrarFila() {
         int indice = modeloTabla.getRowCount() - 1;
         for (int i = indice; i >= 0; i--) {
             modeloTabla.removeRow(i);

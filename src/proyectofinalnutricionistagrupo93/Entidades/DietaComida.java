@@ -1,13 +1,14 @@
 package proyectofinalnutricionistagrupo93.Entidades;
 
 public class DietaComida {
+
     private int idDietaComida; //ID.  
     private int idComida;
+    private String nombreComida;
     private int idDieta;
     private Horario horario; //Horario.
     private int porcion;
     private boolean estado;
-    
 
     public DietaComida() {
     }
@@ -77,10 +78,17 @@ public class DietaComida {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return "DietaComida{" + "horario=" + horario + ", porcion=" + porcion + ", estado=" + estado + '}';
+    public String getNombreComida() {
+        return nombreComida;
     }
 
-   
+    public void setNombreComida(String nombreComida) {
+        this.nombreComida = nombreComida;
+    }
+
+    @Override
+    public String toString() {
+        return "DietaComida{" + "nombre=" + nombreComida + ", horario=" + horario + ", porcion=" + porcion + ", estado=" + estado + '}';
+    }
+
 }

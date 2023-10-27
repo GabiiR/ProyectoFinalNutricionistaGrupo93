@@ -46,23 +46,25 @@ public class Data_DietaComida {
         }
     }
 
-    public void modificarDietaComida(int idcomida, String horario, int porcion, int iddieta) {
+    public void modificarDietaComida(int idregistro,int idcomida,int porcion, int iddieta) {
         try {
-            String sql = "UPDATE dietacomida SET  idComida = ?, Horario= ?, Porcion=? WHERE IdDieta = ? AND Estado = 1";
+            String sql = "UPDATE dietacomida SET  idComida = ?, porcion=? WHERE idDieta = ? AND idDietaComida = ? AND estado = '1'";
 
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, idcomida);
-            ps.setString(2, horario);
-            ps.setInt(3, porcion);
-            ps.setInt(4, iddieta);
+            
+            ps.setInt(1, idcomida);            
+            ps.setInt(2, porcion);
+            ps.setInt(3, iddieta);
+            ps.setInt(4, idregistro);
 
             int resultado = ps.executeUpdate(); //Ejecuta consulta "UPDATE".
             if (resultado > 0) {
-                JOptionPane.showMessageDialog(null, "Se ha actualizado la Dieta.");
+                
+                JOptionPane.showMessageDialog(null, "Se ha actualizado la Dieta. " + resultado );
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar la Dieta.");
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la Dieta." + e );
         }
     }
 
@@ -125,7 +127,12 @@ public class Data_DietaComida {
         DietaComida comida = null;
 
         try {
-            String sql = "SELECT * FROM DietaComida WHERE idDieta=? AND estado = 1";
+            String sql = "SELECT dc.idComida, dc.horario, dc.porcion, dc.idDietaComida, c.nombre\n"
+                    + "FROM dietacomida AS dc\n"
+                    + "INNER JOIN comida AS c ON dc.idComida = c.idComida\n"
+                    + "WHERE dc.estado = 1\n"
+                    + "AND c.estado = 1\n"
+                    + "AND dc.idDieta = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idDieta);
             ResultSet rs = ps.executeQuery();
@@ -133,11 +140,11 @@ public class Data_DietaComida {
             while (rs.next()) {
                 comida = new DietaComida();
                 comida.setIdComida(rs.getInt("idComida"));
-                
-                String horarioString = rs.getString("horario"); 
+                comida.setIdDietaComida(rs.getInt("idDietaComida"));
+                String horarioString = rs.getString("horario");
                 Horario horarioEnum = convertirStringAHorario(horarioString);
                 comida.setHorario(horarioEnum);
-                
+                comida.setNombreComida(rs.getString("nombre"));
                 comida.setPorcion(rs.getInt("porcion"));
                 
                 comidasxdieta.add(comida);
@@ -148,27 +155,27 @@ public class Data_DietaComida {
         }
         return (ArrayList<DietaComida>) comidasxdieta;
     }
-    
+
     private Horario convertirStringAHorario(String horarioString) {
-    if (horarioString != null) {
-        switch (horarioString.toUpperCase()) {
-            case "DESAYUNO":
-                return Horario.DESAYUNO;
-            case "ALMUERZO":
-                return Horario.ALMUERZO;
-            case "MERIENDA":
-                return Horario.MERIENDA;
-            case "CENA":
-                return Horario.CENA;
-            case "SNACK":
-                return Horario.SNACK;
-            default:
-                // Manejar caso en el que el string no coincide con ningún valor válido
-                throw new IllegalArgumentException("Valor de horario no válido: " + horarioString);
+        if (horarioString != null) {
+            switch (horarioString.toUpperCase()) {
+                case "DESAYUNO":
+                    return Horario.DESAYUNO;
+                case "ALMUERZO":
+                    return Horario.ALMUERZO;
+                case "MERIENDA":
+                    return Horario.MERIENDA;
+                case "CENA":
+                    return Horario.CENA;
+                case "SNACK":
+                    return Horario.SNACK;
+                default:
+                    // Manejar caso en el que el string no coincide con ningún valor válido
+                    throw new IllegalArgumentException("Valor de horario no válido: " + horarioString);
+            }
+        } else {
+            // Manejar el caso en el que el valor es nulo (si es necesario)
+            return null; // O puedes asignar un valor predeterminado
         }
-    } else {
-        // Manejar el caso en el que el valor es nulo (si es necesario)
-        return null; // O puedes asignar un valor predeterminado
     }
-}
 }
