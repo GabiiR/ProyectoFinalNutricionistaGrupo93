@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-10-2023 a las 23:48:57
+-- Tiempo de generación: 27-10-2023 a las 20:32:11
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -31,22 +31,21 @@ USE `proyectofinalnutricionistagrupo93`;
 
 CREATE TABLE `comida` (
   `idComida` int(11) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `detalle` varchar(100) NOT NULL,
-  `cantCalorias` int(11) NOT NULL
+  `nombre` varchar(75) NOT NULL,
+  `detalle` varchar(75) DEFAULT NULL,
+  `cantCalorias` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `comida`
 --
 
-INSERT INTO `comida` (`idComida`, `nombre`, `detalle`, `cantCalorias`) VALUES
-(1, 'Té o café con leche descremada', 'La leche descremada es una fuente de calcio y proteínas.', 100),
-(2, 'Tostadas integrales', 'ricas en fibra y carbohidratos complejos', 75),
-(3, 'Ensalada de quinua', 'Fuente de proteínas, rica en fibra y baja en grasas', 200),
-(4, 'Frutas frescas', 'ricas en vitaminas, minerales, antioxidantes y fibra', 100),
-(5, 'Ensalada de Garbanzos', 'Aporta proteínas, fibra, vitaminas y minerales', 250),
-(6, 'Yogur natural', 'fuente de probióticos beneficiosos para la salud intestinal', 200);
+INSERT INTO `comida` (`idComida`, `nombre`, `detalle`, `cantCalorias`, `estado`) VALUES
+(1, 'tomate', 'vitamina c', 55, 1),
+(2, 'naranja', 'vit c', 3, 1),
+(3, 'banana', 'potasio', 180, 1),
+(4, 'LOPES', 'VIT', 60, 1);
 
 -- --------------------------------------------------------
 
@@ -56,20 +55,21 @@ INSERT INTO `comida` (`idComida`, `nombre`, `detalle`, `cantCalorias`) VALUES
 
 CREATE TABLE `dieta` (
   `idDieta` int(11) NOT NULL,
-  `nombre` varchar(30) NOT NULL,
-  `paciente` int(11) NOT NULL,
+  `nombre` varchar(75) NOT NULL,
+  `paciente` int(11) DEFAULT NULL,
   `fechaInicial` date NOT NULL,
   `fechaFinal` date NOT NULL,
-  `pesoInicial` double NOT NULL,
-  `pesoFinal` double NOT NULL
+  `pesoInicial` float NOT NULL,
+  `pesoObjetivo` float NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dieta`
 --
 
-INSERT INTO `dieta` (`idDieta`, `nombre`, `paciente`, `fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoFinal`) VALUES
-(1, 'Dieta 1', 1, '2023-01-14', '2023-08-27', 95, 80);
+INSERT INTO `dieta` (`idDieta`, `nombre`, `paciente`, `fechaInicial`, `fechaFinal`, `pesoInicial`, `pesoObjetivo`, `estado`) VALUES
+(1, 'dieta1', 1, '2023-10-10', '2023-10-31', 60, 50, 1);
 
 -- --------------------------------------------------------
 
@@ -79,16 +79,48 @@ INSERT INTO `dieta` (`idDieta`, `nombre`, `paciente`, `fechaInicial`, `fechaFina
 
 CREATE TABLE `dietacomida` (
   `idDietaComida` int(11) NOT NULL,
-  `comida` int(11) NOT NULL,
-  `dieta` int(11) NOT NULL
+  `idComida` int(11) NOT NULL,
+  `idDieta` int(11) NOT NULL,
+  `horario` varchar(50) NOT NULL,
+  `porcion` int(11) NOT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `dietacomida`
 --
 
-INSERT INTO `dietacomida` (`idDietaComida`, `comida`, `dieta`) VALUES
-(1, 1, 1);
+INSERT INTO `dietacomida` (`idDietaComida`, `idComida`, `idDieta`, `horario`, `porcion`, `estado`) VALUES
+(1, 2, 1, 'Almuerzo', 2, 0),
+(2, 1, 1, 'snack', 1, 0),
+(3, 1, 1, 'DESAYUNO', 1, 0),
+(4, 1, 1, 'DESAYUNO', 1, 0),
+(5, 1, 1, 'DESAYUNO', 2, 1),
+(6, 1, 1, 'DESAYUNO', 2, 1),
+(7, 4, 1, 'DESAYUNO', 1, 1),
+(8, 2, 1, 'CENA', 99, 1),
+(9, 1, 1, 'DESAYUNO', 60, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `historial`
+--
+
+CREATE TABLE `historial` (
+  `idHistorial` int(11) NOT NULL,
+  `idPaciente` int(11) NOT NULL,
+  `peso` double NOT NULL,
+  `fecha` date NOT NULL,
+  `estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `historial`
+--
+
+INSERT INTO `historial` (`idHistorial`, `idPaciente`, `peso`, `fecha`, `estado`) VALUES
+(1, 1, 50, '2023-10-26', 1);
 
 -- --------------------------------------------------------
 
@@ -98,20 +130,26 @@ INSERT INTO `dietacomida` (`idDietaComida`, `comida`, `dieta`) VALUES
 
 CREATE TABLE `paciente` (
   `idPaciente` int(11) NOT NULL,
-  `Nombre` varchar(30) NOT NULL,
-  `Dni` int(8) NOT NULL,
-  `Domicilio` varchar(30) NOT NULL,
-  `Telefono` int(11) NOT NULL
+  `dni` int(9) NOT NULL,
+  `nombre` varchar(75) NOT NULL,
+  `apellido` varchar(100) NOT NULL,
+  `genero` varchar(15) NOT NULL,
+  `edad` int(3) NOT NULL,
+  `altura` float NOT NULL,
+  `pesoActual` double NOT NULL,
+  `pesoDeseado` double NOT NULL,
+  `domicilio` varchar(100) DEFAULT NULL,
+  `telefono` int(11) DEFAULT NULL,
+  `mail` varchar(100) DEFAULT NULL,
+  `estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `paciente`
 --
 
-INSERT INTO `paciente` (`idPaciente`, `Nombre`, `Dni`, `Domicilio`, `Telefono`) VALUES
-(1, 'Alberto Juarez', 1111111, 'San martin 542', 112233),
-(2, 'Tomas Fedez', 12312312, 'Jose 888', 5566),
-(4, 'Juan Perez', 3333333, 'Peron 333', 1212);
+INSERT INTO `paciente` (`idPaciente`, `dni`, `nombre`, `apellido`, `genero`, `edad`, `altura`, `pesoActual`, `pesoDeseado`, `domicilio`, `telefono`, `mail`, `estado`) VALUES
+(1, 1234567, 'lopez', 'sa', 'm', 55, 1.8, 66, 99, 'dnaisd', 111, NULL, 1);
 
 --
 -- Índices para tablas volcadas
@@ -121,29 +159,37 @@ INSERT INTO `paciente` (`idPaciente`, `Nombre`, `Dni`, `Domicilio`, `Telefono`) 
 -- Indices de la tabla `comida`
 --
 ALTER TABLE `comida`
-  ADD PRIMARY KEY (`idComida`);
+  ADD PRIMARY KEY (`idComida`),
+  ADD UNIQUE KEY `nombre_2` (`nombre`,`cantCalorias`);
 
 --
 -- Indices de la tabla `dieta`
 --
 ALTER TABLE `dieta`
   ADD PRIMARY KEY (`idDieta`),
-  ADD UNIQUE KEY `paciente` (`paciente`);
+  ADD KEY `idPaciente` (`paciente`);
 
 --
 -- Indices de la tabla `dietacomida`
 --
 ALTER TABLE `dietacomida`
   ADD PRIMARY KEY (`idDietaComida`),
-  ADD KEY `comida` (`comida`),
-  ADD KEY `dieta` (`dieta`);
+  ADD KEY `idDieta` (`idDieta`),
+  ADD KEY `idComida` (`idComida`);
+
+--
+-- Indices de la tabla `historial`
+--
+ALTER TABLE `historial`
+  ADD PRIMARY KEY (`idHistorial`),
+  ADD KEY `idPaciente` (`idPaciente`);
 
 --
 -- Indices de la tabla `paciente`
 --
 ALTER TABLE `paciente`
   ADD PRIMARY KEY (`idPaciente`),
-  ADD UNIQUE KEY `Dni` (`Dni`);
+  ADD UNIQUE KEY `dni` (`dni`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -153,7 +199,7 @@ ALTER TABLE `paciente`
 -- AUTO_INCREMENT de la tabla `comida`
 --
 ALTER TABLE `comida`
-  MODIFY `idComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `idComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `dieta`
@@ -165,13 +211,19 @@ ALTER TABLE `dieta`
 -- AUTO_INCREMENT de la tabla `dietacomida`
 --
 ALTER TABLE `dietacomida`
-  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDietaComida` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `historial`
+--
+ALTER TABLE `historial`
+  MODIFY `idHistorial` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `paciente`
 --
 ALTER TABLE `paciente`
-  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idPaciente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -187,8 +239,14 @@ ALTER TABLE `dieta`
 -- Filtros para la tabla `dietacomida`
 --
 ALTER TABLE `dietacomida`
-  ADD CONSTRAINT `dietacomida_ibfk_1` FOREIGN KEY (`comida`) REFERENCES `comida` (`idComida`),
-  ADD CONSTRAINT `dietacomida_ibfk_2` FOREIGN KEY (`dieta`) REFERENCES `dieta` (`idDieta`);
+  ADD CONSTRAINT `dietacomida_ibfk_1` FOREIGN KEY (`idDieta`) REFERENCES `dieta` (`idDieta`),
+  ADD CONSTRAINT `dietacomida_ibfk_2` FOREIGN KEY (`idComida`) REFERENCES `comida` (`idComida`);
+
+--
+-- Filtros para la tabla `historial`
+--
+ALTER TABLE `historial`
+  ADD CONSTRAINT `historial_ibfk_1` FOREIGN KEY (`idPaciente`) REFERENCES `paciente` (`idPaciente`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
