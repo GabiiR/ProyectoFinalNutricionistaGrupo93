@@ -32,6 +32,7 @@ public class Lista_De_Pacientes extends javax.swing.JInternalFrame {
         jtTablaComida = new javax.swing.JTable();
         jSalir = new javax.swing.JButton();
 
+        setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
@@ -122,8 +123,11 @@ public class Lista_De_Pacientes extends javax.swing.JInternalFrame {
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         borratabla();
+        if(jCheckBox1.isSelected()){
         cargarPacientesXfiltro();
-        
+        }else{
+         cargarPacientes();
+        }       
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
 

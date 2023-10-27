@@ -192,13 +192,11 @@ public class Data_Pacientes {
                 paciente.setGenero(rs.getString("genero"));
                 paciente.setEdad(rs.getInt("edad"));
                 paciente.setPesoActual(rs.getDouble("pesoActual"));
-                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
+                paciente.setPesoDeseado(rs.getDouble("pesoObjetivo"));
                 paciente.setFechaFin(rs.getDate("fechaFinal").toLocalDate());
                 listaPaci.add(paciente);
             }
             ps.close();
-            JOptionPane.showMessageDialog(null, "Exito al encontrar pacientes");
-
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes" + ex);
         }
@@ -227,12 +225,11 @@ public class Data_Pacientes {
                 paciente.setApellido(rs.getString("apellido"));
                 paciente.setEdad(rs.getInt("edad"));
                 paciente.setPesoActual(rs.getDouble("pesoActual"));
-                paciente.setPesoDeseado(rs.getDouble("pesoDeseado"));
+                paciente.setPesoDeseado(rs.getDouble("pesoObjetivo"));
                 paciente.setFechaFin(rs.getDate("fechaFinal").toLocalDate());
                 listaPacientexfiltro.add(paciente);
             }
             ps.close();
-            JOptionPane.showMessageDialog(null, "Exito al encontrar pacientes");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error haciendo la lista de pacientes" + ex);

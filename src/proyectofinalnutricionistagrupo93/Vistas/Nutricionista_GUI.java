@@ -35,6 +35,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jmbPacientes = new javax.swing.JMenu();
         jmiPacientesOpc1 = new javax.swing.JMenuItem();
         jmiPacientesOpc2 = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jmbComidas = new javax.swing.JMenu();
         jmiComidasOpc1 = new javax.swing.JMenuItem();
         jmListaComidas = new javax.swing.JMenuItem();
@@ -81,6 +82,14 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
             }
         });
         jmbPacientes.add(jmiPacientesOpc2);
+
+        jMenuItem1.setText("Lista de pacientes");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jmbPacientes.add(jMenuItem1);
 
         jMenuBar1.add(jmbPacientes);
 
@@ -212,9 +221,13 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         RDD.show();
     }//GEN-LAST:event_jmiDietasPacientesActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        Lista_De_Pacientes LDP = new Lista_De_Pacientes();
+        jDesktopPane1.add(LDP);
+        LDP.show();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -252,6 +265,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMPlandeNutricion;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jmListaComidas;
     private javax.swing.JMenu jmbComidas;
     private javax.swing.JMenu jmbDietas;
