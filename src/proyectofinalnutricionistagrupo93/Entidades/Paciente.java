@@ -3,26 +3,32 @@ package proyectofinalnutricionistagrupo93.Entidades;
 import java.time.LocalDate;
 
 public class Paciente {
+
     private int idPaciente; //ID.
-    
     private String nombre;
-    private String apellido;
     private int dni;
-    private String genero;
-    private int edad;
-    private float altura;
-    private String mail;
     private String domicilio;
     private int telefono;
     private double pesoActual;
     private double pesoDeseado;
-    private boolean estado = false;
-    private LocalDate fechaFin; 
+    private boolean estado;
+    private LocalDate fechaFin;
 
     public Paciente() {
     }
 
-    public Paciente(int idPaciente, String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado, boolean estado) {
+    public Paciente(String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado, boolean estado, LocalDate fechaFin) {
+        this.nombre = nombre;
+        this.dni = dni;
+        this.domicilio = domicilio;
+        this.telefono = telefono;
+        this.pesoActual = pesoActual;
+        this.pesoDeseado = pesoDeseado;
+        this.estado = estado;
+        this.fechaFin = fechaFin;
+    }
+
+    public Paciente(int idPaciente, String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado, boolean estado, LocalDate fechaFin) {
         this.idPaciente = idPaciente;
         this.nombre = nombre;
         this.dni = dni;
@@ -31,6 +37,7 @@ public class Paciente {
         this.pesoActual = pesoActual;
         this.pesoDeseado = pesoDeseado;
         this.estado = estado;
+        this.fechaFin = fechaFin;
     }
 
     public Paciente(String nombre, int dni, String domicilio, int telefono, double pesoActual, double pesoDeseado, boolean estado) {
@@ -106,65 +113,17 @@ public class Paciente {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
-    
-        public String getApellido() {
-        return apellido;
-    }
 
- 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
-    }
-
-  
-    public String getGenero() {
-        return genero;
-    }
-
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-
-    public void setEdad(int edad) {
-        this.edad = edad;
-    }
-
-    public float getAltura() {
-        return altura;
-    }
-
-
-    public void setAltura(float altura) {
-        this.altura = altura;
-    }
-
-
-    public String getMail() {
-        return mail;
-    }
-
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
-        
     public LocalDate getFechaFin() {
         return fechaFin;
     }
 
-   
     public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
+
     @Override
     public String toString() {
-        return getNombre() +", "+ getDni();
+        return  nombre + ", "+ pesoActual+" Kg, "+ pesoDeseado+ "Kg " + fechaFin;
     }
-
-
 }

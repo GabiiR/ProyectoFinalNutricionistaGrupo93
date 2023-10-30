@@ -6,9 +6,12 @@
 package proyectofinalnutricionistagrupo93.Vistas;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import javax.accessibility.AccessibleContext;
 import javax.swing.JOptionPane;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Conexion;
@@ -57,6 +60,8 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         jrbEstado = new javax.swing.JRadioButton();
         jlEstado = new javax.swing.JLabel();
         jbLimpiarRegistro = new javax.swing.JButton();
+        jDcFechaFin = new com.toedter.calendar.JDateChooser();
+        jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
@@ -138,6 +143,8 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel1.setText("Fecha Fin:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,11 +191,19 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                                 .addGap(69, 69, 69)
                                 .addComponent(jrbEstado)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbEliminarPaciente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jbLimpiarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
-                        .addComponent(jbSalirRegistroPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jbEliminarPaciente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jbLimpiarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 112, Short.MAX_VALUE)
+                                .addComponent(jbSalirRegistroPacientes, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jDcFechaFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -222,9 +237,12 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                     .addComponent(jtPesoDeseado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlPesoDeseado_kg))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jrbEstado)
-                    .addComponent(jlEstado))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jrbEstado)
+                        .addComponent(jlEstado))
+                    .addComponent(jDcFechaFin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAgregarPaciente)
@@ -250,16 +268,18 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
             return;
         } else {
             try {
-                String nombreCompleto = jtNombrePaciente.getText(); //Obtiene nombre completo del paciente.
+                String nombre = jtNombrePaciente.getText(); //Obtiene nombre completo del paciente.
                 Integer dni = Integer.parseInt(jtDniPaciente.getText()); //Captura solo enteros. Obtiene DNi del paciente.
 
                 String domicilio = jtDomicilioPaciente.getText(); //Obtiene domicilio del paciente.
-                Integer celular = Integer.parseInt(jtTelefonoPaciente.getText()); //Obtiene celular del paciente.
+                Integer telefono = Integer.parseInt(jtTelefonoPaciente.getText()); //Obtiene celular del paciente.
 
                 /*- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -*/
                 Double pesoActual = Double.parseDouble(jtPesoActual.getText()); //Obtiene peso actual del paciente.
                 Double pesoDeseado = Double.parseDouble(jtPesoDeseado.getText()); //Obtiene peso deseado del paciente.
-
+                java.util.Date fechaF = jDcFechaFin.getDate();
+                LocalDate fechaFin = fechaF.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                
                 //2. Comprueba digitos del Dni:
                 if (dni < 1000000 || dni > 99999999) { //7 u 8 digitos. Comprueba digitos.
                     JOptionPane.showMessageDialog(this, "Por favor, ingrese un número de DNI entre 7 u 8 digitos.");
@@ -281,7 +301,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                             //3. SE AGREGA PACIENTE.
                             if (pacienteActual == null) {
                                 boolean estado = true; //Paciente se transforma en activo.
-                                pacienteActual = new Paciente(nombreCompleto, dni, domicilio, celular, pesoActual, pesoDeseado, estado);
+                                pacienteActual = new Paciente(nombre, dni, domicilio, telefono, pesoActual, pesoDeseado, estado, fechaFin);
                                 Dat_Pac.agregarPaciente(pacienteActual);
                             }
 
@@ -290,9 +310,9 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                             //JOptionPane.showMessageDialog(this, "Se agrego al paciente correctamente.");
                             limpiarCampos();
                         }
-                        rs.close();
+                       
                         ps.close();
-                        con.close();
+                       
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, "Ingrese un DNI correcto.");
                     }
@@ -369,10 +389,11 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                 jtPesoDeseado.setText(String.valueOf(pacienteActual.getPesoDeseado()));
                 jrbEstado.setSelected(true);
                 jrbEstado.setEnabled(true);
+                jDcFechaFin.setDate(Date.valueOf(pacienteActual.getFechaFin()));
                 jbAgregarPaciente.setEnabled(false);
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Su DNI no fue ingresado correctamente\n o esta escrito en un formato incorrecto.\n Por favor, vuelva a ingresarlo de vuelta.");
+            JOptionPane.showMessageDialog(this, "Su DNI no fue ingresado correctamente\n o esta escrito en un formato incorrecto.\n Por favor, vuelva a ingresarlo de vuelta." + e.getMessage());
         }
         
     }//GEN-LAST:event_jbBuscarPacienteActionPerformed
@@ -393,7 +414,8 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                     
                     Double pesoActual = Double.parseDouble(jtPesoActual.getText());
                     Double pesoDeseado = Double.parseDouble(jtPesoDeseado.getText());
-
+                    java.util.Date fechaF = jDcFechaFin.getDate();
+                    LocalDate fechaFin = fechaF.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                     //Comprueba campos vacios:
                     if (nombre.isEmpty() || domicilio.isEmpty()) { //Verifica si hay espacios vacios en [Nombre] y [Domicilio].
                         JOptionPane.showMessageDialog(this, "Error, no puede haber campos vacios.");
@@ -407,6 +429,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                         pacienteActual.setPesoActual(pesoActual); //Actualiza el peso actual de paciente.
                         pacienteActual.setPesoDeseado(pesoDeseado); //Actualiza el peso deseado del paciente.
                         pacienteActual.setEstado(estado);
+                        pacienteActual.setFechaFin(fechaFin);
                         Dat_Pac.modificarPaciente(pacienteActual); //Devuelve el paciente modificado.
                         jrbEstado.setEnabled(true);
                     }
@@ -436,6 +459,8 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                 
                 Double pesoActual = Double.parseDouble(jtPesoActual.getText());
                 Double pesoDeseado = Double.parseDouble(jtPesoDeseado.getText());
+                java.util.Date fechaF = jDcFechaFin.getDate();
+                LocalDate fechaFin = fechaF.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
                 //Comprueba campos vacios:
                 if (nombre.isEmpty() || domicilio.isEmpty()) { //Verifica si hay espacios vacios en [Nombre] y [Domicilio].
@@ -450,6 +475,7 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
                     pacienteActual.setPesoActual(pesoActual); //Actualiza el peso actual de paciente.
                     pacienteActual.setPesoDeseado(pesoDeseado); //Actualiza el peso deseado del paciente.
                     pacienteActual.setEstado(estado);
+                    pacienteActual.setFechaFin(fechaFin);
                     Dat_Pac.eliminarPaciente(pacienteActual.getDni()); //Elimina al paciente.
                 }
             }
@@ -474,9 +500,12 @@ public class Registro_De_Pacientes extends javax.swing.JInternalFrame {
         jtTelefonoPaciente.setText("");
         jtPesoActual.setText("");
         jtPesoDeseado.setText("");
+        jDcFechaFin.setDate(null);
     };
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.toedter.calendar.JDateChooser jDcFechaFin;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbAgregarPaciente;
     private javax.swing.JButton jbBuscarPaciente;
     private javax.swing.JButton jbEliminarPaciente;

@@ -44,10 +44,8 @@
                           <Component id="jcbPacientes" alignment="0" max="32767" attributes="0"/>
                           <Component id="jtNombrePlan" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jEstado" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFechaFinal" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFechaInicial" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                           <Component id="jtPesoObjetivo" alignment="0" pref="85" max="32767" attributes="0"/>
@@ -59,8 +57,10 @@
                                           <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
+                                  <Component id="jFechaInicial" alignment="0" pref="157" max="32767" attributes="0"/>
+                                  <Component id="jFechaFinal" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="106" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -70,7 +70,7 @@
                       <Component id="jGuardar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jEliminar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="67" max="32767" attributes="0"/>
+                      <EmptySpace pref="136" max="32767" attributes="0"/>
                       <Component id="jSalir" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
                   </Group>
@@ -155,9 +155,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jtNombrePlan">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -166,9 +163,6 @@
     </Component>
     <Component class="javax.swing.JComboBox" name="jcbPacientes">
       <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
         <Property name="focusTraversalPolicyProvider" type="boolean" value="true"/>
       </Properties>
       <Events>

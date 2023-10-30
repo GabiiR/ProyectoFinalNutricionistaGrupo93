@@ -37,7 +37,7 @@ public class Data_Historial{
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Historial no agregado");
+            JOptionPane.showMessageDialog(null, "Historial no agregado al cargar visita... " + ex.getMessage());
         }
     }
 
@@ -55,7 +55,7 @@ public class Data_Historial{
             JOptionPane.showMessageDialog(null, "historial modificado con exito.");
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se modifico el Historial.");
+            JOptionPane.showMessageDialog(null, "No se modifico el Historial.por visita... " + ex.getMessage());
         }
     }
 
@@ -69,7 +69,7 @@ public class Data_Historial{
             JOptionPane.showMessageDialog(null, "Historial eliminado con exito.");
             
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No se elimino el Historial.");
+            JOptionPane.showMessageDialog(null, "No se elimino el Historial." + ex.getMessage());
         }
     }
     
@@ -93,7 +93,7 @@ public class Data_Historial{
             
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos de Historial.");
+            JOptionPane.showMessageDialog(null, "No se encontraron datos de Historial.por paciente... " + e.getMessage());
         }
         return historial;
     }
