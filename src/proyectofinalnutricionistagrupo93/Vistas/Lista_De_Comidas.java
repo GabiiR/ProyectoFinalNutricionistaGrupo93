@@ -22,6 +22,7 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
      */
     public Lista_De_Comidas() {
         initComponents();
+         crearTabla();
     }
 
     /**
@@ -55,6 +56,98 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -63,7 +156,7 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
         ));
         jtTablaComida.setEnabled(false);
         jtTablaComida.setName(""); // NOI18N
-        jtTablaComida.setPreferredSize(new java.awt.Dimension(350, 64));
+        jtTablaComida.setPreferredSize(new java.awt.Dimension(350, 350));
         jScrollPane1.setViewportView(jtTablaComida);
 
         jLabel12.setText("Cantidad de Calorias");
@@ -165,16 +258,19 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
 
     private void jBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBuscarActionPerformed
         List<Comida> listacomidas = Data_Com.listaComida();
-        crearTabla();
+       
         cargaComidas();
     }//GEN-LAST:event_jBuscarActionPerformed
 
     private void jLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLimpiarActionPerformed
         // TODO add your handling code here:
+        borrarFila();
     }//GEN-LAST:event_jLimpiarActionPerformed
 
     private void jSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jSalirActionPerformed
         // TODO add your handling code here:
+        dispose();
+        
     }//GEN-LAST:event_jSalirActionPerformed
     private void crearTabla() {
         modeloTabla.addColumn("IdComida");
@@ -182,6 +278,12 @@ public class Lista_De_Comidas extends javax.swing.JInternalFrame {
         modeloTabla.addColumn("Detalle");
         modeloTabla.addColumn("Cantidad De Calorias");
         jtTablaComida.setModel(modeloTabla);
+    }
+     private void borrarFila() {
+        int indice = modeloTabla.getRowCount() - 1;
+        for (int i = indice; i >= 0; i--) {
+            modeloTabla.removeRow(i);
+        }
     }
 
 

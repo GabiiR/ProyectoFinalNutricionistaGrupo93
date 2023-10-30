@@ -65,6 +65,28 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -73,7 +95,7 @@ public class Historial_De_Pacientes extends javax.swing.JInternalFrame {
         ));
         jtTablaPac.setEnabled(false);
         jtTablaPac.setName(""); // NOI18N
-        jtTablaPac.setPreferredSize(new java.awt.Dimension(350, 64));
+        jtTablaPac.setPreferredSize(new java.awt.Dimension(350, 225));
         jScrollPane1.setViewportView(jtTablaPac);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

@@ -41,7 +41,7 @@ public class Data_DietaComida {
             ps.close();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al agregar Dieta.");
+            JOptionPane.showMessageDialog(null, "Error al agregar Dieta. A DIETACOMIDA"+e.getMessage());
 
         }
     }
@@ -64,7 +64,7 @@ public class Data_DietaComida {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se pudo actualizar la Dieta.");
+            JOptionPane.showMessageDialog(null, "No se pudo modificar la DietaComida (Dieta)" + e.getMessage());
         }
     }
 
@@ -87,7 +87,7 @@ public class Data_DietaComida {
             ps.close();
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al eliminar Dieta.");
+            JOptionPane.showMessageDialog(null, "Error al eliminar Dieta.por ID" + e.getMessage());
         }
     }
 
@@ -116,7 +116,7 @@ public class Data_DietaComida {
             }
             ps.close();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "No se encontraron datos de la Dieta.");
+            JOptionPane.showMessageDialog(null, "No se encontraron datos de la Dieta.por ID"+e.getMessage());
         }
         return dieta;
     }
@@ -127,12 +127,9 @@ public class Data_DietaComida {
         DietaComida comida = null;
 
         try {
-            String sql = "SELECT dc.idComida, dc.horario, dc.porcion, dc.idDietaComida, c.nombre\n"
-                    + "FROM dietacomida AS dc\n"
-                    + "INNER JOIN comida AS c ON dc.idComida = c.idComida\n"
-                    + "WHERE dc.estado = 1\n"
-                    + "AND c.estado = 1\n"
-                    + "AND dc.idDieta = ?";
+            String sql = "SELECT dc.idComida, dc.horario, dc.porcion, dc.idDietaComida, c.nombre "
+                    + "FROM dietacomida AS dc INNER JOIN comida AS c ON dc.idComida = c.idComida "
+                    + "WHERE dc.estado = 1 AND c.estado = 1 AND dc.idDieta = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, idDieta);
             ResultSet rs = ps.executeQuery();
@@ -151,7 +148,7 @@ public class Data_DietaComida {
             }
             ps.close();
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas... ");
+            JOptionPane.showMessageDialog(null, "No pudo generarse la lista de comidas...por dieta " + ex.getMessage());
         }
         return (ArrayList<DietaComida>) comidasxdieta;
     }

@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import jdk.nashorn.internal.objects.NativeArray;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Dieta;
 import proyectofinalnutricionistagrupo93.AccesoADatos.Data_Pacientes;
 import proyectofinalnutricionistagrupo93.Entidades.Dieta;
@@ -25,7 +26,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
     protected Paciente paciente = new Paciente(); //Datos del paciente.
     protected Data_Pacientes Data_Pac = new Data_Pacientes(); //Metodos del paciente.
     protected Data_Dieta Data_Dieta = new Data_Dieta();
-    protected ArrayList<Paciente> listaPaci = new ArrayList<>();
+    protected List<Paciente> listaPaci = new ArrayList<>();
     protected Paciente pacienteActual = null;
     protected Dieta dietaActual = null;
 
@@ -34,8 +35,8 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
      */
     public Plan_De_Nutricion() {
         initComponents();
-        List<Paciente> listaPaci = Data_Pac.listarPacientes();
-        cargarDatosPaciente((ArrayList<Paciente>) listaPaci);
+        ArrayList<Paciente> listaPaci = Data_Pac.listarPacientes();
+        cargarDatosPaciente(listaPaci);
     }
 
     /**
@@ -77,8 +78,6 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
         setTitle("Plan de Nutricion");
 
         jLabel1.setText("Nombre del Plan:");
-
-        jtNombrePlan.setEnabled(false);
 
         jLabel2.setText("Paciente:");
 
@@ -167,10 +166,8 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                             .addComponent(jcbPacientes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jtNombrePlan)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jEstado)
-                                    .addComponent(jFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addComponent(jtPesoObjetivo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
@@ -178,15 +175,17 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                                         .addGap(34, 34, 34)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel7)
-                                            .addComponent(jLabel8))))
-                                .addGap(0, 106, Short.MAX_VALUE))))
+                                            .addComponent(jLabel8)))
+                                    .addComponent(jFechaInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                                    .addComponent(jFechaFinal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLimpiar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jGuardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jEliminar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                         .addComponent(jSalir)
                         .addGap(13, 13, 13))
                     .addGroup(layout.createSequentialGroup()
@@ -268,6 +267,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
 
 
     private void jcbPacientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPacientesActionPerformed
+
         int filaseleccionada = jcbPacientes.getSelectedIndex();
         if (filaseleccionada != -1) {
             Paciente p = (Paciente) jcbPacientes.getSelectedItem();
@@ -304,7 +304,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
             Boolean estado = jEstado.isSelected();
 
             if (dietaActual == null) {
-                dietaActual = new Dieta(nombre, pacienteSeleccionado, fechai, fechaf, pesoInicial, pesoObjetivo, estado);
+                dietaActual = new Dieta(nombre, pacienteSeleccionado.getIdPaciente(), fechai, fechaf, pesoInicial, pesoObjetivo, estado);
                 Data_Dieta.agregarDieta(dietaActual);
             } else {
                 dietaActual.setNombre(nombre);
@@ -317,7 +317,7 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
             }
             limpiarCampos();
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+            JOptionPane.showMessageDialog(null, "Error al guardar Plan de nutricion " + e.getMessage());
         }
     }//GEN-LAST:event_jGuardarActionPerformed
 
@@ -348,11 +348,10 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
  private void cargarDatosPaciente(ArrayList<Paciente> listaPaci) {
 
-        listaPaci.forEach((p) -> {
+        for (Paciente p : listaPaci) {
             jcbPacientes.addItem(p);
-        });
-        modeloTabla.addRow(new Object[]{paciente.getNombre(), paciente.getDni(), paciente.getDomicilio(), paciente.getTelefono(), paciente.getPesoActual(), paciente.getPesoDeseado()});
-    }
+            //modeloTabla.addRow(new Object[]{paciente.getNombre(), paciente.getPesoActual(), paciente.getPesoDeseado()});
+    }}
 
     private void cargarDatos(int idPaciente) {
         try {
@@ -367,19 +366,20 @@ public class Plan_De_Nutricion extends javax.swing.JInternalFrame {
                 LocalDate fi = dietaActual.getFechaInicial();
                 java.util.Date datei = java.util.Date.from(fi.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 jFechaInicial.setDate(datei);
-                LocalDate ff = dietaActual.getFechaInicial();
+                LocalDate ff = dietaActual.getFechaFinal();
                 java.util.Date datef = java.util.Date.from(ff.atStartOfDay(ZoneId.systemDefault()).toInstant());
                 jFechaFinal.setDate(datef);
 
                 jEstado.setSelected(true);
                 jEstado.setEnabled(true);
-            }else{
+            } else {
                 jtNombrePlan.setEnabled(true);
                 jEstado.setSelected(false);
                 jEstado.setEnabled(true);
             }
-           
+
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al cargar datos de pacientes y dietas. " + e.getMessage());
         }
     }
 

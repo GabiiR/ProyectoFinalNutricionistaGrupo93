@@ -52,6 +52,28 @@ public class Lista_De_Pacientes extends javax.swing.JInternalFrame {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
             new String [] {
@@ -60,7 +82,7 @@ public class Lista_De_Pacientes extends javax.swing.JInternalFrame {
         ));
         jtTablaComida.setEnabled(false);
         jtTablaComida.setName(""); // NOI18N
-        jtTablaComida.setPreferredSize(new java.awt.Dimension(350, 64));
+        jtTablaComida.setPreferredSize(new java.awt.Dimension(350, 350));
         jScrollPane1.setViewportView(jtTablaComida);
 
         jSalir.setText("Salir");
@@ -143,8 +165,6 @@ public class Lista_De_Pacientes extends javax.swing.JInternalFrame {
  private void crearTabla() {
         modeloTabla.addColumn("Id Paciente");
         modeloTabla.addColumn("Nombre");
-        modeloTabla.addColumn("Apellido");
-        modeloTabla.addColumn("Edad");
         modeloTabla.addColumn("Peso Actual");
         modeloTabla.addColumn("Peso Objetivo");
         modeloTabla.addColumn("Fecha Final");
@@ -154,13 +174,13 @@ public class Lista_De_Pacientes extends javax.swing.JInternalFrame {
     private void cargarPacientes() {
         listaPaciente = (ArrayList) Data_Pac.listarPacientes();
         for (Paciente p : listaPaciente) {
-            modeloTabla.addRow(new Object[]{p.getIdPaciente(), p.getNombre(), p.getApellido(),p.getEdad(), p.getPesoActual(), p.getPesoDeseado(), p.getFechaFin()});
+            modeloTabla.addRow(new Object[]{p.getIdPaciente(), p.getNombre(), p.getPesoActual(), p.getPesoDeseado(), p.getFechaFin()});
         }
     }
     private void cargarPacientesXfiltro() {
         listaPaciente = (ArrayList) Data_Pac.listarPacientesfiltro();
         for (Paciente p : listaPaciente) {
-            modeloTabla.addRow(new Object[]{p.getIdPaciente(), p.getNombre(), p.getApellido(),p.getEdad(), p.getPesoActual(), p.getPesoDeseado(), p.getFechaFin()});
+            modeloTabla.addRow(new Object[]{p.getIdPaciente(), p.getNombre(), p.getPesoActual(), p.getPesoDeseado(), p.getFechaFin()});
         }
     }
     private void borratabla() {

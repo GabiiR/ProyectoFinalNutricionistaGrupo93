@@ -45,6 +45,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         jMListaDietas = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        jMRegistroDietas = new javax.swing.JMenuItem();
         jMPlandeNutricion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -158,6 +159,14 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
 
         jMenu1.setText("Planes de Nutricion");
 
+        jMRegistroDietas.setText("Registro de Dietas");
+        jMRegistroDietas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMRegistroDietasActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMRegistroDietas);
+
         jMPlandeNutricion.setText("Plan de Nutricion");
         jMPlandeNutricion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +267,13 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
         MCD.show();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMRegistroDietasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMRegistroDietasActionPerformed
+        // TODO add your handling code here:
+        Registro_De_Dietas RD = new Registro_De_Dietas();
+        jDesktopPane1.add(RD);
+        RD.show();
+    }//GEN-LAST:event_jMRegistroDietasActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -293,6 +309,7 @@ public class Nutricionista_GUI extends javax.swing.JFrame {
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenuItem jMListaDietas;
     private javax.swing.JMenuItem jMPlandeNutricion;
+    private javax.swing.JMenuItem jMRegistroDietas;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;

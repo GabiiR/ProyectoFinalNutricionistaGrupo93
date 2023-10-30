@@ -80,11 +80,24 @@
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbEliminarPaciente" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jbLimpiarRegistro" min="-2" pref="81" max="-2" attributes="0"/>
-                      <EmptySpace pref="112" max="32767" attributes="0"/>
-                      <Component id="jbSalirRegistroPacientes" min="-2" pref="82" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jbEliminarPaciente" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jbLimpiarRegistro" min="-2" pref="81" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace pref="112" max="32767" attributes="0"/>
+                              <Component id="jbSalirRegistroPacientes" min="-2" pref="82" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                              <Component id="jDcFechaFin" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -128,9 +141,13 @@
                   <Component id="jlPesoDeseado_kg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jrbEstado" min="-2" max="-2" attributes="0"/>
-                  <Component id="jlEstado" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jrbEstado" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlEstado" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jDcFechaFin" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -262,6 +279,13 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbLimpiarRegistroActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="com.toedter.calendar.JDateChooser" name="jDcFechaFin">
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fecha Fin:"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

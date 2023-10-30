@@ -108,6 +108,14 @@
             <Property name="text" type="java.lang.String" value="Planes de Nutricion"/>
           </Properties>
           <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jMRegistroDietas">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Registro de Dietas"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMRegistroDietasActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMPlandeNutricion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Plan de Nutricion"/>
